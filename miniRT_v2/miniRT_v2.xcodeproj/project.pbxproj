@@ -15,7 +15,6 @@
 		F46826122775B775001E4EC6 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826112775B775001E4EC6 /* vector.c */; };
 		F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826152775D37C001E4EC6 /* mlx_utils.c */; };
 		F46826192775FF37001E4EC6 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826182775FF37001E4EC6 /* utils.c */; };
-		F468261B27760577001E4EC6 /* parse_objects.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261A27760577001E4EC6 /* parse_objects.c */; };
 		F468261D277C94E6001E4EC6 /* intersection.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261C277C94E6001E4EC6 /* intersection.c */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +46,6 @@
 		F46826152775D37C001E4EC6 /* mlx_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = mlx_utils.c; path = miniRT_v2/srcs/mlx_utils.c; sourceTree = "<group>"; };
 		F46826172775F3B8001E4EC6 /* mlx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mlx.h; path = miniRT_v2/libs/mlx19/mlx.h; sourceTree = "<group>"; };
 		F46826182775FF37001E4EC6 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utils.c; path = miniRT_v2/srcs/utils.c; sourceTree = "<group>"; };
-		F468261A27760577001E4EC6 /* parse_objects.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = parse_objects.c; path = miniRT_v2/srcs/parse_objects.c; sourceTree = "<group>"; };
 		F468261C277C94E6001E4EC6 /* intersection.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = intersection.c; path = miniRT_v2/srcs/intersection.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +71,6 @@
 				F468261C277C94E6001E4EC6 /* intersection.c */,
 				F43E361E27785C8100CE5AC6 /* list.h */,
 				F43E361C27785C6300CE5AC6 /* list_utils.c */,
-				F468261A27760577001E4EC6 /* parse_objects.c */,
 				F46826182775FF37001E4EC6 /* utils.c */,
 				F46826172775F3B8001E4EC6 /* mlx.h */,
 				F46826152775D37C001E4EC6 /* mlx_utils.c */,
@@ -160,7 +157,6 @@
 			files = (
 				F40AA6B22781DEC300C7F5BF /* Makefile in Sources */,
 				F46826122775B775001E4EC6 /* vector.c in Sources */,
-				F468261B27760577001E4EC6 /* parse_objects.c in Sources */,
 				F468261D277C94E6001E4EC6 /* intersection.c in Sources */,
 				F46826192775FF37001E4EC6 /* utils.c in Sources */,
 				F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */,

@@ -36,7 +36,7 @@ void	fix_color(t_color	*color)
 		color->blue = 255;
 }
 
-int	color_mlt(int i_color, double mlt)	//cproduct
+int	color_mlt(int i_color, double mlt)
 {
 	t_color	color;
 
@@ -47,7 +47,7 @@ int	color_mlt(int i_color, double mlt)	//cproduct
 	return (convert_color2i(color));
 }
 
-int	color_sum(int i_color_1, int i_color_2)	//cadd
+int	color_sum(int i_color_1, int i_color_2)
 {
 	t_color	color_1;
 	t_color	color_2;

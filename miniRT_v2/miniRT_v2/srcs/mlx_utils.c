@@ -9,7 +9,7 @@ void	init_mlx(t_mlx *mlx, t_scene *scene)
 	scene->width = 800;
 	scene->height = 600;
 	curr = mlx->camera;
-	mlx->begin = mlx->camera;//?
+	mlx->begin = mlx->camera;
 	while (curr)
 	{
 		curr->image = mlx_new_image(mlx->mlx, scene->width, scene->height);

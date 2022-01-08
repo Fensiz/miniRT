@@ -2,8 +2,6 @@
 #include <mlx.h>
 #include <math.h>
 
-//al_init // маркер инициализации освещения
-
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
