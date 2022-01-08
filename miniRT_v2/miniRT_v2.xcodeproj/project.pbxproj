@@ -1,0 +1,352 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = F40AA6AC277F8B9500C7F5BF /* color_ops.c */; };
+		F40AA6AF277F94E300C7F5BF /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = F40AA6AE277F94E300C7F5BF /* texture.c */; };
+		F40AA6B22781DEC300C7F5BF /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = F40AA6B12781DEC300C7F5BF /* Makefile */; };
+		F43E361D27785C6400CE5AC6 /* list_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F43E361C27785C6300CE5AC6 /* list_utils.c */; };
+		F468260B2775B70A001E4EC6 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F468260A2775B70A001E4EC6 /* main.c */; };
+		F46826122775B775001E4EC6 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826112775B775001E4EC6 /* vector.c */; };
+		F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826152775D37C001E4EC6 /* mlx_utils.c */; };
+		F46826192775FF37001E4EC6 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826182775FF37001E4EC6 /* utils.c */; };
+		F468261B27760577001E4EC6 /* parse_objects.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261A27760577001E4EC6 /* parse_objects.c */; };
+		F468261D277C94E6001E4EC6 /* intersection.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261C277C94E6001E4EC6 /* intersection.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F46826052775B70A001E4EC6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F40AA6AC277F8B9500C7F5BF /* color_ops.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = color_ops.c; path = miniRT_v2/srcs/color_ops.c; sourceTree = "<group>"; };
+		F40AA6AE277F94E300C7F5BF /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = texture.c; path = miniRT_v2/srcs/texture.c; sourceTree = "<group>"; };
+		F40AA6B0277FB79800C7F5BF /* color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = color.h; path = miniRT_v2/includes/color.h; sourceTree = "<group>"; };
+		F40AA6B12781DEC300C7F5BF /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = miniRT_v2/Makefile; sourceTree = "<group>"; };
+		F40AA6B32781DEC900C7F5BF /* new.rt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = new.rt; sourceTree = "<group>"; };
+		F43E361C27785C6300CE5AC6 /* list_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = list_utils.c; path = miniRT_v2/srcs/list_utils.c; sourceTree = "<group>"; };
+		F43E361E27785C8100CE5AC6 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = list.h; path = miniRT_v2/includes/list.h; sourceTree = "<group>"; };
+		F46826072775B70A001E4EC6 /* miniRT_v2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = miniRT_v2; sourceTree = BUILT_PRODUCTS_DIR; };
+		F468260A2775B70A001E4EC6 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = main.c; path = miniRT_v2/srcs/main.c; sourceTree = "<group>"; };
+		F46826112775B775001E4EC6 /* vector.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vector.c; path = miniRT_v2/srcs/vector.c; sourceTree = "<group>"; };
+		F46826132775B7EF001E4EC6 /* vector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = vector.h; path = miniRT_v2/includes/vector.h; sourceTree = "<group>"; };
+		F46826142775D20B001E4EC6 /* minirt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = minirt.h; path = miniRT_v2/includes/minirt.h; sourceTree = "<group>"; };
+		F46826152775D37C001E4EC6 /* mlx_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = mlx_utils.c; path = miniRT_v2/srcs/mlx_utils.c; sourceTree = "<group>"; };
+		F46826172775F3B8001E4EC6 /* mlx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mlx.h; path = miniRT_v2/libs/mlx19/mlx.h; sourceTree = "<group>"; };
+		F46826182775FF37001E4EC6 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utils.c; path = miniRT_v2/srcs/utils.c; sourceTree = "<group>"; };
+		F468261A27760577001E4EC6 /* parse_objects.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = parse_objects.c; path = miniRT_v2/srcs/parse_objects.c; sourceTree = "<group>"; };
+		F468261C277C94E6001E4EC6 /* intersection.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = intersection.c; path = miniRT_v2/srcs/intersection.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F46826042775B70A001E4EC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F46825FE2775B70A001E4EC6 = {
+			isa = PBXGroup;
+			children = (
+				F40AA6B32781DEC900C7F5BF /* new.rt */,
+				F40AA6B12781DEC300C7F5BF /* Makefile */,
+				F40AA6B0277FB79800C7F5BF /* color.h */,
+				F40AA6AE277F94E300C7F5BF /* texture.c */,
+				F40AA6AC277F8B9500C7F5BF /* color_ops.c */,
+				F468261C277C94E6001E4EC6 /* intersection.c */,
+				F43E361E27785C8100CE5AC6 /* list.h */,
+				F43E361C27785C6300CE5AC6 /* list_utils.c */,
+				F468261A27760577001E4EC6 /* parse_objects.c */,
+				F46826182775FF37001E4EC6 /* utils.c */,
+				F46826172775F3B8001E4EC6 /* mlx.h */,
+				F46826152775D37C001E4EC6 /* mlx_utils.c */,
+				F46826142775D20B001E4EC6 /* minirt.h */,
+				F46826132775B7EF001E4EC6 /* vector.h */,
+				F46826112775B775001E4EC6 /* vector.c */,
+				F468260A2775B70A001E4EC6 /* main.c */,
+				F46826092775B70A001E4EC6 /* miniRT_v2 */,
+				F46826082775B70A001E4EC6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F46826082775B70A001E4EC6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F46826072775B70A001E4EC6 /* miniRT_v2 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F46826092775B70A001E4EC6 /* miniRT_v2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = miniRT_v2;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F46826062775B70A001E4EC6 /* miniRT_v2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F468260E2775B70A001E4EC6 /* Build configuration list for PBXNativeTarget "miniRT_v2" */;
+			buildPhases = (
+				F46826032775B70A001E4EC6 /* Sources */,
+				F46826042775B70A001E4EC6 /* Frameworks */,
+				F46826052775B70A001E4EC6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = miniRT_v2;
+			productName = miniRT_v2;
+			productReference = F46826072775B70A001E4EC6 /* miniRT_v2 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F46825FF2775B70A001E4EC6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					F46826062775B70A001E4EC6 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = F46826022775B70A001E4EC6 /* Build configuration list for PBXProject "miniRT_v2" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F46825FE2775B70A001E4EC6;
+			productRefGroup = F46826082775B70A001E4EC6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F46826062775B70A001E4EC6 /* miniRT_v2 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F46826032775B70A001E4EC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F40AA6B22781DEC300C7F5BF /* Makefile in Sources */,
+				F46826122775B775001E4EC6 /* vector.c in Sources */,
+				F468261B27760577001E4EC6 /* parse_objects.c in Sources */,
+				F468261D277C94E6001E4EC6 /* intersection.c in Sources */,
+				F46826192775FF37001E4EC6 /* utils.c in Sources */,
+				F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */,
+				F468260B2775B70A001E4EC6 /* main.c in Sources */,
+				F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */,
+				F43E361D27785C6400CE5AC6 /* list_utils.c in Sources */,
+				F40AA6AF277F94E300C7F5BF /* texture.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F468260C2775B70A001E4EC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=*]" = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = /Users/simon/42_courses/miniRT_v2/miniRT_v2/libs/mlx19/;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-I/Users/simon/42_courses/miniRT_v2/miniRT_v2/includes";
+				OTHER_LDFLAGS = (
+					"-framework",
+					OpenGL,
+					"-framework",
+					AppKit,
+					/Users/simon/42_courses/miniRT_v2/miniRT_v2/libs/mlx19/libmlx.a,
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F468260D2775B70A001E4EC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = /Users/simon/42_courses/miniRT_v2/miniRT_v2/libs/mlx19/;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-I/Users/simon/42_courses/miniRT_v2/miniRT_v2/includes";
+				OTHER_LDFLAGS = (
+					"-framework",
+					OpenGL,
+					"-framework",
+					AppKit,
+					/Users/simon/42_courses/miniRT_v2/miniRT_v2/libs/mlx19/libmlx.a,
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F468260F2775B70A001E4EC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "./**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F46826102775B70A001E4EC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "./**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F46826022775B70A001E4EC6 /* Build configuration list for PBXProject "miniRT_v2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F468260C2775B70A001E4EC6 /* Debug */,
+				F468260D2775B70A001E4EC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F468260E2775B70A001E4EC6 /* Build configuration list for PBXNativeTarget "miniRT_v2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F468260F2775B70A001E4EC6 /* Debug */,
+				F46826102775B70A001E4EC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F46825FF2775B70A001E4EC6 /* Project object */;
+}
