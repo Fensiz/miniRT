@@ -17,7 +17,7 @@
 # define SPHERE	110
 # define PLANE	111
 # define CYLINDER	112
-# define BLACK	0x000000
+# define BLACK	16711680//0x333333
 # define WHITE	0xffffff
 
 # define BUFF_SIZE 64
@@ -127,5 +127,5 @@ double	sphere_intersection(t_vector origin, t_vector direction, t_figure *figure
 int		trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene);
 double	cylinder_intersection(t_vector o, t_vector d, t_figure *lst);
 double	plane_intersection(t_vector o, t_vector d, t_figure *lst);
-void	apply_texture(int texture, t_inter *inter);
+void	apply_texture(t_figure *figure, t_inter *inter);
 #endif

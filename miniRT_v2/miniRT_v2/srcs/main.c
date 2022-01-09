@@ -536,7 +536,7 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	inter.color = scene->background;
 	if (closest_figure.type != -1)
 		inter.color = closest_figure.color;
-	apply_texture(closest_figure.texture, &inter);
+	apply_texture(&closest_figure, &inter);
 	compute_light(ray, &inter, *scene, lst);
 	
 

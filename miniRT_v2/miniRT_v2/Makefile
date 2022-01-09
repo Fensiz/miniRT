@@ -6,7 +6,7 @@
 #    By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 00:42:18 by bgreenbl          #+#    #+#              #
-#    Updated: 2022/01/07 23:50:24 by bgreenbl         ###   ########.fr        #
+#    Updated: 2022/01/09 00:40:24 by bgreenbl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLX_PATH	=	./libs/mlx19/
 
 MLX_LIB		=	$(MLX_PATH)libmlx.a			
 CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra -MMD
+#CFLAGS		=	-Wall -Werror -Wextra -MMD
 
 SRC			=	$(addprefix $(SRC_PATH), $(FILES))
 OBJ			=	$(SRC:.c=.o)
