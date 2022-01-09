@@ -12,9 +12,9 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 	if (figure->type == CYLINDER)
 	{
 		coords = vector_sub(inter->point, figure->figure.cy.center);
-		coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI)*180);
-		coords = vector_y_rot(coords, (acos(figure->figure.cy.nv.y) / M_PI)*180);
-		coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI)*180);
+		coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI)*180);
+		//coords = vector_y_rot(coords, (acos(figure->figure.cy.nv.y) / M_PI)*180);
+		coords = vector_z_rot(coords, (asin(figure->figure.cy.nv.x) / M_PI)*180);
 		theta = atan2(coords.x, coords.z);
 		phi = acos((double)coords.y / figure->figure.cy.radius);
 		raw_u = theta / (2 * M_PI);
@@ -24,6 +24,19 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 		val.y = abs((int)(v*figure->figure.cy.radius/15)) % 2;
 		party_mix = ((int)val.x ^ (int)val.y);
 		return (party_mix ? BLACK : WHITE);
+//		coords = vector_sub(inter->point, figure->figure.cy.center);
+//		coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.x) / M_PI)*180);
+//		coords = vector_y_rot(coords, (acos(figure->figure.cy.nv.y) / M_PI)*180);
+//		coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI)*180);
+//		theta = atan2(coords.x, coords.z);
+//		phi = acos((double)coords.y / figure->figure.cy.radius);
+//		raw_u = theta / (2 * M_PI);
+//		u = 1 - (raw_u + 0.5);
+//		v = (int)coords.y;
+//		val.x = (int)floor(u * figure->figure.cy.height) % 2;
+//		val.y = abs((int)(v*figure->figure.cy.radius/15)) % 2;
+//		party_mix = ((int)val.x ^ (int)val.y);
+//		return (party_mix ? BLACK : WHITE);
 	}
 	else if (figure->type == SPHERE)
 	{
@@ -42,9 +55,9 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 	}
 	else
 	{
-		coords.x = (int)floor(fabs(inter->point.x));
-		coords.y = (int)floor(fabs(inter->point.y)+0.001);
-		coords.z = (int)floor(fabs(inter->point.z));
+		coords.x = abs((int)floor((inter->point.x)));
+		coords.y = abs((int)floor((inter->point.y)+0.001));
+		coords.z = abs((int)floor((inter->point.z)));
 		val.x = (int)(coords.x) % 2;
 		val.y = (int)(coords.y) % 2;
 		val.z = (int)(coords.z) % 2;
