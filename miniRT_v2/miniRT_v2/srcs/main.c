@@ -255,7 +255,30 @@ void		parse_cylinder(t_figure **figure_list, char **str)
 	curr->texture = ft_atoi(str);
 	check_value(curr->texture, 0, 5, "cylinder");
 }
+#include <stdio.h>
+void		parse_cone(t_figure **figure_list, char **str)
+{
+	t_figure	*curr;
 
+	(*str) += 2;
+	curr = ft_addback_figure(figure_list);
+	curr->type = CONE;
+	skip_spaces(str);
+	curr->figure.co.center = parse_vector(str);
+	curr->figure.co.nv = vector_norm(parse_vector(str));
+	curr->figure.co.radius = ft_atof(str) / 2;
+	check_value(curr->figure.co.radius, 0, INFINITY, "cone");
+	curr->figure.co.height = ft_atof(str);
+	check_value(curr->figure.co.height, 0, INFINITY, "cone");
+	curr->color = parse_color(str);
+	/* bonus */
+	curr->specular = ft_atoi(str);
+	check_value(curr->specular, 0, INFINITY, "cone");
+	curr->reflection = ft_atof(str);
+	check_value(curr->reflection, 0, 1, "cone");
+	curr->texture = ft_atoi(str);
+	check_value(curr->texture, 0, 5, "cone");
+}
 
 static void	parse(t_mlx *mlx, t_scene *scene, t_figure **figure, char **s)
 {
@@ -265,6 +288,8 @@ static void	parse(t_mlx *mlx, t_scene *scene, t_figure **figure, char **s)
 		parse_camera(mlx, scene, s);
 	else if (**s == 'c' && *(*s + 1) == 'y')
 		parse_cylinder(figure, s);
+	else if (**s == 'c' && *(*s + 1) == 'o')
+		parse_cone(figure, s);
 	else if (**s == 'L')
 		parse_light(&scene, s);
 	else if (**s == 's' && *(*s + 1) == 'p')
@@ -417,6 +442,11 @@ void		try_all_intersections(t_vector_2p ray, t_figure *figure,
 			distance = plane_intersection(ray.origin, ray.direction, figure);
 		else if (figure->type == CYLINDER)
 			distance = cylinder_intersection(ray.origin, ray.direction, figure);
+		else if (figure->type == CONE)
+		{
+			printf("+\n");
+			distance = cone_intersection(ray.origin, ray.direction, figure);
+		}
 		if (distance > EPSILON && distance < *closest_intersection)
 		{
 			*closest_figure = *figure;
@@ -438,6 +468,8 @@ int		in_light(t_vector o, t_vector d, t_figure *lst) //shadows
 			distance = plane_intersection(o, d, lst);
 		else if (lst->type == CYLINDER)
 			distance = cylinder_intersection(o, d, lst);
+		else if (lst->type == CONE)
+			distance = cone_intersection(o, d, lst);
 		if (distance > EPSILON && distance < 1)
 			return (0);
 		lst = lst->next;
@@ -536,6 +568,7 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	inter.color = scene->background;
 	if (closest_figure.type != -1)
 		inter.color = closest_figure.color;
+	//return (inter.color);
 	apply_texture(&closest_figure, &inter);
 	compute_light(ray, &inter, *scene, lst);
 	

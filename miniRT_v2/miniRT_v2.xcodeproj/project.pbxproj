@@ -306,6 +306,7 @@
 		F468260F2775B70A001E4EC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = "./**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -315,6 +316,7 @@
 		F46826102775B70A001E4EC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = "./**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
