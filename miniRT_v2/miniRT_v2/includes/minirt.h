@@ -17,6 +17,7 @@
 # define SPHERE	110
 # define PLANE	111
 # define CYLINDER	112
+# define CONE	113
 # define BLACK	16711680//0x333333
 # define WHITE	0xffffff
 
@@ -47,11 +48,22 @@ typedef struct	s_cylinder
 	double		dist2;
 }				t_cylinder;
 
+typedef struct	s_cone
+{
+	t_vector	center;
+	t_vector	nv;
+	double		radius;
+	double		height;
+	double		dist1;
+	double		dist2;
+}				t_cone;
+
 union			u_figure
 {
 	t_sphere	sp;
 	t_plane		pl;
 	t_cylinder	cy;
+	t_cone		co;
 };
 
 typedef struct		s_figure
@@ -128,4 +140,5 @@ int		trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene);
 double	cylinder_intersection(t_vector o, t_vector d, t_figure *lst);
 double	plane_intersection(t_vector o, t_vector d, t_figure *lst);
 void	apply_texture(t_figure *figure, t_inter *inter);
+double cone_intersection(t_vector pos, t_vector dir, t_figure *lst);
 #endif

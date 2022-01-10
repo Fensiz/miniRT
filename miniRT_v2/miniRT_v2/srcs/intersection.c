@@ -184,3 +184,41 @@ double			cylinder_intersection(t_vector o, t_vector d, t_figure *lst)
 	}
 	return (INFINITY);
 }
+t_vector cone_normal(t_vector  p, t_figure *lst)
+{
+	float r = sqrt((p.x-lst->figure.co.center.x)*(p.x-lst->figure.co.center.x) + (p.z-lst->figure.co.center.z)*(p.z-lst->figure.co.center.z));
+	t_vector n = vector_set(p.x-lst->figure.co.center.x, r*(lst->figure.co.radius/lst->figure.co.height), p.z-lst->figure.co.center.z);
+	n = vector_norm(n);
+	return n;
+}
+
+
+double cone_intersection(t_vector pos, t_vector dir, t_figure *lst)
+{
+	double A = pos.x - lst->figure.co.center.x;
+	double B = pos.z - lst->figure.co.center.z;
+	double D = lst->figure.co.height - pos.y + lst->figure.co.center.y;
+	
+	double tan = (lst->figure.co.radius / lst->figure.co.height) * (lst->figure.co.radius / lst->figure.co.height);
+	
+	float a = (dir.x * dir.x) + (dir.z * dir.z) - (tan*(dir.y * dir.y));
+	float b = (2*A*dir.x) + (2*B*dir.z) + (2*tan*D*dir.y);
+	float c = (A*A) + (B*B) - (tan*(D*D));
+	
+	float delta = b*b - 4*(a*c);
+	if(fabs(delta) < 0.001) return -1.0;
+	if(delta < 0.0) return -1.0;
+	
+	float t1 = (-b - sqrt(delta))/(2*a);
+	float t2 = (-b + sqrt(delta))/(2*a);
+	float t;
+	
+	if (t1>t2) t = t2;
+	else t = t1;
+	lst->normal = cone_normal(pos, lst);
+	float r = pos.y + t*dir.y;
+	printf("%f",t);
+	if ((r > lst->figure.co.center.y) && (r < lst->figure.co.center.y + lst->figure.co.height)) return t;
+	else return -1;
+}
+
