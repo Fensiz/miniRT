@@ -12,31 +12,35 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 	if (figure->type == CYLINDER)
 	{
 		coords = vector_sub(inter->point, figure->figure.cy.center);
-		coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI)*180);
-		//coords = vector_y_rot(coords, (acos(figure->figure.cy.nv.y) / M_PI)*180);
-		coords = vector_z_rot(coords, (asin(figure->figure.cy.nv.x) / M_PI)*180);
+		coords.x += EPSILON;
+		coords.y += EPSILON;
+		coords.z += EPSILON;
+
+		if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z >= 0))
+			coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180);
+		else if (figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z < 0)
+			coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180);
+		else if (figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.z >= 0)
+			coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.z) / M_PI) * 180);
+		else
+			coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.z) / M_PI) * 180);
+		if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x >= 0))
+			coords = vector_z_rot(coords, 180+(asin(figure->figure.cy.nv.x) / M_PI) * 180);
+		else if ((figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.x < 0))
+			coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI) * 180);
+		else if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x < 0))
+			coords = vector_z_rot(coords, 180+(asin(figure->figure.cy.nv.x) / M_PI) * 180);
+		else
+			coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI) * 180);
 		theta = atan2(coords.x, coords.z);
-		phi = acos((double)coords.y / figure->figure.cy.radius);
+		
 		raw_u = theta / (2 * M_PI);
 		u = 1 - (raw_u + 0.5);
 		v = (int)coords.y;
-		val.x = (int)floor(u * figure->figure.cy.height) % 2;
-		val.y = abs((int)(v*figure->figure.cy.radius/15)) % 2;
+		val.x = abs((int)floor(u * figure->figure.cy.radius*4)) % 2;
+		val.y = abs((int)floor(v * figure->figure.cy.height/4)) % 2;
 		party_mix = ((int)val.x ^ (int)val.y);
 		return (party_mix ? BLACK : WHITE);
-//		coords = vector_sub(inter->point, figure->figure.cy.center);
-//		coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.x) / M_PI)*180);
-//		coords = vector_y_rot(coords, (acos(figure->figure.cy.nv.y) / M_PI)*180);
-//		coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI)*180);
-//		theta = atan2(coords.x, coords.z);
-//		phi = acos((double)coords.y / figure->figure.cy.radius);
-//		raw_u = theta / (2 * M_PI);
-//		u = 1 - (raw_u + 0.5);
-//		v = (int)coords.y;
-//		val.x = (int)floor(u * figure->figure.cy.height) % 2;
-//		val.y = abs((int)(v*figure->figure.cy.radius/15)) % 2;
-//		party_mix = ((int)val.x ^ (int)val.y);
-//		return (party_mix ? BLACK : WHITE);
 	}
 	else if (figure->type == SPHERE)
 	{
@@ -55,9 +59,9 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 	}
 	else
 	{
-		coords.x = abs((int)floor((inter->point.x)));
-		coords.y = abs((int)floor((inter->point.y)+0.001));
-		coords.z = abs((int)floor((inter->point.z)));
+		coords.x = abs((int)floor((inter->point.x) + EPSILON));
+		coords.y = abs((int)floor((inter->point.y) + EPSILON));
+		coords.z = abs((int)floor((inter->point.z) + EPSILON));
 		val.x = (int)(coords.x) % 2;
 		val.y = (int)(coords.y) % 2;
 		val.z = (int)(coords.z) % 2;
