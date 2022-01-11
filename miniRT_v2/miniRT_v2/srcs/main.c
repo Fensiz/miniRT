@@ -444,7 +444,7 @@ void		try_all_intersections(t_vector_2p ray, t_figure *figure,
 			distance = cylinder_intersection(ray.origin, ray.direction, figure);
 		else if (figure->type == CONE)
 		{
-			printf("+\n");
+			//printf("+\n");
 			distance = cone_intersection(ray.origin, ray.direction, figure);
 		}
 		if (distance > EPSILON && distance < *closest_intersection)
@@ -470,7 +470,7 @@ int		in_light(t_vector o, t_vector d, t_figure *lst) //shadows
 			distance = cylinder_intersection(o, d, lst);
 		else if (lst->type == CONE)
 			distance = cone_intersection(o, d, lst);
-		if (distance > EPSILON && distance < 1)
+		if (distance > EPSILON && distance < 1 && lst->type != CONE)
 			return (0);
 		lst = lst->next;
 	}
@@ -517,7 +517,8 @@ void	compute_light(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *lst
 	{
 		direction = vector_sub(scene.light->origin, inter->point);
 		if (in_light(inter->point, direction, lst)
-			&& vector_dot(inter->normal, direction) > 0)
+			&&
+			vector_dot(inter->normal, direction) > 0)
 		{
 			light = scene.light->brightness * vcos(inter->normal, direction);
 			add_coeficient(rgb, light, scene.light->color);
