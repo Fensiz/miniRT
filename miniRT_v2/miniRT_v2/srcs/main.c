@@ -455,7 +455,40 @@ void		try_all_intersections(t_vector_2p ray, t_figure *figure,
 		figure = figure->next;
 	}
 }
+//o - light origin
+//i - inter point
+int		in_light2(t_vector o, t_vector i, t_vector d, t_figure *lst) //shadows
+{
+	double	distance_v = INFINITY;
+	double	distance_mem = INFINITY;
+	t_figure	closest_figure;
 
+	while (lst)
+	{
+		if (lst->type == SPHERE)
+			distance_v = sphere_intersection(o, d, lst);
+		else if (lst->type == PLANE)
+			distance_v = plane_intersection(o, d, lst);
+		else if (lst->type == CYLINDER)
+			distance_v = cylinder_intersection(o, d, lst);
+		else if (lst->type == CONE)
+			distance_v = cone_intersection(o, d, lst);
+		if (distance_v < distance_mem)
+		{
+			distance_mem = distance_v;
+			closest_figure = *lst;
+		}
+		
+//		if (distance > EPSILON && distance < 1 && lst->type != CONE)
+//			return (0);
+		lst = lst->next;
+	}
+	if (distance_mem < INFINITY && vector_len(vector_sub(i, vector_sum(vector_mlt(distance_mem, d), o))) < 0.1)
+	{
+		return 1;
+	}
+	return (0);
+}
 int		in_light(t_vector o, t_vector d, t_figure *lst) //shadows
 {
 	double	distance;
@@ -510,13 +543,16 @@ void	compute_light(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *lst
 	double			light;
 	double			rgb[3];
 	t_vector		direction;
+	t_vector		direction2;
 
 	ft_memset(rgb, 0, 3 * sizeof(double));
 	add_coeficient(rgb, scene.ambient_light, scene.ambient_light_color);
 	while (scene.light)
 	{
 		direction = vector_sub(scene.light->origin, inter->point);
-		if (in_light(inter->point, direction, lst)
+		direction2 = vector_norm(vector_sub(inter->point, scene.light->origin));
+		if (//in_light(inter->point, direction, lst)
+			in_light2(scene.light->origin ,inter->point, direction2, lst)
 			&&
 			vector_dot(inter->normal, direction) > 0)
 		{
