@@ -15,17 +15,25 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 		coords.x += EPSILON;
 		coords.y += EPSILON;
 		coords.z += EPSILON;
+		t_vector n = figure->figure.cy.nv;
 
-		if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z >= 0))
-			coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180);
-		else if (figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z < 0)
-			coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180);
+		if ((n.y >= 0 && n.z >= 0))
+		{
+			coords = vector_x_rot(coords, -(asin(n.z) / M_PI) * 180);
+			n = vector_x_rot(n, -(asin(n.z) / M_PI) * 180);
+		}
+		else if (n.y >= 0 && n.z < 0)
+		{
+			coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180); //может быть надо добавить 180
+			n = vector_x_rot(n, -(asin(n.z) / M_PI) * 180);
+		}
 		else if (figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.z >= 0)
 			coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.z) / M_PI) * 180);
 		else
 			coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.z) / M_PI) * 180);
+		
 		if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x >= 0))
-			coords = vector_z_rot(coords, 180+(asin(figure->figure.cy.nv.x) / M_PI) * 180);
+			coords = vector_z_rot(coords, 180 +(asin(figure->figure.cy.nv.x) / M_PI) * 180);
 		else if ((figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.x < 0))
 			coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI) * 180);
 		else if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x < 0))
@@ -42,6 +50,10 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 		party_mix = ((int)val.x ^ (int)val.y);
 		return (party_mix ? BLACK : WHITE);
 	}
+//	else if (figure->type == CONE)
+//	{
+//
+//	}
 	else if (figure->type == SPHERE)
 	{
 		coords = vector_sub(inter->point, figure->figure.sp.center);
