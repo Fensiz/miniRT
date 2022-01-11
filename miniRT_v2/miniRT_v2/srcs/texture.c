@@ -16,80 +16,31 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 		coords.y += EPSILON;
 		coords.z += EPSILON;
 
-		if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z >= 0))
-			coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180);
-		else if (figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z < 0)
-			coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180); //может быть надо добавить 180
-		else if (figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.z >= 0)
-			coords = vector_x_rot(coords, 180 + (asin(figure->figure.cy.nv.z) / M_PI) * 180);
-		else
-			coords = vector_x_rot(coords, 180 + (asin(figure->figure.cy.nv.z) / M_PI) * 180);
-		
-		if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x >= 0))
-			coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		else if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x < 0))
-			coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		else if ((figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.x >= 0))
-			coords = vector_z_rot(coords, 180+(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		else
-			coords = vector_z_rot(coords, 180+(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		
-		/*
 		 t_vector n;
 		 n = figure->figure.cy.nv;
+		printf("=%lf/%lf/%lf---%lf\n",n.x, n.y, n.z, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
 		 
-		 if ((n.y >= 0 && n.z >= 0))
+		 if (n.y >= 0)
 		 {
-			 coords = vector_x_rot(coords, -(asin(n.z) / M_PI) * 180);
-			 n = vector_x_rot(n, -(asin(n.z) / M_PI) * 180);
-		 }
-		 else if (n.y >= 0 && n.z < 0)
-		 {
-			 coords = vector_x_rot(coords, (asin(n.z) / M_PI) * 180); //может быть надо добавить 180
-			 n = vector_x_rot(n, (asin(n.z) / M_PI) * 180);
-		 }
-		 else if (n.y < 0 && n.z >= 0)
-		 {
-			 coords = vector_x_rot(coords, 180 + (asin(n.z) / M_PI) * 180);
-			 n = vector_x_rot(n, 180 + (asin(n.z) / M_PI) * 180);
+			 coords = vector_x_rot(coords, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
+			 n = vector_x_rot(n, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
 		 }
 		 else
 		 {
-			 coords = vector_x_rot(coords, 180 - (asin(n.z) / M_PI) * 180);
-			 n = vector_x_rot(n, 180 - (asin(n.z) / M_PI) * 180);
+			 coords = vector_x_rot(coords, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
+			 n = vector_x_rot(n, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
 		 }
-		 
-		 if ((n.y >= 0 && n.x >= 0))
+		 if (n.y >= 0)
 		 {
-			 coords = vector_z_rot(coords, -(asin(n.x) / M_PI) * 180);
-			 n = vector_z_rot(n, -(asin(n.x) / M_PI) * 180);
+			 coords = vector_z_rot(coords, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
+			 n = vector_z_rot(n, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
 		 }
-		 else if ((n.y >= 0 && n.x < 0))
-			 coords = vector_z_rot(coords, (asin(n.x) / M_PI) * 180);
-		 else if ((n.y < 0 && n.x >= 0))
-			 coords = vector_z_rot(coords, 180+(asin(n.x) / M_PI) * 180);
 		 else
-			 coords = vector_z_rot(coords, 180-(asin(n.x) / M_PI) * 180);
-		 */
-		/*
-		 if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z >= 0))
-			 coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180);
-		 else if (figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.z < 0)
-			 coords = vector_x_rot(coords, -(asin(figure->figure.cy.nv.z) / M_PI) * 180); //может быть надо добавить 180
-		 else if (figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.z >= 0)
-			 coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.z) / M_PI) * 180);
-		 else
-			 coords = vector_x_rot(coords, (asin(figure->figure.cy.nv.z) / M_PI) * 180);
-		 
-		 if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x >= 0))
-			 coords = vector_z_rot(coords, 180 +(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		 else if ((figure->figure.cy.nv.y < 0 && figure->figure.cy.nv.x < 0))
-			 coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		 else if ((figure->figure.cy.nv.y >= 0 && figure->figure.cy.nv.x < 0))
-			 coords = vector_z_rot(coords, 180+(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		 else
-			 coords = vector_z_rot(coords, -(asin(figure->figure.cy.nv.x) / M_PI) * 180);
-		 */
+		 {
+			 coords = vector_z_rot(coords, 180+(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
+			 n = vector_z_rot(n, 180+(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
+		 }
+
 		theta = atan2(coords.x, coords.z);
 		
 		raw_u = theta / (2 * M_PI);
