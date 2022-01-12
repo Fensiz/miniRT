@@ -30,9 +30,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
-            landmarkName = "compute_light(ray, inter, scene, lst)"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
+            landmarkName = "trace_ray(ray, depth, lst, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,9 +46,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
-            landmarkName = "compute_light(ray, inter, scene, lst)"
+            startingLineNumber = "600"
+            endingLineNumber = "600"
+            landmarkName = "trace_ray(ray, depth, lst, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
-            landmarkName = "compute_light(ray, inter, scene, lst)"
+            startingLineNumber = "598"
+            endingLineNumber = "598"
+            landmarkName = "trace_ray(ray, depth, lst, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +78,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "602"
-            endingLineNumber = "602"
-            landmarkName = "trace_ray(ray, depth, lst, scene)"
+            startingLineNumber = "634"
+            endingLineNumber = "634"
+            landmarkName = "main(argc, argv)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

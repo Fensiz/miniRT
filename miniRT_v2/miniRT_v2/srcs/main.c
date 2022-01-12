@@ -478,15 +478,10 @@ int		in_light2(t_vector o, t_vector i, t_vector d, t_figure *lst) //shadows
 			distance_mem = distance_v;
 			closest_figure = *lst;
 		}
-		
-//		if (distance > EPSILON && distance < 1 && lst->type != CONE)
-//			return (0);
 		lst = lst->next;
 	}
 	if (distance_mem < INFINITY && vector_len(vector_sub(i, vector_sum(vector_mlt(distance_mem, d), o))) < 0.1)
-	{
 		return 1;
-	}
 	return (0);
 }
 int		in_light(t_vector o, t_vector d, t_figure *lst) //shadows
