@@ -277,4 +277,3 @@ double cone_intersection(t_vector origin, t_vector direction, t_figure *lst)
 	
 	//return cone_solve(origin, direction, lst);
 }
-

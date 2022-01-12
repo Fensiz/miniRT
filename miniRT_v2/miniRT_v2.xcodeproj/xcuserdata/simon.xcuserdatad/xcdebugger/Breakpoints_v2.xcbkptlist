@@ -30,9 +30,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "604"
-            endingLineNumber = "604"
-            landmarkName = "trace_ray(ray, depth, lst, scene)"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
+            landmarkName = "compute_light(ray, inter, scene, lst)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,9 +46,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "605"
-            endingLineNumber = "605"
-            landmarkName = "trace_ray(ray, depth, lst, scene)"
+            startingLineNumber = "568"
+            endingLineNumber = "568"
+            landmarkName = "compute_light(ray, inter, scene, lst)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "603"
-            endingLineNumber = "603"
-            landmarkName = "trace_ray(ray, depth, lst, scene)"
+            startingLineNumber = "566"
+            endingLineNumber = "566"
+            landmarkName = "compute_light(ray, inter, scene, lst)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +78,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
-            landmarkName = "main(argc, argv)"
+            startingLineNumber = "602"
+            endingLineNumber = "602"
+            landmarkName = "trace_ray(ray, depth, lst, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
