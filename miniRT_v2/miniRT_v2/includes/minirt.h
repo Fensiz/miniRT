@@ -116,6 +116,7 @@ typedef struct		s_scene
 	double			ambient_light;
 	int				ambient_light_color;
 	int				background;
+	double			nv_map[800][600];
 }					t_scene;
 typedef struct		s_inter
 {

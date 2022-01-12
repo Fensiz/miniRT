@@ -16,6 +16,7 @@
 		F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826152775D37C001E4EC6 /* mlx_utils.c */; };
 		F46826192775FF37001E4EC6 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826182775FF37001E4EC6 /* utils.c */; };
 		F468261D277C94E6001E4EC6 /* intersection.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261C277C94E6001E4EC6 /* intersection.c */; };
+		F468261F278F162D001E4EC6 /* map.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261E278F162D001E4EC6 /* map.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +48,7 @@
 		F46826172775F3B8001E4EC6 /* mlx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mlx.h; path = miniRT_v2/libs/mlx19/mlx.h; sourceTree = "<group>"; };
 		F46826182775FF37001E4EC6 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utils.c; path = miniRT_v2/srcs/utils.c; sourceTree = "<group>"; };
 		F468261C277C94E6001E4EC6 /* intersection.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = intersection.c; path = miniRT_v2/srcs/intersection.c; sourceTree = "<group>"; };
+		F468261E278F162D001E4EC6 /* map.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = map.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		F46825FE2775B70A001E4EC6 = {
 			isa = PBXGroup;
 			children = (
+				F468261E278F162D001E4EC6 /* map.c */,
 				F40AA6B32781DEC900C7F5BF /* new.rt */,
 				F40AA6B12781DEC300C7F5BF /* Makefile */,
 				F40AA6B0277FB79800C7F5BF /* color.h */,
@@ -157,6 +160,7 @@
 			files = (
 				F40AA6B22781DEC300C7F5BF /* Makefile in Sources */,
 				F46826122775B775001E4EC6 /* vector.c in Sources */,
+				F468261F278F162D001E4EC6 /* map.c in Sources */,
 				F468261D277C94E6001E4EC6 /* intersection.c in Sources */,
 				F46826192775FF37001E4EC6 /* utils.c in Sources */,
 				F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */,
