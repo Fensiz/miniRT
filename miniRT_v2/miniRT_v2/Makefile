@@ -13,7 +13,7 @@
 NAME		=	miniRT
 SRC_PATH	=	./srcs/
 FILES		=	intersection.c	color_ops.c	utils.c		\
-				mlx_utils.c		vector.c	main.c	texture.c
+				mlx_utils.c		vector.c	main.c	texture.c	handlers.c
 MLX_PATH	=	./libs/mlx19/
 
 MLX_LIB		=	$(MLX_PATH)libmlx.a			

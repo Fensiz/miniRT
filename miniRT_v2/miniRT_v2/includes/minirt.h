@@ -142,4 +142,6 @@ double	cylinder_intersection(t_vector o, t_vector d, t_figure *lst);
 double	plane_intersection(t_vector o, t_vector d, t_figure *lst);
 void	apply_texture(t_figure *figure, t_inter *inter);
 double cone_intersection(t_vector pos, t_vector dir, t_figure *lst);
+int	key_handler(int keycode, void *mlx_arr);
+int	red_cross_handler(void *mlx_arr);
 #endif

@@ -617,26 +617,6 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	return (color_sum(color_mlt(inter.color, 1 - r), color_mlt(inter.reflection_color, r)));
 }
 
-int	key_handler(int keycode, void *mlx_arr)
-{
-	if (keycode == 53)
-	{
-		mlx_destroy_window (((t_mlx *)mlx_arr)->mlx, ((t_mlx *)mlx_arr)->window);
-		exit (0);
-	}
-	return (0);
-}
-
-int	red_cross_handler(void *mlx_arr)
-{
-	if (mlx_arr)
-	{
-		mlx_destroy_window (((t_mlx *)mlx_arr)->mlx, ((t_mlx *)mlx_arr)->window);
-		exit (0);
-	}
-	return (0);
-}
-
 int main(int argc, const char **argv)
 {
 	t_mlx		mlx;
