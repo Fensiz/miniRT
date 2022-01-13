@@ -1,29 +1,22 @@
 #include "minirt.h"
 #include <stdio.h>
 
+double	rot_angle(t_vector n, double coord)
+{
+	return ((asin(coord / sqrt(n.y * n.y + coord * coord)) / M_PI) * 180);
+}
 
-void	rot_to_n(t_vector n, t_vector coords)
+t_vector	rot_y1_to_n(t_vector v, t_vector n)
 {
 	if (n.y >= 0)
-	{
-		coords = vector_x_rot(coords, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-		n = vector_x_rot(n, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-	}
+		v = vector_x_rot(v, -rot_angle(n, n.z));
 	else
-	{
-		coords = vector_x_rot(coords, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-		n = vector_x_rot(n, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-	}
+		v = vector_x_rot(v, 180 + rot_angle(n, n.z));
 	if (n.y >= 0)
-	{
-		coords = vector_z_rot(coords, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-		n = vector_z_rot(n, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-	}
+		v = vector_z_rot(v, rot_angle(n, n.x));
 	else
-	{
-		coords = vector_z_rot(coords, 180-(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-		n = vector_z_rot(n, 180-(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-	}
+		v = vector_z_rot(v, 180 - rot_angle(n, n.x));
+	return (v);
 }
 
 
@@ -47,27 +40,27 @@ static int	checkerboard(t_inter *inter, t_figure *figure)
 		 t_vector n;
 		 n = figure->figure.cy.nv;
 		//printf("=%lf/%lf/%lf---%lf\n",n.x, n.y, n.z, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-		 
-		 if (n.y >= 0)
-		 {
-			 coords = vector_x_rot(coords, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-			 n = vector_x_rot(n, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-		 }
-		 else
-		 {
-			 coords = vector_x_rot(coords, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-			 n = vector_x_rot(n, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
-		 }
-		 if (n.y >= 0)
-		 {
-			 coords = vector_z_rot(coords, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-			 n = vector_z_rot(n, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-		 }
-		 else
-		 {
-			 coords = vector_z_rot(coords, 180-(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-			 n = vector_z_rot(n, 180-(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
-		 }
+		coords = rot_y1_to_n(coords, figure->figure.cy.nv);
+//		 if (n.y >= 0)
+//		 {
+//			 coords = vector_x_rot(coords, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
+//			 n = vector_x_rot(n, -(asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
+//		 }
+//		 else
+//		 {
+//			 coords = vector_x_rot(coords, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
+//			 n = vector_x_rot(n, 180 + (asin(n.z/sqrt(n.y * n.y + n.z * n.z)) / M_PI) * 180);
+//		 }
+//		 if (n.y >= 0)
+//		 {
+//			 coords = vector_z_rot(coords, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
+//			 n = vector_z_rot(n, (asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
+//		 }
+//		 else
+//		 {
+//			 coords = vector_z_rot(coords, 180-(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
+//			 n = vector_z_rot(n, 180-(asin(n.x/sqrt(n.x * n.x + n.y * n.y)) / M_PI) * 180);
+//		 }
 
 		theta = atan2(coords.x, coords.z);
 		
