@@ -1,6 +1,7 @@
 #include "minirt.h"
 #include <mlx.h>
 #include <math.h>
+#include <stdio.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
@@ -48,6 +49,10 @@ void	ft_error(int code, char *error_text)
 		write(2, "Scene error: ", 13);
 	else if (code == FATAL)
 		write(2, "Fatal error: ", 13);
+//	else if (code == FIG_TYPE)
+//		write(2, "Figure error: ", 14);
+	else if (code == FILE_FORMAT_ERR)
+		write(2, "Wrong file format", 17);
 	write(2, error_text, ft_strlen(error_text));
 	write(2, "\n", 1);
 	exit(code);
@@ -255,7 +260,7 @@ void		parse_cylinder(t_figure **figure_list, char **str)
 	curr->texture = ft_atoi(str);
 	check_value(curr->texture, 0, 5, "cylinder");
 }
-#include <stdio.h>
+
 void		parse_cone(t_figure **figure_list, char **str)
 {
 	t_figure	*curr;
@@ -296,19 +301,26 @@ static void	parse(t_mlx *mlx, t_scene *scene, t_figure **figure, char **s)
 		parse_sphere(figure, s);
 	else if (**s == 'p' && *(*s + 1) == 'l')
 		parse_plane(figure, s);
+	else
+		ft_error(SCENE, " parse error: undefined object in the input file");
 }
 
 static void	parse_elems(t_mlx *mlx, t_scene *scene, t_figure **figure, char *str)
 {
 	while (*str)
 	{
-		if (*str == '#')
-		{
-			while (*str && *str != '\n')
-				str++;
+		while (ft_isspace(*str) || *str == '\n' || *str == '#') {
+			if (ft_isspace(*str))
+				skip_spaces(&str);
+			else if (*str == '\n')
+				str ++;
+			else
+			{
+				while (*str && *str != '\n')
+					str ++;
+			}
 		}
-		else
-			parse(mlx, scene, figure, &str);
+		parse(mlx, scene, figure, &str);
 		str++;
 	}
 	if (mlx->camera == NULL)
@@ -335,6 +347,19 @@ char	*file_to_str(int fd)
 	return (str);
 }
 
+int	is_right_format(const char *fname)
+{
+	int len;
+
+	len = (int)ft_strlen(fname);
+//	printf("len = %d\n", len);
+	if (len <= 3)
+		return (0);
+	if (!(fname[len - 1] == 't' && fname[len - 2] == 'r' && fname[len - 3] == '.'))
+		return (0);
+	return (1);
+}
+
 void	parse_scene(t_mlx *mlx, t_scene *scene, t_figure **figure,
 							const char **argv)
 {
@@ -345,6 +370,8 @@ void	parse_scene(t_mlx *mlx, t_scene *scene, t_figure **figure,
 	scene->light = NULL;
 	mlx->camera = NULL;
 	fd = open(argv[1], O_RDONLY);
+	if (!is_right_format(argv[1]))
+		ft_error(FILE_FORMAT_ERR, "");
 	if (fd == -1)
 		ft_fatal(FD);
 	str = file_to_str(fd);
