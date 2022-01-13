@@ -14,6 +14,7 @@
 # define RANGE	101
 # define SCENE	105
 # define FATAL	106
+# define FILE_FORMAT_ERR	107
 # define SPHERE	110
 # define PLANE	111
 # define CYLINDER	112

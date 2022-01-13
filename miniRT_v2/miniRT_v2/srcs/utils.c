@@ -5,6 +5,8 @@ void	ft_fatal(int i)
 {
 	if (i == MALLOC)
 		write(2, "Fatal error: malloc failed.\n", 28);
+	if (i == FD)
+		write(2, "Cannot open file.\n", 18);
 	exit(i);
 }
 
