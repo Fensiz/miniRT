@@ -443,10 +443,7 @@ void		try_all_intersections(t_vector_2p ray, t_figure *figure,
 		else if (figure->type == CYLINDER)
 			distance = cylinder_intersection(ray.origin, ray.direction, figure);
 		else if (figure->type == CONE)
-		{
-			//printf("+\n");
 			distance = cone_intersection(ray.origin, ray.direction, figure);
-		}
 		if (distance > EPSILON && distance < *closest_intersection)
 		{
 			*closest_figure = *figure;
@@ -601,7 +598,7 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	if (closest_figure.type != -1)
 		inter.color = closest_figure.color;
 	//return (inter.color);
-	apply_texture(&closest_figure, &inter);
+	apply_texture(&closest_figure, &inter, scene);
 	compute_light(ray, &inter, *scene, lst);
 	
 
@@ -629,6 +626,7 @@ int main(int argc, const char **argv)
 	parse_scene(&mlx, &scene, &figure, argv);
 	init_mlx(&mlx, &scene);
 	curr = mlx.camera;
+	load_map(&scene);
 	while (curr)
 	{
 		render_scene(&scene, figure, &mlx, curr);

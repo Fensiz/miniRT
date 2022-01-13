@@ -6,14 +6,15 @@
 #    By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 00:42:18 by bgreenbl          #+#    #+#              #
-#    Updated: 2022/01/09 00:40:24 by bgreenbl         ###   ########.fr        #
+#    Updated: 2022/01/13 23:04:55 by bgreenbl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	miniRT
 SRC_PATH	=	./srcs/
 FILES		=	intersection.c	color_ops.c	utils.c		\
-				mlx_utils.c		vector.c	main.c	texture.c	handlers.c
+				mlx_utils.c		vector.c	main.c	texture.c	handlers.c\
+				map_reader.c
 MLX_PATH	=	./libs/mlx19/
 
 MLX_LIB		=	$(MLX_PATH)libmlx.a			

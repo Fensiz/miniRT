@@ -34,6 +34,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      enableAddressSanitizer = "YES"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -53,9 +54,20 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "/Users/simon/42_courses/miniRT_v2/new.rt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/simon/miniRT_git/miniRT_v2/new.rt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
+      <AdditionalOptions>
+         <AdditionalOption
+            key = "MallocScribble"
+            value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
+      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

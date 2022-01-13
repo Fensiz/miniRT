@@ -107,6 +107,12 @@ typedef struct		s_light
 	int				color;
 	struct s_light	*next;
 }					t_light;
+typedef struct s_map
+{
+	int	size;
+	int	*map;
+	struct s_map *next;
+}	t_map;
 typedef struct		s_scene
 {
 	int				width;
@@ -116,6 +122,7 @@ typedef struct		s_scene
 	double			ambient_light;
 	int				ambient_light_color;
 	int				background;
+	t_map			*map;
 	//double			nv_map[800][600];
 }					t_scene;
 typedef struct		s_inter
@@ -125,6 +132,14 @@ typedef struct		s_inter
 	t_vector		normal;
 	t_vector		point;
 }					t_inter;
+typedef struct s_uv
+{
+	double	u;
+	double	v;
+}	t_uv;
+
+void	load_map(t_scene *scene);
+void	ft_error(int code, char *error_text);
 void	ft_fatal(int i);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -140,8 +155,9 @@ double	sphere_intersection(t_vector origin, t_vector direction, t_figure *figure
 int		trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene);
 double	cylinder_intersection(t_vector o, t_vector d, t_figure *lst);
 double	plane_intersection(t_vector o, t_vector d, t_figure *lst);
-void	apply_texture(t_figure *figure, t_inter *inter);
+void	apply_texture(t_figure *figure, t_inter *inter, t_scene *scene);
 double cone_intersection(t_vector pos, t_vector dir, t_figure *lst);
 int	key_handler(int keycode, void *mlx_arr);
 int	red_cross_handler(void *mlx_arr);
+char	*file_to_str(int fd);
 #endif
