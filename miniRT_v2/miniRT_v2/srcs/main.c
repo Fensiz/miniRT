@@ -320,6 +320,8 @@ static void	parse_elems(t_mlx *mlx, t_scene *scene, t_figure **figure, char *str
 					str ++;
 			}
 		}
+		if (!*str)
+			break ;
 		parse(mlx, scene, figure, &str);
 		str++;
 	}
@@ -504,7 +506,7 @@ int		in_light2(t_vector o, t_vector i, t_vector d, t_figure *lst) //shadows
 		}
 		lst = lst->next;
 	}
-	if (distance_mem < INFINITY && vector_len(vector_sub(i, vector_sum(vector_mlt(distance_mem, d), o))) < 0.1)
+	if (distance_mem < INFINITY && vector_len(vector_sub(i, vector_sum(vector_mlt(distance_mem, d), o))) < 0.01)
 		return 1;
 	return (0);
 }
@@ -545,14 +547,14 @@ double	calc_specular(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *l
 {
 	double	light;
 	t_vector	direction;
-	t_vector	p_to_cam;
+	t_vector	to_cam;
 	t_vector	reflected;
 
 	direction = vector_sub(scene.light->origin, inter->point);
-	p_to_cam = vector_sub(ray.origin, inter->point);
+	to_cam = vector_sub(ray.origin, inter->point);
 	reflected = reflect_ray(direction, inter->normal);
-	if (vector_dot(reflected, p_to_cam) > 0)
-		light = scene.light->brightness * pow(vcos(reflected, p_to_cam), lst->specular);
+	if (vector_dot(reflected, to_cam) > 0)
+		light = scene.light->brightness * pow(vcos(reflected, to_cam), lst->specular);
 	else
 		light = 0;
 	return (light);
@@ -573,7 +575,8 @@ void	compute_light(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *lst
 		if (//in_light(inter->point, direction, lst)
 			in_light2(scene.light->origin ,inter->point, direction2, lst)
 			&&
-			vector_dot(inter->normal, direction) > 0)
+			vector_dot(inter->normal, direction) > 0
+			)
 		{
 			light = scene.light->brightness * vcos(inter->normal, direction);
 			add_coeficient(rgb, light, scene.light->color);
@@ -624,11 +627,11 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	inter.color = scene->background;
 	if (closest_figure.type != -1)
 		inter.color = closest_figure.color;
-	//return (inter.color);
+	
 	apply_texture(&closest_figure, &inter, scene);
 	compute_light(ray, &inter, *scene, lst);
 	
-
+	//return (inter.color);
 	r = 0;
 	if (closest_figure.type != -1)
 		r = closest_figure.reflection;
@@ -637,7 +640,10 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 		new_ray.origin = inter.point;
 		new_ray.direction = reflect_ray(vector_mlt(-1, ray.direction), inter.normal);
 		inter.reflection_color = trace_ray(new_ray, depth - 1, lst, scene);
+		if(inter.reflection_color == 0)
+			printf("x=%lf, y=%lf, z=%lf\n", inter.normal.x, inter.normal.y, inter.normal.z);
 	}
+//	return (color_mlt(inter.reflection_color, r));
 	return (color_sum(color_mlt(inter.color, 1 - r), color_mlt(inter.reflection_color, r)));
 }
 

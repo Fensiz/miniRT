@@ -30,9 +30,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "596"
-            endingLineNumber = "596"
-            landmarkName = "trace_ray(ray, depth, lst, scene)"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
+            landmarkName = "calc_normal(point, direction, normal, light)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,9 +46,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
-            landmarkName = "trace_ray(ray, depth, lst, scene)"
+            startingLineNumber = "600"
+            endingLineNumber = "600"
+            landmarkName = "calc_normal(point, direction, normal, light)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,9 +62,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "595"
-            endingLineNumber = "595"
-            landmarkName = "trace_ray(ray, depth, lst, scene)"
+            startingLineNumber = "598"
+            endingLineNumber = "598"
+            landmarkName = "calc_normal(point, direction, normal, light)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -78,9 +78,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "632"
-            endingLineNumber = "632"
-            landmarkName = "main(argc, argv)"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
+            landmarkName = "trace_ray(ray, depth, lst, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,9 +94,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
-            landmarkName = "cam_rot(d, cam_direction)"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
+            landmarkName = "canvas_to_viewport(x, y, camera, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,9 +110,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
-            landmarkName = "cam_rot(d, cam_direction)"
+            startingLineNumber = "404"
+            endingLineNumber = "404"
+            landmarkName = "canvas_to_viewport(x, y, camera, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,9 +126,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
-            landmarkName = "render_scene(scene, figure, mlx, camera)"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
+            landmarkName = "cam_rot(d, cam_direction)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -174,9 +174,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
-            landmarkName = "try_all_intersections(ray, figure, closest_figure, closest_intersection)"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
+            landmarkName = "render_scene(scene, figure, mlx, camera)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -190,9 +190,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
-            landmarkName = "render_scene(scene, figure, mlx, camera)"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
+            landmarkName = "cam_rot(d, cam_direction)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -270,9 +270,9 @@
             filePath = "miniRT_v2/srcs/main.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "627"
-            endingLineNumber = "627"
-            landmarkName = "main(argc, argv)"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
+            landmarkName = "trace_ray(ray, depth, lst, scene)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

@@ -50,11 +50,13 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	v *= 400;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
 	vi = ((int)floor(v) % map_size + map_size) % map_size;
-	g.x = map[((ui - 1 + map_size) % map_size) * map_size + vi]
-		- map[(ui + 1) % map_size * map_size + vi];
-	g.y = 1;
-	g.z = (map[ui * map_size + (vi - 1 + map_size) % map_size]
-		 - map[ui * map_size + (vi + 1) % map_size]);
+	g.x = map[(ui - 1 + map_size) % map_size + vi* map_size]
+		- map[(ui + 1) % map_size + vi * map_size];
+	g.y = 0;
+	g.z = (map[ui + (vi - 1 + map_size) % map_size * map_size]
+		 - map[ui + (vi + 1) % map_size * map_size]);
+	if (fabs(g.x) == 0 && fabs(g.z) == 0)
+		return vector_set(0, 0, 0);
 	g = vector_norm(g);
 	
 	return (g);
@@ -104,7 +106,17 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 	{
 		//write(1, "CHECK\n",6);
 		g = rot_from_y1_to_n(uv_to_normal(i.u, i.v, map->map, map->size), inter->normal);
-		inter->normal = vector_norm(vector_sum(inter->normal, g));
+		//if (g.y >= 0)
+		
+//		inter->normal.y += g.y/7;
+//		//if (g.x )
+//		inter->normal.x += g.x/7;
+//		inter->normal.z += g.z/7;
+//
+		inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
+//		inter->normal = vector_norm(inter->normal);
+		//		else
+//			inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
 	}
 	val.x = (int)floor(i.u * 40) % 2;
 	val.y = (int)floor(i.v * 20) % 2;
