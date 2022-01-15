@@ -28,15 +28,18 @@ t_vector	rot_form_n_to_y1(t_vector v, t_vector n)
 
 t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 {
-	
+	printf("%lf,",vector_len(v));
 	if (n.y >= 0)
-		v = vector_x_rot(v, rot_angle(n, n.z));
+		v = vector_x_rot(v, rot_angle(n, n.z));//
 	else
 		v = vector_x_rot(v, 180 - rot_angle(n, n.z));
-	if (n.y >= 0)
+	if (n.y >= 0)// && n.x >= 0)
 		v = vector_z_rot(v, -rot_angle(n, n.x));
+//	else if (n.y >= 0 && n.x >= 0)
+//		v = vector_z_rot(v, -rot_angle(n, n.x));
 	else
-		v = vector_z_rot(v, 180 + rot_angle(n, n.x));
+		v = vector_z_rot(v,  180 - rot_angle(n, n.x));
+	printf("%lf\n",vector_len(v));
 	return (v);
 }
 
@@ -46,19 +49,19 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	int	vi;
 	t_vector	g;
 
-	u *= 800;
-	v *= 400;
+	u *= 600;
+	v *= 300;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
-	vi = ((int)floor(v) % map_size + map_size) % map_size;
-	g.x = map[(ui - 1 + map_size) % map_size + vi* map_size]
-		- map[(ui + 1) % map_size + vi * map_size];
+	vi = ((int)floor(-v) % map_size + map_size) % map_size;
+	g.x = (map[(ui - 1 + map_size) % map_size + vi* map_size]
+		- map[(ui + 1) % map_size + vi * map_size]);
 	g.y = 0;
 	g.z = (map[ui + (vi - 1 + map_size) % map_size * map_size]
 		 - map[ui + (vi + 1) % map_size * map_size]);
-	if (fabs(g.x) == 0 && fabs(g.z) == 0)
+	if (g.x == 0 && g.z == 0)
 		return vector_set(0, 0, 0);
 	g = vector_norm(g);
-	
+	//g = vector_set(0, 0, -1);
 	return (g);
 }
 
@@ -105,7 +108,9 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 	if (figure->texture >> 1)
 	{
 		//write(1, "CHECK\n",6);
-		g = rot_from_y1_to_n(uv_to_normal(i.u, i.v, map->map, map->size), inter->normal);
+		g = uv_to_normal(i.u, i.v, map->map, map->size);
+		if (vector_len(g))
+			g = rot_from_y1_to_n(g, inter->normal);
 		//if (g.y >= 0)
 		
 //		inter->normal.y += g.y/7;
