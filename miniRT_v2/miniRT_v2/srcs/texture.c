@@ -6,6 +6,10 @@ double	rot_angle(t_vector n, double coord)
 {
 	return ((asin(coord / sqrt(n.y * n.y + coord * coord)) / M_PI) * 180);
 }
+double	rot_angle2(t_vector n, double coord)
+{
+	return ((asin(coord / sqrt(n.y * n.y + n.x * n.x + n.z * n.z)) / M_PI) * 180);
+}
 
 t_vector	rot_form_n_to_y1(t_vector v, t_vector n)
 {
@@ -28,18 +32,36 @@ t_vector	rot_form_n_to_y1(t_vector v, t_vector n)
 
 t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 {
-	printf("%lf,",vector_len(v));
-	if (n.y >= 0)
-		v = vector_x_rot(v, rot_angle(n, n.z));//
+	//printf("%lf,",vector_len(v));
+
+	t_vector s = v;
+	if (n.y >= 0)// && n.z >= 0)
+	{
+		v = vector_x_rot(v, rot_angle2(n, n.z));//
+		//n = vector_x_rot(n, -rot_angle(n, n.z));
+	}
+//	else if(n.y >=0)
+//		v = vector_x_rot(v, rot_angle2(n, n.z));
 	else
-		v = vector_x_rot(v, 180 - rot_angle(n, n.z));
-	if (n.y >= 0)// && n.x >= 0)
-		v = vector_z_rot(v, -rot_angle(n, n.x));
-//	else if (n.y >= 0 && n.x >= 0)
+	{
+		v = vector_x_rot(v, rot_angle2(n, n.z));
+		//v.x *= -1;
+		
+		//n = vector_x_rot(n, 180 + rot_angle(n, n.z));
+	}
+	if (n.y >= 0)//&& n.x >= 0)
+		v = vector_z_rot(v, -rot_angle(n, n.x));//-
+//	else if (n.y >= 0 && n.x < 0)
 //		v = vector_z_rot(v, -rot_angle(n, n.x));
 	else
-		v = vector_z_rot(v,  180 - rot_angle(n, n.x));
-	printf("%lf\n",vector_len(v));
+	{
+		v = vector_z_rot(v, -rot_angle(n, n.x));//-
+		//v.z *= -1;
+		v.y *= -1;
+		
+	}
+	if (n.y>=0)
+	printf("VS-%.2lf,%.2lf,%.2lf _ V%.2lf,%.2lf,%.2lf _ N%.2lf,%.2lf,%.2lf\n",s.x,s.y,s.z,v.x,v.y,v.z,n.x,n.y,n.z);
 	return (v);
 }
 
@@ -53,14 +75,15 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	v *= 300;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
 	vi = ((int)floor(-v) % map_size + map_size) % map_size;
-	g.x = (map[(ui - 1 + map_size) % map_size + vi* map_size]
-		- map[(ui + 1) % map_size + vi * map_size]);
-	g.y = 0;
-	g.z = (map[ui + (vi - 1 + map_size) % map_size * map_size]
-		 - map[ui + (vi + 1) % map_size * map_size]);
-	if (g.x == 0 && g.z == 0)
-		return vector_set(0, 0, 0);
+	g.x = 0;//-(map[(ui - 1 + map_size) % map_size + vi* map_size]
+//		- map[(ui + 1) % map_size + vi * map_size]);
+	g.y = 1;
+	g.z = 0;//-(map[ui + (vi - 1 + map_size) % map_size * map_size]
+		// - map[ui + (vi + 1) % map_size * map_size]);
+//	if (g.x == 0 && g.z == 0)
+//		return vector_set(0, 0, 0);
 	g = vector_norm(g);
+	//g.y *= -1;
 	//g = vector_set(0, 0, -1);
 	return (g);
 }
@@ -113,13 +136,14 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 			g = rot_from_y1_to_n(g, inter->normal);
 		//if (g.y >= 0)
 		
-//		inter->normal.y += g.y/7;
-//		//if (g.x )
-//		inter->normal.x += g.x/7;
-//		inter->normal.z += g.z/7;
+		inter->normal.y += g.y;
+		//if (g.x )
+		inter->normal.x += g.x;
+		inter->normal.z += g.z;
 //
-		inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
-//		inter->normal = vector_norm(inter->normal);
+		
+		//inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
+		inter->normal = vector_norm(inter->normal);
 		//		else
 //			inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
 	}

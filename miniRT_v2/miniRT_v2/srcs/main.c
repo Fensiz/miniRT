@@ -640,8 +640,8 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 		new_ray.origin = inter.point;
 		new_ray.direction = reflect_ray(vector_mlt(-1, ray.direction), inter.normal);
 		inter.reflection_color = trace_ray(new_ray, depth - 1, lst, scene);
-		if(inter.reflection_color == 0)
-			printf("x=%lf, y=%lf, z=%lf\n", inter.normal.x, inter.normal.y, inter.normal.z);
+//		if(inter.reflection_color == 0)
+//			printf("x=%lf, y=%lf, z=%lf\n", inter.normal.x, inter.normal.y, inter.normal.z);
 	}
 //	return (color_mlt(inter.reflection_color, r));
 	return (color_sum(color_mlt(inter.color, 1 - r), color_mlt(inter.reflection_color, r)));
