@@ -35,33 +35,62 @@ t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 	//printf("%lf,",vector_len(v));
 
 	t_vector s = v;
-	if (n.y >= 0)// && n.z >= 0)
+	if (n.y >= 0 && n.x >=0 && n.z <0)
 	{
-		v = vector_x_rot(v, rot_angle2(n, n.z));//
-		//n = vector_x_rot(n, -rot_angle(n, n.z));
+		v = vector_z_rot(v, rot_angle2(n, n.x));
+		v = vector_x_rot(v, rot_angle(n, n.z));
 	}
+	if (n.y < 0 && n.x >=0 && n.z <0)
+	{
+		v = vector_z_rot(v, rot_angle2(n, n.x));
+		v = vector_x_rot(v, rot_angle(n, n.z));
+		//v.z *= -1;
+		//v.x *= -1;
+	}
+	else if (n.y >= 0 && n.x < 0 && n.z <0)
+	{
+		v = vector_z_rot(v, rot_angle2(n, n.x));
+		v = vector_x_rot(v, rot_angle(n, n.z));
+	}
+	else if (n.y < 0 && n.x < 0 && n.z <0)
+	{
+		v = vector_z_rot(v, rot_angle2(n, n.x));
+		v = vector_x_rot(v, rot_angle(n, n.z));
+	}
+//	if (n.y >= 0)// && n.x >= 0)
+//		v = vector_z_rot(v, rot_angle2(n, n.x));
+//	if (n.y >= 0)// && n.z <0)
+//		//v = vector_z_rot(v, rot_angle2(n, n.x));//
+//	v = vector_x_rot(v, -rot_angle(n, n.z));
+	
+		//n = vector_x_rot(n, -rot_angle(n, n.z));
 //	else if(n.y >=0)
 //		v = vector_x_rot(v, rot_angle2(n, n.z));
-	else
-	{
-		v = vector_x_rot(v, rot_angle2(n, n.z));
-		//v.x *= -1;
-		
-		//n = vector_x_rot(n, 180 + rot_angle(n, n.z));
-	}
-	if (n.y >= 0)//&& n.x >= 0)
-		v = vector_z_rot(v, -rot_angle(n, n.x));//-
+//	else
+//	{
+//		//v = vector_z_rot(v, rot_angle2(n, n.x));
+//		v = vector_x_rot(v, rot_angle2(n, n.z));
+//		//v.x *= -1;
+//
+//		//n = vector_x_rot(n, 180 + rot_angle(n, n.z));
+//	}
+	
+//		v = vector_x_rot(v, -rot_angle(n, n.z));//-
 //	else if (n.y >= 0 && n.x < 0)
 //		v = vector_z_rot(v, -rot_angle(n, n.x));
-	else
-	{
-		v = vector_z_rot(v, -rot_angle(n, n.x));//-
-		//v.z *= -1;
-		v.y *= -1;
-		
-	}
-	if (n.y>=0)
-	printf("VS-%.2lf,%.2lf,%.2lf _ V%.2lf,%.2lf,%.2lf _ N%.2lf,%.2lf,%.2lf\n",s.x,s.y,s.z,v.x,v.y,v.z,n.x,n.y,n.z);
+//	else
+//	{
+//		v = vector_z_rot(v, -rot_angle2(n, n.x));
+////		v = vector_x_rot(v, -rot_angle(n, n.z));//-
+//		//v.z *= -1;
+if (v.y <0)
+	v.y *= -1;
+//
+//	}
+	//v = vector_y_rot(v,180);
+	
+	if (n.y>=0&&n.z<0 && n.x>=0)
+	printf("VS%.2lf,%.2lf,%.2lf _ V%.2lf,%.2lf,%.2lf _ N%.2lf,%.2lf,%.2lf\n",s.x,s.y,s.z,v.x,v.y,v.z,n.x,n.y,n.z);
 	return (v);
 }
 
@@ -75,13 +104,13 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	v *= 300;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
 	vi = ((int)floor(-v) % map_size + map_size) % map_size;
-	g.x = 0;//-(map[(ui - 1 + map_size) % map_size + vi* map_size]
+	g.x = 0;/// (map[(ui - 1 + map_size) % map_size + vi* map_size]
 //		- map[(ui + 1) % map_size + vi * map_size]);
-	g.y = 1;
-	g.z = 0;//-(map[ui + (vi - 1 + map_size) % map_size * map_size]
-		// - map[ui + (vi + 1) % map_size * map_size]);
-//	if (g.x == 0 && g.z == 0)
-//		return vector_set(0, 0, 0);
+	g.y = 0;
+	g.z = 1;// -(map[ui + (vi - 1 + map_size) % map_size * map_size]
+//		 - map[ui + (vi + 1) % map_size * map_size]);
+	if (g.x == 0 && g.z == 0)
+		return vector_set(0, 0, 0);
 	g = vector_norm(g);
 	//g.y *= -1;
 	//g = vector_set(0, 0, -1);
@@ -124,6 +153,7 @@ t_uv	uv_sphere(t_inter *inter, t_figure *figure)
 void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 {
 	t_vector 	g;
+	t_vector	gx;
 	t_uv		i;
 	t_vector	val;
 
@@ -131,18 +161,84 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 	if (figure->texture >> 1)
 	{
 		//write(1, "CHECK\n",6);
-		g = uv_to_normal(i.u, i.v, map->map, map->size);
-		if (vector_len(g))
-			g = rot_from_y1_to_n(g, inter->normal);
+		gx = uv_to_normal(i.u, i.v, map->map, map->size);
+		if (vector_len(gx))
+			g = rot_from_y1_to_n(gx, inter->normal);
 		//if (g.y >= 0)
-		
-		inter->normal.y += g.y;
-		//if (g.x )
-		inter->normal.x += g.x;
-		inter->normal.z += g.z;
+		if (gx.x >= 0)
+		{
+			if (inter->normal.x >= 0)
+			{
+				if (inter->normal.y <= 0)
+					inter->normal.y += g.y;
+				else
+					inter->normal.y -= g.y;
+					inter->normal.x += g.x;
+				if (g.x >= 0)
+					inter->normal.z += g.z;
+				else
+					inter->normal.z -= g.z;
+			}
+			else
+			{
+				if (inter->normal.y <= 0)
+				inter->normal.y -= g.y;
+				else
+					inter->normal.y += g.y;
+					inter->normal.x += g.x;
+				if (inter->normal.y >=0 && g.y < 0 && inter->normal.x < 0)
+				
+					inter->normal.z += g.z;
+			}
+		}
+		else
+		{
+			if (inter->normal.x >= 0)
+			{
+				inter->normal.x += g.x;
+				if (inter->normal.y <= 0)
+					inter->normal.y -= g.y;
+				else
+					inter->normal.y += g.y;
+				inter->normal.z -= g.z;
+			}
+			else
+			{
+				inter->normal.x += g.x;
+				if (inter->normal.y <= 0)
+					inter->normal.y += g.y;
+				else
+					inter->normal.y -= g.y;
+				inter->normal.z += g.z;
+			}
+		}
+	//		}
+//		else
+//		{
+//			inter->normal.z += g.z;
+//			//inter->normal.x += g.x;
+//		}
 //
 		
-		//inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
+		
+		
+//		inter->normal.x += g.x;
+//		if (inter->normal.y <= 0)
+//			inter->normal.y -= g.y;
+//		else
+//			inter->normal.y += g.y;
+//		if (inter->normal.x < 0)
+//		{
+//			if (g.x >= 0)
+//				inter->normal.z -= g.z;
+////				else
+////					inter->normal.z += g.z;
+//
+//			//inter->normal.z -= g.z;
+//		}
+		
+		
+		//inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(0.7, g)));
 		inter->normal = vector_norm(inter->normal);
 		//		else
 //			inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));

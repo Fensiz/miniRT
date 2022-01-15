@@ -108,8 +108,9 @@ int main()
     t_vector    v;
     t_vector    n;
 
-    v = vector_set(-1,0,0);
-    n = vector_set(0,0,-1);
+    v = vector_set(1,0,0);
+    n = vector_set(0.87,0,-0.5);
+	//0.5 0 -0.87
     v = rot_from_y1_to_n(v, n);
     printf("%lf,%lf,%lf\n", v.x, v.y, v.z);
 }
