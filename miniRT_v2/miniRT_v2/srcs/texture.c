@@ -33,7 +33,28 @@ t_vector	rot_form_n_to_y1(t_vector v, t_vector n)
 		v = vector_z_rot(v, 180 - rot_angle(n, n.x));
 	return (v);
 }
+t_vector	set_normals(t_vector n, double u, double v)
+{
+	//t_mat4		tbn;
+	t_vector		tangent;
+	t_vector		bitangent;
+//	t_vector		mat[3];
+	//t_rgb		getc;
 
+//	if (rec->ref->mat.t_normal.map != NULL)
+//	{
+	tangent = vector_cross(n, vector_set(0,1,0));//vec3_id(ID_Y));
+	if (vector_len(tangent) == 0)
+		tangent = vector_norm(vector_cross(n, vector_set(0,0,1)));
+	bitangent = vector_norm(vector_cross(n, tangent));
+	t_vector res = vector_sum(vector_mlt(u, tangent), vector_mlt(v, bitangent));
+//		tbn = mat4(vec3_zero(), inter->normal, bitangent, tangent);
+//		getc = get_uv_color_at(rec->ref->mat.t_normal.map, u, v);
+//		rec->normal = vec3_unit(mat4_mult_dir(tbn, vec3_sub_s(vec3_div_s(
+//							getc, 0.5), 1)));
+	res = vector_norm(res);
+	return res;
+}
 t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 {
 	//printf("%lf,",vector_len(v));
@@ -45,9 +66,23 @@ t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 //		v.z *= -1;
 //	if (n.x >= 0)
 //		v.x *= -1;
-		v = vector_z_rot(v, rot_angle2(n, n.x));
+	//v = vector_sum();
+//		v = vector_z_rot(v, rot_angle2(n, n.x));
+//		v = vector_x_rot(v, -rot_angle(n, n.z));
+//	if (n.y < 0)
+//		v = vector_x_rot(v, -rot_angle2(n, n.z));
+//	else
+		v = vector_x_rot(v, rot_angle2(n, n.z));
+	
+	//if (n.y >= 0)
 		v = vector_y_rot(v, rot_angle3(n, n.z));
 	
+//		v = vector_z_rot(v, rot_angle2(n, n.x));
+//	if (n.x < 0)
+//		v = vector_x_rot(v, -rot_angle(n, n.z));
+//	else
+//		v = vector_x_rot(v, rot_angle(n, n.z));
+//	v = set_normals(n, v.x, v.z);
 //	}
 //	if (s.z >=0)
 //		v
@@ -105,10 +140,12 @@ t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 //	}
 	//v = vector_y_rot(v,180);
 	
-	if (n.y>=0&&n.z<0 && n.x>=0)
-	printf("VS%.2lf,%.2lf,%.2lf _ V%.2lf,%.2lf,%.2lf _ N%.2lf,%.2lf,%.2lf\n",s.x,s.y,s.z,v.x,v.y,v.z,n.x,n.y,n.z);
+//	if (n.y>=0&&n.z<0 && n.x>=0)
+//	printf("VS%.2lf,%.2lf,%.2lf _ V%.2lf,%.2lf,%.2lf _ N%.2lf,%.2lf,%.2lf\n",s.x,s.y,s.z,v.x,v.y,v.z,n.x,n.y,n.z);
 	return (v);
 }
+
+
 
 t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 {
@@ -120,9 +157,9 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	v *= 900;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
 	vi = ((int)floor(-v) % map_size + map_size) % map_size;
-	g.x = 1;//-(map[(ui - 1 + map_size) % map_size + vi* map_size]
+	g.x = 0;//-(map[(ui - 1 + map_size) % map_size + vi* map_size]
 //		- map[(ui + 1) % map_size + vi * map_size]);
-	g.y = 0;
+	g.y = 1;
 	g.z = 0;//-(map[ui + (vi - 1 + map_size) % map_size * map_size]
 //		 - map[ui + (vi + 1) % map_size * map_size]);
 //	if (g.x == 0 && g.z == 0)
@@ -222,26 +259,6 @@ t_uv	get_sphere_uv(t_inter *inter)
 //	pvec3_unit(norm);
 //}
 
-void	set_normals(t_inter *inter, t_real u, t_real v)
-{
-	//t_mat4		tbn;
-	t_vector		tangent;
-	t_vector		bitangent;
-	//t_rgb		getc;
-
-//	if (rec->ref->mat.t_normal.map != NULL)
-//	{
-	tangent = vector_cross(inter->normal, vector_set(0,1,0));//vec3_id(ID_Y));
-		if (vector_len(tangent) == 0)
-			tangent = vector_norm(vector_cross(inter->normal, vector_set(0,0,1)));
-		bitangent = vector_norm(vector_cross(inter->normal, tangent));
-		tbn = mat4(vec3_zero(), inter->normal, bitangent, tangent);
-		getc = get_uv_color_at(rec->ref->mat.t_normal.map, u, v);
-		rec->normal = vec3_unit(mat4_mult_dir(tbn, vec3_sub_s(vec3_div_s(
-							getc, 0.5), 1)));
-//	}
-//	wave_apply(rec, u, v);
-}
 
 t_uv	uv_sphere(t_inter *inter, t_figure *figure)
 {
@@ -262,25 +279,32 @@ t_uv	uv_sphere(t_inter *inter, t_figure *figure)
 void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 {
 	t_vector 	g;
-	t_vector	gx;
+	t_vector	gx,g0,gp;
 	t_vector	gx2, g2;
 	t_uv		i;
 	t_vector	val;
 	t_vector	temp_n;
 	t_vector	temp_n2;
-
+	t_vector	coord;
+	
 	temp_n = inter->normal;
-	temp_n2 = vector_set(0, 0, 0);
+//	temp_n2 = vector_set(0, 0, 0);
+	g0 = vector_set(0,figure->figure.sp.radius,0);
 	i = uv_sphere(inter, figure);
 	if (figure->texture >> 1)
 	{
 		gx = uv_to_normal(i.u, i.v, map->map, map->size);
 		if (vector_len(gx))
-			g = rot_from_y1_to_n(gx, inter->normal);
-		
-		temp_n.x += g.x;
-		temp_n.y += g.y;
-		temp_n.z += g.z;
+		{
+			gx = vector_sum(gx, g0); //координата на верхушке сферы
+			g0 = rot_from_y1_to_n(g0, inter->normal);
+			gx = rot_from_y1_to_n(gx, inter->normal);
+			g = vector_sub(gx, g0);
+			g = vector_norm(g);
+		}
+//		temp_n.x += g.x;
+//		temp_n.y += g.y;
+//		temp_n.z += g.z;
 //		if (inter->normal.x < 0)
 //		{
 //			if (gx.x >= 0)
@@ -295,8 +319,8 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 //			else
 //				temp_n.z -= g.z;
 //		}
-		inter->normal = vector_norm(temp_n);
-//		inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
+//		inter->normal = vector_norm(temp_n);
+		inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
 		
 //		gx2 = uv_to_normal2(i.u, i.v, map->map, map->size);
 //		if (vector_len(gx2))
