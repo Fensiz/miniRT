@@ -138,3 +138,14 @@ t_vector	vector_z_rot(t_vector v, double degree_angle)
 	ret.z = v.x * rot_mtx[2].x + v.y * rot_mtx[2].y + v.z * rot_mtx[2].z;
 	return (ret);
 }
+
+t_vector	vector_id(const int id)
+{
+	const t_vector	identity[3] = {
+		(t_vector){1.0, 0.0, 0.0},
+		(t_vector){0.0, 1.0, 0.0},
+		(t_vector){0.0, 0.0, 1.0}
+	};
+
+	return (identity[id]);
+}
