@@ -177,9 +177,7 @@ static int	checkerboard(t_inter *inter, t_figure *figure, t_scene *scene)
 
 		coords = rot_form_n_to_y1(coords, figure->figure.cy.nv);
 		theta = atan2(coords.x, coords.z);
-		
-		raw_u = theta / (2 * M_PI);
-		u = 1 - (raw_u + 0.5);
+		u = 1 - (theta / (2 * M_PI) + 0.5);
 		v = coords.y;
 		r = (int)sqrt(pow(coords.x, 2) + pow(coords.z, 2))%2 ^ 1;
 		val.x = abs((int)floor(theta / M_PI * figure->figure.cy.radius * 4)) % 2;
