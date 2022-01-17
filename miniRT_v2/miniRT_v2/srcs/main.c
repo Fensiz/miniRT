@@ -614,37 +614,45 @@ void	calc_normal(t_vector point, t_vector direction, t_vector *normal, t_figure 
 int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 {
 	t_figure	closest_figure;
-	t_inter		inter;
+	t_inter		*inter;
 	double		closest_intersection;
 	double		r;
 	t_vector_2p	new_ray;
+	int			ret_color;
 
+	inter = (t_inter *)memalloc(sizeof(t_inter));
 	closest_intersection = INFINITY;
 	closest_figure.type = -1;
 	try_all_intersections(ray, lst, &closest_figure, &closest_intersection);
-	inter.point = vector_sum(ray.origin, vector_mlt(closest_intersection, ray.direction));
-	calc_normal(inter.point, ray.direction, &inter.normal, &closest_figure);
-	inter.color = scene->background;
+	inter->point = vector_sum(ray.origin, vector_mlt(closest_intersection, ray.direction));
+	calc_normal(inter->point, ray.direction, &inter->normal, &closest_figure);
+	inter->color = scene->background;
 	if (closest_figure.type != -1)
-		inter.color = closest_figure.color;
-	
-	apply_texture(&closest_figure, &inter, scene);
-	compute_light(ray, &inter, *scene, lst);
+		inter->color = closest_figure.color;
+	else
+		return (scene->background);
+	inter->old_normal = inter->normal;
+	apply_texture(&closest_figure, inter, scene);
+	compute_light(ray, inter, *scene, lst);
 	
 	//return (inter.color);
 	r = 0;
 	if (closest_figure.type != -1)
 		r = closest_figure.reflection;
+	inter->reflection_color = 0;
 	if (r > 0 && depth > 0)
 	{
-		new_ray.origin = inter.point;
-		new_ray.direction = reflect_ray(vector_mlt(-1, ray.direction), inter.normal);
-		inter.reflection_color = trace_ray(new_ray, depth - 1, lst, scene);
-//		if(inter.reflection_color == 0)
-//			printf("x=%lf, y=%lf, z=%lf\n", inter.normal.x, inter.normal.y, inter.normal.z);
+		new_ray.origin = inter->point;
+		//vector_sum(inter->point, vector_mlt(0.01,inter->normal));
+		//inter->point;//
+		new_ray.direction = reflect_ray(vector_mlt(-1, ray.direction), inter->normal);
+		if (vector_dot(vector_mlt(1, new_ray.direction), inter->old_normal) >= 0)
+		inter->reflection_color = trace_ray(new_ray, depth - 1, lst, scene);
 	}
-//	return (color_mlt(inter.reflection_color, r));
-	return (color_sum(color_mlt(inter.color, 1 - r), color_mlt(inter.reflection_color, r)));
+	ret_color = color_sum(color_mlt(inter->color, 1 - r), color_mlt(inter->reflection_color, r));
+	if (r == 1)printf("%lf\n", r);
+	free(inter);
+	return (ret_color);
 }
 
 int main(int argc, const char **argv)
@@ -660,20 +668,16 @@ int main(int argc, const char **argv)
 	init_mlx(&mlx, &scene);
 	curr = mlx.camera;
 	load_map(&scene);
+	scene.background = 0;
 	while (curr)
 	{
 		render_scene(&scene, figure, &mlx, curr);
 		curr = curr->next;
 	}
-//	success_message(ac);
-	
-//	graphic_loop(mlx, scene);
 	mlx.window = mlx_new_window(mlx.mlx, scene.width, scene.height, "miniRT");
 	mlx_put_image_to_window(mlx.mlx, mlx.window , mlx.camera->image, 0, 0);
-
 	mlx_hook(mlx.window, 2, 1L<<0, key_handler, &mlx);
 	mlx_hook(mlx.window, 17, 0L, red_cross_handler, &mlx);
-
 	mlx_loop(mlx.mlx);
 	return (0);
 }

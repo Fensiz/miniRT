@@ -33,46 +33,9 @@ t_vector	rot_form_n_to_y1(t_vector v, t_vector n)
 		v = vector_z_rot(v, 180 - rot_angle(n, n.x));
 	return (v);
 }
-t_vector	set_normals(t_vector n, double u, double v)
-{
-	//t_mat4		tbn;
-	t_vector		tangent;
-	t_vector		bitangent;
-//	t_vector		mat[3];
-	//t_rgb		getc;
-
-//	if (rec->ref->mat.t_normal.map != NULL)
-//	{
-	tangent = vector_cross(n, vector_set(0,1,0));//vec3_id(ID_Y));
-	if (vector_len(tangent) == 0)
-		tangent = vector_norm(vector_cross(n, vector_set(0,0,1)));
-	bitangent = vector_norm(vector_cross(n, tangent));
-	t_vector res = vector_sum(vector_mlt(u, tangent), vector_mlt(v, bitangent));
-//		tbn = mat4(vec3_zero(), inter->normal, bitangent, tangent);
-//		getc = get_uv_color_at(rec->ref->mat.t_normal.map, u, v);
-//		rec->normal = vec3_unit(mat4_mult_dir(tbn, vec3_sub_s(vec3_div_s(
-//							getc, 0.5), 1)));
-	res = vector_norm(res);
-	return res;
-}
 t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 {
-	//printf("%lf,",vector_len(v));
 
-	t_vector s = v;
-//	if (n.y >= 0 && n.x >=0 && n.z <0)
-//	{
-//	if (n.z >= 0)
-//		v.z *= -1;
-//	if (n.x >= 0)
-//		v.x *= -1;
-	//v = vector_sum();
-//		v = vector_z_rot(v, rot_angle2(n, n.x));
-//		v = vector_x_rot(v, -rot_angle(n, n.z));
-//	if (n.y < 0)
-//		v = vector_x_rot(v, -rot_angle2(n, n.z));
-//	else
-	
 	 if (n.x >= 0 && n.y >= 0 && n.z < 0)
 	 {
 		v = vector_z_rot(v, -rot_angle2(n, n.x));
@@ -93,94 +56,20 @@ t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 	   v = vector_z_rot(v, -rot_angle2(n, n.x));
 	   v = vector_x_rot(v, 180 - rot_angle(n, n.z));
 	}
-	
-//	if (n.y >= 0)
-			
-//		else
-//			v = vector_x_rot(v, 180 - rot_angle(n, n.z));
-//	}
-//	else
-//	{
-//		v = vector_x_rot(v, rot_angle2(n, n.z));
-//	}
-	//if (n.y >= 0)
-//	if (n.y >= 0)
-//		v = vector_z_rot(v, rot_angle(n, n.x));
-//	else
-//		v = vector_z_rot(v, 180 - rot_angle(n, n.x));
-//	v.y *= -1;
-//if (n.y >= 0)
-//	v.y *= -1;
-	
-//		v = vector_z_rot(v, rot_angle2(n, n.x));
-//	if (n.x < 0)
-//		v = vector_x_rot(v, -rot_angle(n, n.z));
-//	else
-//		v = vector_x_rot(v, rot_angle(n, n.z));
-//	v = set_normals(n, v.x, v.z);
-//	}
-//	if (s.z >=0)
-//		v
-//
-//	v.x *= -1;
-	
-	
-	//v.z = 0;
-//	v.z *= 2;
-//	if (n.y < 0 && n.x >=0 && n.z <0)
-//	{
-//		v = vector_z_rot(v, rot_angle2(n, n.x));
-//		v = vector_x_rot(v, rot_angle(n, n.z));
-//		//v.z *= -1;
-//		//v.x *= -1;
-//	}
-//	else if (n.y >= 0 && n.x < 0 && n.z <0)
-//	{
-//		v = vector_z_rot(v, rot_angle2(n, n.x));
-//		v = vector_x_rot(v, rot_angle(n, n.z));
-//	}
-//	else if (n.y < 0 && n.x < 0 && n.z <0)
-//	{
-//		v = vector_z_rot(v, rot_angle2(n, n.x));
-//		v = vector_x_rot(v, rot_angle(n, n.z));
-//	}
-//	if (n.y >= 0)// && n.x >= 0)
-//		v = vector_z_rot(v, rot_angle2(n, n.x));
-//	if (n.y >= 0)// && n.z <0)
-//		//v = vector_z_rot(v, rot_angle2(n, n.x));//
-//	v = vector_x_rot(v, -rot_angle(n, n.z));
-	
-		//n = vector_x_rot(n, -rot_angle(n, n.z));
-//	else if(n.y >=0)
-//		v = vector_x_rot(v, rot_angle2(n, n.z));
-//	else
-//	{
-//		//v = vector_z_rot(v, rot_angle2(n, n.x));
-//		v = vector_x_rot(v, rot_angle2(n, n.z));
-//		//v.x *= -1;
-//
-//		//n = vector_x_rot(n, 180 + rot_angle(n, n.z));
-//	}
-	
-//		v = vector_x_rot(v, -rot_angle(n, n.z));//-
-//	else if (n.y >= 0 && n.x < 0)
-//		v = vector_z_rot(v, -rot_angle(n, n.x));
-//	else
-//	{
-//		v = vector_z_rot(v, -rot_angle2(n, n.x));
-////		v = vector_x_rot(v, -rot_angle(n, n.z));//-
-//		//v.z *= -1;
-
-//
-//	}
-	//v = vector_y_rot(v,180);
-	
-//	if (n.y>=0&&n.z<0 && n.x>=0)
-//	printf("VS%.2lf,%.2lf,%.2lf _ V%.2lf,%.2lf,%.2lf _ N%.2lf,%.2lf,%.2lf\n",s.x,s.y,s.z,v.x,v.y,v.z,n.x,n.y,n.z);
 	return (v);
 }
 
+int	uv_height(double u, double v, int *map, int map_size)
+{
+	int	ui;
+	int	vi;
 
+	u *= 800;
+	v *= 400;
+	ui = ((int)floor(u) % map_size + map_size) % map_size;
+	vi = ((int)floor(-v) % map_size + map_size) % map_size;
+	return (map[ui + vi * map_size]);
+}
 
 t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 {
@@ -200,9 +89,6 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	if (g.x == 0 && g.z == 0)
 		return vector_set(0, 0, 0);
 	g = vector_norm(g);
-
-	//g.y *= -1;
-	//g = vector_set(0, 0, -1);
 	return (g);
 }
 
@@ -222,19 +108,6 @@ int	texture_plane(t_vector point)
 	else
 		return (WHITE);
 }
-t_uv	get_sphere_uv(t_inter *inter)
-{
-	double	theta;
-	double	phi;
-	t_uv	i;
-
-	theta = asin(inter->normal.y);
-	phi = atan2(inter->normal.x, inter->normal.z);
-	i.u = (phi + M_PI) * 2 / M_PI;
-	i.v = 1. - (theta + M_PI / 2) / M_PI;
-	return (i);
-}
-
 
 
 t_uv	uv_sphere(t_inter *inter, t_figure *figure)
@@ -250,162 +123,30 @@ t_uv	uv_sphere(t_inter *inter, t_figure *figure)
 	coords = vector_sum(coords, figure->figure.sp.center);
 	i.u = 1 - (theta / (2 * M_PI) + 0.5);
 	i.v = 1 - phi / M_PI;
+	
 	return (i);
 }
 
 void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 {
-	t_vector 	g;
-	t_vector	gx,g0,gp;
-	t_vector	gx2, g2;
+	t_vector	gx;
 	t_uv		i;
 	t_vector	val;
-	t_vector	temp_n;
-	t_vector	temp_n2;
-	t_vector	coord;
+	int height;
+
 	
-	//temp_n = inter->normal;
-//	temp_n2 = vector_set(0, 0, 0);
-	//g0 = vector_set(0,figure->figure.sp.radius,0);
 	i = uv_sphere(inter, figure);
 	if (figure->texture >> 1)
 	{
+		height = uv_height(i.u, i.v, map->map, map->size);
 		gx = uv_to_normal(i.u, i.v, map->map, map->size);
-		printf("%lf, %lf, %lf, %d %d\n", i.u,i.v,gx.z,map->map[0],map->map[1]);
 		if (vector_len(gx))
 		{
-			gx = vector_mlt(1, gx);
+			gx = vector_mlt(0.2, gx);
 			gx = vector_sum(gx, vector_set(0, 1, 0));
-			
 			gx = vector_norm(gx);
-			printf("%lf, %lf, %lf\n", gx.x,gx.y,gx.z);
 			inter->normal = rot_from_y1_to_n(gx, inter->normal);
-			printf("%lf, %lf, %lf\n", gx.x,gx.y,gx.z);
-			//g = vector_norm(gx);
-			
-			//gx = vector_sum(gx, g0); //координата на верхушке сферы
-			//g0 = rot_from_y1_to_n(g0, inter->normal);
-			//gx = rot_from_y1_to_n(gx, inter->normal);
-			//g = vector_sub(gx, g0);
-			
 		}
-//		temp_n.x += g.x;
-//		temp_n.y += g.y;
-//		temp_n.z += g.z;
-//		if (inter->normal.x < 0)
-//		{
-//			if (gx.x >= 0)
-//				temp_n.z -= g.z;
-//			else
-//				temp_n.z += g.z;
-//		}
-//		else
-//		{
-//			if (g.x < 0)
-//				temp_n.z += g.z;
-//			else
-//				temp_n.z -= g.z;
-//		}
-//		inter->normal = vector_norm(temp_n);
-		//inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
-		
-//		gx2 = uv_to_normal2(i.u, i.v, map->map, map->size);
-//		if (vector_len(gx2))
-//			g2 = rot_from_y1_to_n(gx2, inter->normal);
-//		temp_n2.x += g2.x;
-//		if(inter->normal.y >= 0)
-//			temp_n2.y += g2.y;
-//		else
-//			temp_n2.y -= g2.y;
-//		if (gx2.z < 0)
-//		temp_n2.z += g2.z;
-//		else
-//			temp_n2.z -= g2.z;
-//		inter->normal = vector_norm(vector_sum(temp_n, temp_n2));
-		
-		
-		
-		
-		
-		
-		
-		
-//		if (gx.x >= 0)
-//		{
-//			if (inter->normal.x >= 0)
-//			{
-//				if (inter->normal.y <= 0)
-//					temp_n.y += g.y;
-//				else
-//					temp_n.y -= g.y;
-////				if (gx.x >= 0)
-//				if (gx.z >= 0)
-//					temp_n.z += g.z;
-//
-//				else
-//					temp_n.z -= g.z;
-//			}
-//			else
-//			{
-//				if (inter->normal.y <= 0)
-//				temp_n.y -= g.y;
-//				else
-//					temp_n.y += g.y;
-////				if (inter->normal.y >=0 && g.y < 0 && inter->normal.x < 0)
-//
-//					//temp_n.z -= g.z;
-//			}
-//		}
-//		else
-//		{
-//			if (inter->normal.x >= 0)
-//			{
-//				if (inter->normal.y <= 0)
-//					temp_n.y -= g.y;
-//				else
-//					temp_n.y += g.y;
-//				temp_n.z -= g.z;
-//			}
-//			else
-//			{
-//				if (inter->normal.y <= 0)
-//					temp_n.y += g.y;
-//				else
-//					temp_n.y -= g.y;
-//				temp_n.z += g.z;
-//			}
-//		}
-	//		}
-//		else
-//		{
-//			inter->normal.z += g.z;
-//			//inter->normal.x += g.x;
-//		}
-//
-		//Z < 0 -y +z
-		//inter->normal.x += g.x;// всегда
-//		inter->normal.y -= g.y;
-//		inter->normal.z += g.z; // меняет верх низ -для полож z
-//		inter->normal.x += g.x;
-//		if (inter->normal.y <= 0)
-//			inter->normal.y -= g.y;
-//		else
-//			inter->normal.y += g.y;
-//		if (inter->normal.x < 0)
-//		{
-//			if (g.x >= 0)
-//				inter->normal.z -= g.z;
-////				else
-////					inter->normal.z += g.z;
-//
-//			//inter->normal.z -= g.z;
-//		}
-		
-		
-//		inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
-		
-		//		else
-//			inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
 	}
 	val.x = (int)floor(i.u * 40) % 2;
 	val.y = (int)floor(i.v * 20) % 2;
@@ -420,54 +161,10 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 
 static int	checkerboard(t_inter *inter, t_figure *figure, t_scene *scene)
 {
-	int y[] = {
-				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
-				0,0,1,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1,0,0,
-				0,0,1,6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,6,1,0,0,
-				0,0,1,6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,6,1,0,0,
-				0,0,1,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,1,0,0,
-				0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-				0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-		
-	};
 	t_vector	coords;
 	t_vector	val;
 	int		party_mix;
 	double theta;
-	double phi;
 	double raw_u, u, v, r;
 
 	if (figure->type == CYLINDER)
@@ -529,29 +226,6 @@ static int	checkerboard(t_inter *inter, t_figure *figure, t_scene *scene)
 	{
 		texture_sphere(inter, figure, scene->map);
 		return (inter->color);
-//		t_vector g;
-//
-//		coords = vector_sub(inter->point, figure->figure.sp.center);
-//		theta = atan2(coords.x, coords.z);
-//		phi = acos((double)coords.y / figure->figure.sp.radius);
-//		coords = vector_sum(coords, figure->figure.sp.center);
-//		u = 1 - (theta / (2 * M_PI) + 0.5);
-//		v = 1 - phi / M_PI;
-//		if (figure->texture >> 1)
-//		{
-//			g = rot_from_y1_to_n(uv_to_normal(u, v, y, 40), inter->normal);
-//			inter->normal = vector_norm(vector_sum(inter->normal, g));
-//		}
-//		val.x = (int)floor(u * 40) % 2;
-//		val.y = (int)floor(v * 20) % 2;
-//		party_mix = ((int)val.x ^ (int)val.y);
-//		if (figure->texture & 1)
-//		{
-//			if ((int)val.x ^ (int)val.y)
-//				return (BLACK);
-//			return (WHITE);
-//		}
-//		return (inter->color);
 	}
 	else
 	{

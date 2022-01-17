@@ -24,7 +24,7 @@
 
 # define BUFF_SIZE 64
 # define EPSILON 0.00001
-# define REFLECTION_LIMIT 1
+# define REFLECTION_LIMIT 3
 
 typedef struct	s_sphere
 {
