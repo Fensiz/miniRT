@@ -72,10 +72,45 @@ t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 //	if (n.y < 0)
 //		v = vector_x_rot(v, -rot_angle2(n, n.z));
 //	else
-		v = vector_x_rot(v, rot_angle2(n, n.z));
 	
+	 if (n.x >= 0 && n.y >= 0 && n.z < 0)
+	 {
+		v = vector_z_rot(v, -rot_angle2(n, n.x));
+		v = vector_x_rot(v, rot_angle(n, n.z));
+	 }
+	else if (n.x < 0 && n.y >= 0 && n.z < 0)
+	{
+	   v = vector_z_rot(v, -rot_angle2(n, n.x));
+	   v = vector_x_rot(v, rot_angle(n, n.z));
+	}
+	else if (n.x >= 0 && n.y < 0 && n.z < 0)
+	{
+	   v = vector_z_rot(v, -rot_angle2(n, n.x));
+	   v = vector_x_rot(v, 180 - rot_angle(n, n.z));
+	}
+	else if (n.x < 0 && n.y < 0 && n.z < 0)
+	{
+	   v = vector_z_rot(v, -rot_angle2(n, n.x));
+	   v = vector_x_rot(v, 180 - rot_angle(n, n.z));
+	}
+	
+//	if (n.y >= 0)
+			
+//		else
+//			v = vector_x_rot(v, 180 - rot_angle(n, n.z));
+//	}
+//	else
+//	{
+//		v = vector_x_rot(v, rot_angle2(n, n.z));
+//	}
 	//if (n.y >= 0)
-		v = vector_y_rot(v, rot_angle3(n, n.z));
+//	if (n.y >= 0)
+//		v = vector_z_rot(v, rot_angle(n, n.x));
+//	else
+//		v = vector_z_rot(v, 180 - rot_angle(n, n.x));
+//	v.y *= -1;
+//if (n.y >= 0)
+//	v.y *= -1;
 	
 //		v = vector_z_rot(v, rot_angle2(n, n.x));
 //	if (n.x < 0)
@@ -153,40 +188,19 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	int	vi;
 	t_vector	g;
 
-	u *= 1000;
-	v *= 900;
+	u *= 800;
+	v *= 400;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
 	vi = ((int)floor(-v) % map_size + map_size) % map_size;
-	g.x = 0;//-(map[(ui - 1 + map_size) % map_size + vi* map_size]
-//		- map[(ui + 1) % map_size + vi * map_size]);
-	g.y = 1;
-	g.z = 0;//-(map[ui + (vi - 1 + map_size) % map_size * map_size]
-//		 - map[ui + (vi + 1) % map_size * map_size]);
-//	if (g.x == 0 && g.z == 0)
-//		return vector_set(0, 0, 0);
-	g = vector_norm(g);
-	//g.y *= -1;
-	//g = vector_set(0, 0, -1);
-	return (g);
-}
-t_vector	uv_to_normal2(double u, double v, int *map, int map_size)
-{
-	int	ui;
-	int	vi;
-	t_vector	g;
-
-	u *= 1;
-	v *= 1;
-	ui = ((int)floor(u) % map_size + map_size) % map_size;
-	vi = ((int)floor(-v) % map_size + map_size) % map_size;
-	g.x =  0;//(map[(ui - 1 + map_size) % map_size + vi* map_size]
-//		- map[(ui + 1) % map_size + vi * map_size]);
-	g.y = 0;
-	g.z =  -(map[ui + (vi - 1 + map_size) % map_size * map_size]
+	g.x = (map[(ui - 1 + map_size) % map_size + vi* map_size]
+		- map[(ui + 1) % map_size + vi * map_size]);
+	g.y = EPSILON;
+	g.z = -(map[ui + (vi - 1 + map_size) % map_size * map_size]
 		 - map[ui + (vi + 1) % map_size * map_size]);
 	if (g.x == 0 && g.z == 0)
 		return vector_set(0, 0, 0);
 	g = vector_norm(g);
+
 	//g.y *= -1;
 	//g = vector_set(0, 0, -1);
 	return (g);
@@ -221,43 +235,6 @@ t_uv	get_sphere_uv(t_inter *inter)
 	return (i);
 }
 
-//
-//void	sphere_bump_mapping(t_inter *inter, t_figure *figure)
-//{
-//	t_vector coords;
-//	double	uv[2];
-//	double	phi;
-//	t_vector	tang[2];
-//	int		ij[2];
-//	t_uv	i, bump;
-//
-//	coords = vector_sub(inter->point, figure->figure.sp.center);
-//	i = get_sphere_uv(inter);
-//	phi = atan2(inter->normal.z, inter->normal.x);
-//	tang[0] = vector_set(-sin(phi), 0., cos(phi));
-//	tang[1] = vector_cross(inter->normal, tang[0]);
-//	ij[0] = (int)(i.u * ((double)bump.u - 1.));
-//	ij[1] = (int)(i.v * ((double)bump.v - 1.));
-//	
-//	pvec3_unitsub(&inter->p, &sp->obj.sp.cent, &inter->n);
-//	get_sphere_uv(inter, &uv[0], &uv[1]);
-//	phi = atan2(inter->n.z, inter->n.x);
-//	pgvec3(-sin(phi), 0., cos(phi), &tang[0]);
-//	pvec3_cross(&inter->n, &tang[0], &tang[1]);
-//	ij[0] = (int)(i.u * ((double)bump_u - 1.));
-//	ij[1] = (int)(i.v * ((double)bump_v - 1.));
-//	bgrt_to_vec3((sp->surf->bmap->arr + ij[1] * 4 *
-//				sp->surf->bmap->w + ij[0] * 4), &bump_col);
-//	pvec3_muln(&bump_col, 2.);
-//	bump_col.x -= 1.;
-//	bump_col.y -= 1.;
-//	bump_col.z -= 1.;
-//	pvec3_muln(&tang[0], sp->surf->bmap_cf * bump_col.y);
-//	pvec3_muln(&tang[1], sp->surf->bmap_cf * bump_col.x);
-//	pvec3_muln(&inter->n, bump_col.z);
-//	pvec3_add3(&inter->n, &tang[0], &tang[1], norm);
-//	pvec3_unit(norm);
-//}
 
 
 t_uv	uv_sphere(t_inter *inter, t_figure *figure)
@@ -287,20 +264,30 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 	t_vector	temp_n2;
 	t_vector	coord;
 	
-	temp_n = inter->normal;
+	//temp_n = inter->normal;
 //	temp_n2 = vector_set(0, 0, 0);
-	g0 = vector_set(0,figure->figure.sp.radius,0);
+	//g0 = vector_set(0,figure->figure.sp.radius,0);
 	i = uv_sphere(inter, figure);
 	if (figure->texture >> 1)
 	{
 		gx = uv_to_normal(i.u, i.v, map->map, map->size);
+		printf("%lf, %lf, %lf, %d %d\n", i.u,i.v,gx.z,map->map[0],map->map[1]);
 		if (vector_len(gx))
 		{
-			gx = vector_sum(gx, g0); //координата на верхушке сферы
-			g0 = rot_from_y1_to_n(g0, inter->normal);
-			gx = rot_from_y1_to_n(gx, inter->normal);
-			g = vector_sub(gx, g0);
-			g = vector_norm(g);
+			gx = vector_mlt(1, gx);
+			gx = vector_sum(gx, vector_set(0, 1, 0));
+			
+			gx = vector_norm(gx);
+			printf("%lf, %lf, %lf\n", gx.x,gx.y,gx.z);
+			inter->normal = rot_from_y1_to_n(gx, inter->normal);
+			printf("%lf, %lf, %lf\n", gx.x,gx.y,gx.z);
+			//g = vector_norm(gx);
+			
+			//gx = vector_sum(gx, g0); //координата на верхушке сферы
+			//g0 = rot_from_y1_to_n(g0, inter->normal);
+			//gx = rot_from_y1_to_n(gx, inter->normal);
+			//g = vector_sub(gx, g0);
+			
 		}
 //		temp_n.x += g.x;
 //		temp_n.y += g.y;
@@ -320,7 +307,7 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 //				temp_n.z -= g.z;
 //		}
 //		inter->normal = vector_norm(temp_n);
-		inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
+		//inter->normal = vector_norm(vector_sum(inter->normal, vector_mlt(1, g)));
 		
 //		gx2 = uv_to_normal2(i.u, i.v, map->map, map->size);
 //		if (vector_len(gx2))

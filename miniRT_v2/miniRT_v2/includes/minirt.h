@@ -131,6 +131,7 @@ typedef struct		s_inter
 	int				color;
 	int				reflection_color;
 	t_vector		normal;
+	t_vector		old_normal;
 	t_vector		point;
 }					t_inter;
 typedef struct s_uv

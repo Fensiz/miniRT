@@ -16,7 +16,12 @@ void	parse_map(char *str, t_map *map)
 		if (!(*str >= '0' && *str <= '9') && *str != ' ' && *str != '-')
 			str++;
 		else
-			map->map[i++] = ft_atoi(&str);
+		{
+			
+			map->map[i] = ft_atoi(&str);
+	//		printf("%d\n",map->map[i]);
+			i++;
+		}
 	}
 }
 
