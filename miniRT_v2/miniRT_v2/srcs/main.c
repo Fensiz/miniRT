@@ -650,7 +650,6 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 		inter->reflection_color = trace_ray(new_ray, depth - 1, lst, scene);
 	}
 	ret_color = color_sum(color_mlt(inter->color, 1 - r), color_mlt(inter->reflection_color, r));
-	if (r == 1)printf("%lf\n", r);
 	free(inter);
 	return (ret_color);
 }
