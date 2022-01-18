@@ -91,22 +91,97 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 	g = vector_norm(g);
 	return (g);
 }
+t_vector	uv_to_normal_pl(double u, double v, int *map, int map_size)
+{
+	int	ui;
+	int	vi;
+	t_vector	g;
+
+	
+	u *= 20;
+	v *= 20;
+	ui = ((int)floor(u) % map_size + map_size) % map_size;
+	vi = ((int)floor(-v) % map_size + map_size) % map_size;
+	g.x = (map[(ui - 1 + map_size) % map_size + vi* map_size]
+		- map[(ui + 1) % map_size + vi * map_size]);
+	g.y = EPSILON;
+	g.z = -(map[ui + (vi - 1 + map_size) % map_size * map_size]
+		 - map[ui + (vi + 1) % map_size * map_size]);
+	if (g.x == 0 && g.z == 0)
+		return vector_set(0, 0, 0);
+	g = vector_norm(g);
+	return (g);
+}
 
 
-int	texture_plane(t_vector point)
+void	texture_plane(t_figure *figure, t_inter *inter, t_map *map)
 {
 	t_vector	coords;
+	t_vector	gx;
 
-	coords.x = abs((int)floor((point.x) + EPSILON));
-	coords.y = abs((int)floor((point.y) + EPSILON));
-	coords.z = abs((int)floor((point.z) + EPSILON));
-	coords.x = (int)(coords.x) % 2;
-	coords.y = (int)(coords.y) % 2;
-	coords.z = (int)(coords.z) % 2;
-	if (((int)coords.x ^ (int)coords.y) ^ (int)coords.z)
-		return (BLACK);
-	else
-		return (WHITE);
+	coords = rot_form_n_to_y1(inter->point, inter->normal);
+	if (figure->texture >> 1)
+	{
+		gx = uv_to_normal_pl(coords.x, coords.z, map->map, map->size);
+		if (vector_len(gx))
+		{
+			gx = vector_mlt(0.2, gx);
+			gx = vector_sum(gx, vector_set(0, 1, 0));
+			gx = vector_norm(gx);
+			inter->normal = rot_from_y1_to_n(gx, inter->normal);
+		}
+	}
+	if (figure->texture & 1)
+	{
+		coords.x = abs((int)floor((coords.x) + EPSILON));
+		coords.y = abs((int)floor((coords.y) + EPSILON));
+		coords.z = abs((int)floor((coords.z) + EPSILON));
+		coords.x = (int)(coords.x) % 2;
+		coords.y = (int)(coords.y) % 2;
+		coords.z = (int)(coords.z) % 2;
+		if (((int)coords.x) ^ (int)coords.z)
+			inter->color = BLACK;
+		else
+			inter->color = WHITE;
+	}
+}
+void	texture_cone(t_figure *figure, t_inter *inter, t_map *map)
+{
+	t_vector	coords;
+	t_vector	gx;
+	t_uv		i;
+	double		theta;
+	t_vector	val;
+		
+	coords = vector_sub(inter->point, figure->figure.co.center);
+	coords.x += EPSILON;
+	coords.y += EPSILON;
+	coords.z += EPSILON;
+	coords = rot_form_n_to_y1(coords, figure->figure.co.nv);
+	theta = atan2(coords.x, coords.z);
+	i.u = theta / M_PI * figure->figure.co.radius * 4;
+	i.v = coords.y;
+
+	if (figure->texture >> 1)
+	{
+		gx = uv_to_normal_pl(i.u , i.v, map->map, map->size);
+		if (vector_len(gx))
+		{
+			gx = vector_mlt(0.2, gx);
+			gx = vector_sum(gx, vector_set(0, 1, 0));
+			gx = vector_norm(gx);
+			inter->normal = rot_from_y1_to_n(gx, inter->normal);
+		}
+	}
+	if (figure->texture & 1)
+	{
+		val.x = abs((int)floor(i.u)) % 2;
+		val.y = abs((int)floor(i.v)) % 2;
+		if (((int)val.x) ^ (int)val.y)
+			inter->color = BLACK;
+		else
+			inter->color = WHITE;
+	}
 }
 
 
@@ -148,10 +223,11 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 			inter->normal = rot_from_y1_to_n(gx, inter->normal);
 		}
 	}
-	val.x = (int)floor(i.u * 40) % 2;
-	val.y = (int)floor(i.v * 20) % 2;
+	
 	if (figure->texture & 1)
 	{
+		val.x = (int)floor(i.u * 40) % 2;
+		val.y = (int)floor(i.v * 20) % 2;
 		if ((int)val.x ^ (int)val.y)
 			inter->color = BLACK;
 		else
@@ -165,7 +241,7 @@ static int	checkerboard(t_inter *inter, t_figure *figure, t_scene *scene)
 	t_vector	val;
 	int		party_mix;
 	double theta;
-	double raw_u, u, v, r;
+	double u, v, r;
 
 	if (figure->type == CYLINDER)
 	{
@@ -174,18 +250,22 @@ static int	checkerboard(t_inter *inter, t_figure *figure, t_scene *scene)
 		coords.y += EPSILON;
 		coords.z += EPSILON;
 
-
 		coords = rot_form_n_to_y1(coords, figure->figure.cy.nv);
-		theta = atan2(coords.x, coords.z);
-		u = 1 - (theta / (2 * M_PI) + 0.5);
-		v = coords.y;
-		r = (int)sqrt(pow(coords.x, 2) + pow(coords.z, 2))%2 ^ 1;
-		val.x = abs((int)floor(theta / M_PI * figure->figure.cy.radius * 4)) % 2;
-		val.y = abs((int)floor(v)) % 2;
 		if (fabs(coords.y) < 0.01 || fabs(fabs(coords.y) - figure->figure.cy.height) < 0.01)
-			return (texture_plane(coords));
+		{
+			texture_plane(figure, inter, scene->map);
+			return (inter->color);
+		}
 		else
+		{
+			theta = atan2(coords.x, coords.z);
+			u = 1 - (theta / (2 * M_PI) + 0.5);
+			v = coords.y;
+			r = (int)sqrt(pow(coords.x, 2) + pow(coords.z, 2))%2 ^ 1;
+			val.x = abs((int)floor(theta / M_PI * figure->figure.cy.radius * 4)) % 2;
+			val.y = abs((int)floor(v)) % 2;
 			party_mix = ((int)val.x ^ (int)val.y);
+		}
 		return (party_mix ? BLACK : WHITE);
 	}
 	else if (figure->type == CONE)
@@ -194,31 +274,29 @@ static int	checkerboard(t_inter *inter, t_figure *figure, t_scene *scene)
 		coords.x += EPSILON;
 		coords.y += EPSILON;
 		coords.z += EPSILON;
-
-		coords = rot_form_n_to_y1(coords, figure->figure.cy.nv);
+		coords = rot_form_n_to_y1(coords, figure->figure.co.nv);
 		theta = atan2(coords.x, coords.z);
 		
-		raw_u = theta / (2 * M_PI);
-		u = 1 - (raw_u + 0.5);
-		v = coords.y;
-		r = (int)sqrt(pow(coords.x, 2) + pow(coords.z, 2))%2 ^ 1;
-		val.x = abs((int)floor(theta / M_PI * figure->figure.cy.radius * 4)) % 2;
-		val.y = abs((int)floor(v)) % 2;
-		if (fabs(coords.y) < 0.01 || fabs(fabs(coords.y) - figure->figure.cy.height) < 0.01)
+		//u = 1 - (theta / (2 * M_PI) + 0.5);
+		//v = coords.y;
+		//r = (int)sqrt(pow(coords.x, 2) + pow(coords.z, 2))%2 ^ 1;
+		
+		if (fabs(coords.y) < 0.01 || fabs(fabs(coords.y) - figure->figure.co.height) < 0.01)
 		{
-			return (texture_plane(coords));
-//			coords.x = abs((int)floor((coords.x) + 10*EPSILON));
-//			coords.y = abs((int)floor((coords.y) + 10*EPSILON));
-//			coords.z = abs((int)floor((coords.z) + 10*EPSILON));
-//			val.x = (int)(coords.x) % 2;
-//			val.y = (int)(coords.y) % 2;
-//			val.z = (int)(coords.z) % 2;
-//			party_mix = ((int)val.x ^ (int)val.y) ^ (int)val.z;
-		//	party_mix = ((int)val.x ^ (int)val.y) ^ (int)r; //аналог для плоских частей конуса
+			texture_plane(figure, inter, scene->map);
+			return (inter->color);
 		}
 		else
-			party_mix = ((int)val.x ^ (int)val.y);
-		return (party_mix ? BLACK : WHITE);
+		{
+//			u = theta / M_PI * figure->figure.co.radius * 4;
+//			v = coords.y;
+//			val.x = abs((int)floor(u)) % 2;
+//			val.y = abs((int)floor(v)) % 2;
+//			party_mix = ((int)val.x ^ (int)val.y);
+			texture_cone(figure, inter, scene->map);
+			return (inter->color);
+		}
+		//return (party_mix ? BLACK : WHITE);
 	}
 	else if (figure->type == SPHERE)
 	{
@@ -227,15 +305,8 @@ static int	checkerboard(t_inter *inter, t_figure *figure, t_scene *scene)
 	}
 	else
 	{
-		return (texture_plane(inter->point));
-//		coords.x = abs((int)floor((inter->point.x) + EPSILON));
-//		coords.y = abs((int)floor((inter->point.y) + EPSILON));
-//		coords.z = abs((int)floor((inter->point.z) + EPSILON));
-//		val.x = (int)(coords.x) % 2;
-//		val.y = (int)(coords.y) % 2;
-//		val.z = (int)(coords.z) % 2;
-//		party_mix = ((int)val.x ^ (int)val.y) ^ (int)val.z;
-//
+		texture_plane(figure, inter, scene->map);
+		return (inter->color);
 	}
 
 }

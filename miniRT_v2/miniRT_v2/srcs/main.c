@@ -633,7 +633,7 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 		return (scene->background);
 	inter->old_normal = inter->normal;
 	apply_texture(&closest_figure, inter, scene);
-	compute_light(ray, inter, *scene, lst);
+	compute_light(ray, inter, *scene, &closest_figure);
 	
 	//return (inter.color);
 	r = 0;
