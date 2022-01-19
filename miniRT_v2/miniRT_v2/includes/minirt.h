@@ -24,7 +24,7 @@
 
 # define BUFF_SIZE 64
 # define EPSILON 0.00001
-# define REFLECTION_LIMIT 3
+# define BOUNCE_LIMIT 3
 
 typedef struct	s_sphere
 {
@@ -55,8 +55,6 @@ typedef struct	s_cone
 	t_vector	nv;
 	double		radius;
 	double		height;
-	double		dist1;
-	double		dist2;
 }				t_cone;
 
 union			u_figure
@@ -133,6 +131,7 @@ typedef struct		s_inter
 	t_vector		normal;
 	t_vector		old_normal;
 	t_vector		point;
+	t_figure		*figure;
 }					t_inter;
 typedef struct s_uv
 {
@@ -162,4 +161,16 @@ double cone_intersection(t_vector pos, t_vector dir, t_figure *lst);
 int	key_handler(int keycode, void *mlx_arr);
 int	red_cross_handler(void *mlx_arr);
 char	*file_to_str(int fd);
+
+void		calc_light(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *lst);
+t_vector	reflect_ray(t_vector ray, t_vector normal);
+
+t_vector	rot_from_n_to_y1(t_vector v, t_vector n);
+t_vector	rot_from_y1_to_n(t_vector v, t_vector n);
+
+/* ubtersections */
+double	sphere_intersection(t_vector origin, t_vector direction, t_figure *figure);
+double	solve_plane(t_vector origin, t_vector direction, t_vector plane_p, t_vector plane_nv);
+double	plane_intersection(t_vector origin, t_vector d, t_figure *lst);
+double	cylinder_intersection(t_vector o, t_vector d, t_figure *lst);
 #endif

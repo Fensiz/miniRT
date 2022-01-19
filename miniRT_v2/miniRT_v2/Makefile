@@ -6,7 +6,7 @@
 #    By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 00:42:18 by bgreenbl          #+#    #+#              #
-#    Updated: 2022/01/13 23:04:55 by bgreenbl         ###   ########.fr        #
+#    Updated: 2022/01/19 14:01:51 by bgreenbl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	miniRT
 SRC_PATH	=	./srcs/
 FILES		=	intersection.c	color_ops.c	utils.c		\
 				mlx_utils.c		vector.c	main.c	texture.c	handlers.c\
-				map_reader.c
+				map_reader.c light_ops.c	inter_sphere.c	inter_cylinder.c	inter_plane.c
 MLX_PATH	=	./libs/mlx19/
 
 MLX_LIB		=	$(MLX_PATH)libmlx.a			

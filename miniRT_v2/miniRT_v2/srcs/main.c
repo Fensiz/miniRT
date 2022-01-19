@@ -120,7 +120,6 @@ int	parse_color(char **str)
 }
 void		parse_ambient_light(t_scene *scene, char **str)
 {
-//задать начальное значение ambient light
 	(*str)++;
 	skip_spaces(str);
 	scene->ambient_light = ft_atof(str);
@@ -354,7 +353,6 @@ int	is_right_format(const char *fname)
 	int len;
 
 	len = (int)ft_strlen(fname);
-//	printf("len = %d\n", len);
 	if (len <= 3)
 		return (0);
 	if (!(fname[len - 1] == 't' && fname[len - 2] == 'r' && fname[len - 3] == '.'))
@@ -410,26 +408,12 @@ static t_vector		canvas_to_viewport(double x, double y, t_camera *camera, t_scen
 	return (v);
 }
 
-#include <stdio.h>
-
 static t_vector		cam_rot(t_vector d, t_vector cam_direction)
 {
-	t_vector	x_axis;
-	t_vector	y_axis;
-	t_vector	z_axis;
 	t_vector	rotated;
 
-	z_axis = cam_direction;
-	if (cam_direction.y == 1)
-		x_axis = vector_set(1, 0, 0);
-	else if (cam_direction.y == -1)
-		x_axis = vector_set(-1, 0, 0);
-	else
-		x_axis = vector_cross(vector_set(0, 1, 0), z_axis);
-	y_axis = vector_cross(z_axis, x_axis);
-	rotated.x = d.x * x_axis.x + d.y * y_axis.x + d.z * z_axis.x;
-	rotated.y = d.x * x_axis.y + d.y * y_axis.y + d.z * z_axis.y;
-	rotated.z = d.x * x_axis.z + d.y * y_axis.z + d.z * z_axis.z;
+	d = vector_x_rot(d, -90);
+	rotated = rot_from_y1_to_n(d, cam_direction);
 	return (rotated);
 }
 
@@ -440,29 +424,27 @@ void		render_scene(t_scene *scene, t_figure *figure, t_mlx *mlx, t_camera *camer
 	int			y;
 	t_vector_2p	ray;
 
-	y = 0;
+	y = -1;
 	ray.origin = camera->origin;
-	while (y < scene->height)
+	while (++y < scene->height)
 	{
-		x = 0;
-		while (x < scene->width)
+		x = -1;
+		while (++x < scene->width)
 		{
 			ray.direction = canvas_to_viewport(x, y, camera, scene);
 			ray.direction = cam_rot(ray.direction, camera->direction);
-			color = trace_ray(ray, REFLECTION_LIMIT, figure, scene);
+			color = trace_ray(ray, BOUNCE_LIMIT, figure, scene);
 			my_put_pixel(mlx, x, y, color);
-			x++;
 		}
-		y++;
 	}
 }
 
-void		try_all_intersections(t_vector_2p ray, t_figure *figure,
-					t_figure *closest_figure, double *closest_intersection)
+void	get_closest_inter(t_vector_2p ray, t_figure *figure,
+					t_figure *closest_figure, double *closest_inter)
 {
 	double distance;
 
-	distance = 0;
+	distance = INFINITY;
 	while (figure)
 	{
 		if (figure->type == SPHERE)
@@ -473,79 +455,21 @@ void		try_all_intersections(t_vector_2p ray, t_figure *figure,
 			distance = cylinder_intersection(ray.origin, ray.direction, figure);
 		else if (figure->type == CONE)
 			distance = cone_intersection(ray.origin, ray.direction, figure);
-		if (distance > EPSILON && distance < *closest_intersection)
+		if (distance > EPSILON && distance < *closest_inter)
 		{
 			*closest_figure = *figure;
-			*closest_intersection = distance;
+			*closest_inter = distance;
 		}
 		figure = figure->next;
 	}
 }
-//o - light origin
-//i - inter point
-int		in_light2(t_vector o, t_vector i, t_vector d, t_figure *lst) //shadows
-{
-	double	distance_v = INFINITY;
-	double	distance_mem = INFINITY;
-	t_figure	closest_figure;
 
-	while (lst)
-	{
-		if (lst->type == SPHERE)
-			distance_v = sphere_intersection(o, d, lst);
-		else if (lst->type == PLANE)
-			distance_v = plane_intersection(o, d, lst);
-		else if (lst->type == CYLINDER)
-			distance_v = cylinder_intersection(o, d, lst);
-		else if (lst->type == CONE)
-			distance_v = cone_intersection(o, d, lst);
-		if (distance_v < distance_mem)
-		{
-			distance_mem = distance_v;
-			closest_figure = *lst;
-		}
-		lst = lst->next;
-	}
-	if (distance_mem < INFINITY && vector_len(vector_sub(i, vector_sum(vector_mlt(distance_mem, d), o))) < 0.01)
-		return 1;
-	return (0);
-}
-int		in_light(t_vector o, t_vector d, t_figure *lst) //shadows
-{
-	double	distance;
 
-	while (lst)
-	{
-		if (lst->type == SPHERE)
-			distance = sphere_intersection(o, d, lst);
-		else if (lst->type == PLANE)
-			distance = plane_intersection(o, d, lst);
-		else if (lst->type == CYLINDER)
-			distance = cylinder_intersection(o, d, lst);
-		else if (lst->type == CONE)
-			distance = cone_intersection(o, d, lst);
-		if (distance > EPSILON && distance < 1 && lst->type != CONE)
-			return (0);
-		lst = lst->next;
-	}
-	return (1);
-}
-void	add_coeficient(double *rgb, double coef, int color)
-{
-	t_color	color_c;
 
-	color_c = convert_color2c(color);
-	rgb[0] += coef * color_c.red / 255;
-	rgb[1] += coef * color_c.green / 255;
-	rgb[2] += coef * color_c.blue / 255;
-}
-t_vector	reflect_ray(t_vector ray, t_vector normal)
-{
-	return (vector_sub(vector_mlt(2 * vector_dot(normal, ray), normal), ray));
-}
+
 double	calc_specular(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *lst)
 {
-	double	light;
+	double		light;
 	t_vector	direction;
 	t_vector	to_cam;
 	t_vector	reflected;
@@ -554,60 +478,54 @@ double	calc_specular(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *l
 	to_cam = vector_sub(ray.origin, inter->point);
 	reflected = reflect_ray(direction, inter->normal);
 	if (vector_dot(reflected, to_cam) > 0)
-		light = scene.light->brightness * pow(vcos(reflected, to_cam), lst->specular);
+		light = scene.light->brightness * pow(vector_cos(reflected, to_cam), lst->specular);
 	else
 		light = 0;
 	return (light);
 }
-void	compute_light(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *lst)
-{
-	double			light;
-	double			rgb[3];
-	t_vector		direction;
-	t_vector		direction2;
 
-	ft_memset(rgb, 0, 3 * sizeof(double));
-	add_coeficient(rgb, scene.ambient_light, scene.ambient_light_color);
-	while (scene.light)
-	{
-		direction = vector_sub(scene.light->origin, inter->point);
-		direction2 = vector_norm(vector_sub(inter->point, scene.light->origin));
-		if (//in_light(inter->point, direction, lst)
-			in_light2(scene.light->origin ,inter->point, direction2, lst)
-			&&
-			vector_dot(inter->normal, direction) > 0
-			)
-		{
-			light = scene.light->brightness * vcos(inter->normal, direction);
-			add_coeficient(rgb, light, scene.light->color);
-		}
-		if (lst->specular)
-		{
-			light = calc_specular(ray, inter, scene, lst);
-			add_coeficient(rgb, light, scene.light->color);
-		}
-		scene.light = scene.light->next;
-	}
-	inter->color = color_x_light_new(inter->color, rgb);
-}
 
-void	calc_normal(t_vector point, t_vector direction, t_vector *normal, t_figure *light)
+void	calc_normal(t_vector point, t_vector direction, t_vector *normal, t_figure *figure)
 {
-	if (light->type == SPHERE)
+	t_vector	rotated;
+	double		r;
+	double		x;
+	
+
+	if (figure->type == SPHERE)
 	{
-		*normal = vector_norm(vector_sub(point, light->figure.sp.center));
-		if (vcos(direction, *normal) > 0)
+		*normal = vector_norm(vector_sub(point, figure->figure.sp.center));
+		if (vector_cos(direction, *normal) > 0)
 		{
 			*normal = vector_mlt(-1, *normal);
-			light->figure.sp.inside = 1;
+			figure->figure.sp.inside = 1;
 		}
 		else
-			light->figure.sp.inside = 0;
+			figure->figure.sp.inside = 0;
 	}
-	else if (vcos(direction, light->normal) > 0)
-		*normal = vector_mlt(-1, light->normal);
+//	if (figure->type == CONE)
+//	{
+//		rotated = rot_from_n_to_y1(vector_sub(point, figure->figure.co.center), figure->figure.co.nv);
+//		if (rotated.y < EPSILON)
+//		{
+//			if (vector_cos(direction, figure->normal) > 0)
+//				*normal = vector_mlt(-1, figure->normal);
+//			else
+//				*normal = figure->normal;
+//		}
+//		else
+//		{
+//			r = sqrt(pow(figure->figure.co.height - rotated.y, 2) + pow(rotated.x, 2));
+//			x = rotated.y - r * figure->figure.co.radius / figure->figure.co.height;
+//		
+//			*normal = rot_from_y1_to_n(vector_norm(vector_sub(point, vector_set(0, x, 0))), figure->figure.co.nv);
+//		}
+//		//*normal = figure->normal;
+//	}
+	else if (vector_cos(direction, figure->normal) > 0)
+		*normal = vector_mlt(-1, figure->normal);
 	else
-		*normal = light->normal;
+		*normal = figure->normal;
 }
 
 
@@ -623,7 +541,7 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	inter = (t_inter *)memalloc(sizeof(t_inter));
 	closest_intersection = INFINITY;
 	closest_figure.type = -1;
-	try_all_intersections(ray, lst, &closest_figure, &closest_intersection);
+	get_closest_inter(ray, lst, &closest_figure, &closest_intersection);
 	inter->point = vector_sum(ray.origin, vector_mlt(closest_intersection, ray.direction));
 	calc_normal(inter->point, ray.direction, &inter->normal, &closest_figure);
 	inter->color = scene->background;
@@ -633,9 +551,8 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 		return (scene->background);
 	inter->old_normal = inter->normal;
 	apply_texture(&closest_figure, inter, scene);
-	compute_light(ray, inter, *scene, &closest_figure);
-	
-	//return (inter.color);
+	inter->figure = &closest_figure;
+	calc_light(ray, inter, *scene, lst);
 	r = 0;
 	if (closest_figure.type != -1)
 		r = closest_figure.reflection;
@@ -643,11 +560,9 @@ int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	if (r > 0 && depth > 0)
 	{
 		new_ray.origin = inter->point;
-		//vector_sum(inter->point, vector_mlt(0.01,inter->normal));
-		//inter->point;//
 		new_ray.direction = reflect_ray(vector_mlt(-1, ray.direction), inter->normal);
 		if (vector_dot(vector_mlt(1, new_ray.direction), inter->old_normal) >= 0)
-		inter->reflection_color = trace_ray(new_ray, depth - 1, lst, scene);
+			inter->reflection_color = trace_ray(new_ray, depth - 1, lst, scene);
 	}
 	ret_color = color_sum(color_mlt(inter->color, 1 - r), color_mlt(inter->reflection_color, r));
 	free(inter);

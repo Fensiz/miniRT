@@ -15,7 +15,7 @@ double	rot_angle3(t_vector n, double coord)
 	return (( asin(-n.x/sqrt(n.z*n.z + n.x*n.x)) / M_PI) * 180);
 }
 
-t_vector	rot_form_n_to_y1(t_vector v, t_vector n)
+t_vector	rot_from_n_to_y1(t_vector v, t_vector n)
 {
 	if (n.y >= 0)
 	{
@@ -119,7 +119,7 @@ void	texture_plane(t_figure *figure, t_inter *inter, t_map *map)
 	t_vector	coords;
 	t_vector	gx;
 
-	coords = rot_form_n_to_y1(inter->point, inter->normal);
+	coords = rot_from_n_to_y1(inter->point, inter->normal);
 	if (figure->texture >> 1)
 	{
 		gx = uv_to_normal_pl(coords.x, coords.z, map->map, map->size);
@@ -158,7 +158,7 @@ void	texture_cylinder(t_figure *figure, t_inter *inter, t_map *map)
 	coords.x += EPSILON;
 	coords.y += EPSILON;
 	coords.z += EPSILON;
-	coords = rot_form_n_to_y1(coords, figure->figure.cy.nv);
+	coords = rot_from_n_to_y1(coords, figure->figure.cy.nv);
 	theta = atan2(coords.x, coords.z);
 	i.u = theta / M_PI * figure->figure.cy.radius * 4;
 	i.v = coords.y;
@@ -197,7 +197,7 @@ void	texture_cone(t_figure *figure, t_inter *inter, t_map *map)
 	coords.x += EPSILON;
 	coords.y += EPSILON;
 	coords.z += EPSILON;
-	coords = rot_form_n_to_y1(coords, figure->figure.co.nv);
+	coords = rot_from_n_to_y1(coords, figure->figure.co.nv);
 	theta = atan2(coords.x, coords.z);
 	i.u = theta / M_PI * figure->figure.co.radius * 4;
 	i.v = coords.y;
@@ -281,7 +281,7 @@ void	cylinder_case(t_figure *figure, t_inter *inter, t_scene *scene)
 	coords.y += EPSILON;
 	coords.z += EPSILON;
 
-	coords = rot_form_n_to_y1(coords, figure->figure.cy.nv);
+	coords = rot_from_n_to_y1(coords, figure->figure.cy.nv);
 	if (fabs(coords.y) < 0.01
 		|| fabs(fabs(coords.y) - figure->figure.cy.height) < 0.01)
 		texture_plane(figure, inter, scene->map);
@@ -297,7 +297,7 @@ void	cone_case(t_figure *figure, t_inter *inter, t_scene *scene)
 	coords.x += EPSILON;
 	coords.y += EPSILON;
 	coords.z += EPSILON;
-	coords = rot_form_n_to_y1(coords, figure->figure.co.nv);
+	coords = rot_from_n_to_y1(coords, figure->figure.co.nv);
 	if (fabs(coords.y) < 0.01
 		|| fabs(fabs(coords.y) - figure->figure.co.height) < 0.01)
 		texture_plane(figure, inter, scene->map);

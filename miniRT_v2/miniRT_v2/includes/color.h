@@ -12,5 +12,6 @@ int		convert_color2i(t_color	color);
 t_color	convert_color2c(int i_color);
 int		color_mlt(int i_color, double mlt);
 int		color_sum(int i_color_1, int i_color_2);
-int		color_x_light_new(int color, double *coef);
+int		apply_light(int color, double *coef);
+void	add_coeficient(double *rgb, double coef, int color);
 #endif

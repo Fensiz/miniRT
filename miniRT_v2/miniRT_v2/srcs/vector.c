@@ -63,14 +63,14 @@ t_vector	vector_norm(t_vector v)
 	return (ret);
 }
 
-double	vcos(t_vector a, t_vector b) //косинус угола между векторами
+double	vector_cos(t_vector a, t_vector b) //косинус угола между векторами
 {
 	return (vector_dot(a, b) / (vector_len(a) * vector_len(b)));
 }
 
 double	vsin(t_vector a, t_vector b)
 {
-	return (sqrt(1 - pow(vcos(a, b), 2)));
+	return (sqrt(1 - pow(vector_cos(a, b), 2)));
 }
 
 t_vector	vector_mlt(double n, t_vector v) // умножение вектора на число

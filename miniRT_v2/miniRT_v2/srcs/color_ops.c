@@ -60,7 +60,7 @@ int	color_sum(int i_color_1, int i_color_2)
 	return (convert_color2i(color_1));
 }
 
-int		color_x_light_new(int color, double *coef)
+int		apply_light(int color, double *coef)
 {
 	t_color		color_c;
 
@@ -72,4 +72,12 @@ int		color_x_light_new(int color, double *coef)
 	return (convert_color2i(color_c));
 }
 
+void	add_coeficient(double *rgb, double coef, int color)
+{
+	t_color	color_c;
 
+	color_c = convert_color2c(color);
+	rgb[0] += coef * color_c.red / 255;
+	rgb[1] += coef * color_c.green / 255;
+	rgb[2] += coef * color_c.blue / 255;
+}
