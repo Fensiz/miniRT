@@ -16,6 +16,12 @@
 		F433DD2827985936007028CE /* inter_cylinder.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2727985936007028CE /* inter_cylinder.c */; };
 		F43E361D27785C6400CE5AC6 /* list_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F43E361C27785C6300CE5AC6 /* list_utils.c */; };
 		F442BE272790A66000C4F39E /* map_reader.c in Sources */ = {isa = PBXBuildFile; fileRef = F442BE262790A66000C4F39E /* map_reader.c */; };
+		F442BE2A2798ABC900C4F39E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442BE292798ABC900C4F39E /* AppKit.framework */; platformFilter = maccatalyst; };
+		F442BE2C2798ABD100C4F39E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442BE2B2798ABD100C4F39E /* OpenGL.framework */; platformFilter = maccatalyst; };
+		F442BE2E2798AD8100C4F39E /* handlers.c in Sources */ = {isa = PBXBuildFile; fileRef = F442BE2D2798AD8100C4F39E /* handlers.c */; };
+		F442BE302798B38700C4F39E /* inter_cylinder_2.c in Sources */ = {isa = PBXBuildFile; fileRef = F442BE2F2798B38700C4F39E /* inter_cylinder_2.c */; };
+		F442BE322798B52C00C4F39E /* vector_2.c in Sources */ = {isa = PBXBuildFile; fileRef = F442BE312798B52C00C4F39E /* vector_2.c */; };
+		F442BE342798B58C00C4F39E /* vector_3.c in Sources */ = {isa = PBXBuildFile; fileRef = F442BE332798B58C00C4F39E /* vector_3.c */; };
 		F468260B2775B70A001E4EC6 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = F468260A2775B70A001E4EC6 /* main.c */; };
 		F46826122775B775001E4EC6 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826112775B775001E4EC6 /* vector.c */; };
 		F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826152775D37C001E4EC6 /* mlx_utils.c */; };
@@ -49,6 +55,12 @@
 		F43E361C27785C6300CE5AC6 /* list_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = list_utils.c; path = miniRT_v2/srcs/list_utils.c; sourceTree = "<group>"; };
 		F43E361E27785C8100CE5AC6 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = list.h; path = miniRT_v2/includes/list.h; sourceTree = "<group>"; };
 		F442BE262790A66000C4F39E /* map_reader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = map_reader.c; path = miniRT_v2/srcs/map_reader.c; sourceTree = "<group>"; };
+		F442BE292798ABC900C4F39E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		F442BE2B2798ABD100C4F39E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		F442BE2D2798AD8100C4F39E /* handlers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = handlers.c; path = miniRT_v2/srcs/handlers.c; sourceTree = "<group>"; };
+		F442BE2F2798B38700C4F39E /* inter_cylinder_2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inter_cylinder_2.c; path = miniRT_v2/srcs/inter_cylinder_2.c; sourceTree = "<group>"; };
+		F442BE312798B52C00C4F39E /* vector_2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vector_2.c; path = miniRT_v2/srcs/vector_2.c; sourceTree = "<group>"; };
+		F442BE332798B58C00C4F39E /* vector_3.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vector_3.c; path = miniRT_v2/srcs/vector_3.c; sourceTree = "<group>"; };
 		F46826072775B70A001E4EC6 /* miniRT_v2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = miniRT_v2; sourceTree = BUILT_PRODUCTS_DIR; };
 		F468260A2775B70A001E4EC6 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = main.c; path = miniRT_v2/srcs/main.c; sourceTree = "<group>"; };
 		F46826112775B775001E4EC6 /* vector.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vector.c; path = miniRT_v2/srcs/vector.c; sourceTree = "<group>"; };
@@ -66,15 +78,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F442BE2A2798ABC900C4F39E /* AppKit.framework in Frameworks */,
+				F442BE2C2798ABD100C4F39E /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F442BE282798ABC900C4F39E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F442BE2B2798ABD100C4F39E /* OpenGL.framework */,
+				F442BE292798ABC900C4F39E /* AppKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F46825FE2775B70A001E4EC6 = {
 			isa = PBXGroup;
 			children = (
+				F442BE2F2798B38700C4F39E /* inter_cylinder_2.c */,
+				F442BE2D2798AD8100C4F39E /* handlers.c */,
 				F433DD2727985936007028CE /* inter_cylinder.c */,
 				F433DD2527985753007028CE /* inter_plane.c */,
 				F433DD2327985652007028CE /* inter_sphere.c */,
@@ -95,9 +120,12 @@
 				F46826142775D20B001E4EC6 /* minirt.h */,
 				F46826132775B7EF001E4EC6 /* vector.h */,
 				F46826112775B775001E4EC6 /* vector.c */,
+				F442BE312798B52C00C4F39E /* vector_2.c */,
+				F442BE332798B58C00C4F39E /* vector_3.c */,
 				F468260A2775B70A001E4EC6 /* main.c */,
 				F46826092775B70A001E4EC6 /* miniRT_v2 */,
 				F46826082775B70A001E4EC6 /* Products */,
+				F442BE282798ABC900C4F39E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,15 +204,19 @@
 				F40AA6B22781DEC300C7F5BF /* Makefile in Sources */,
 				F46826122775B775001E4EC6 /* vector.c in Sources */,
 				F468261F278F162D001E4EC6 /* map.c in Sources */,
+				F442BE302798B38700C4F39E /* inter_cylinder_2.c in Sources */,
 				F468261D277C94E6001E4EC6 /* intersection.c in Sources */,
 				F46826192775FF37001E4EC6 /* utils.c in Sources */,
+				F442BE342798B58C00C4F39E /* vector_3.c in Sources */,
 				F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */,
 				F433DD2827985936007028CE /* inter_cylinder.c in Sources */,
 				F433DD2427985652007028CE /* inter_sphere.c in Sources */,
 				F468260B2775B70A001E4EC6 /* main.c in Sources */,
 				F442BE272790A66000C4F39E /* map_reader.c in Sources */,
+				F442BE322798B52C00C4F39E /* vector_2.c in Sources */,
 				F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */,
 				F433DD22279822F8007028CE /* light_ops.c in Sources */,
+				F442BE2E2798AD8100C4F39E /* handlers.c in Sources */,
 				F433DD2627985753007028CE /* inter_plane.c in Sources */,
 				F43E361D27785C6400CE5AC6 /* list_utils.c in Sources */,
 				F40AA6AF277F94E300C7F5BF /* texture.c in Sources */,
@@ -333,6 +365,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = "./**";
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -343,6 +376,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = "./**";
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -1,127 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inter_cylinder.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgreenbl <bgreenbl@student.21-school.ru>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/19 23:57:35 by bgreenbl          #+#    #+#             */
+/*   Updated: 2022/01/19 23:57:39 by bgreenbl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-static int		solve_cylinder(double x[2], t_vector o, t_vector d, t_figure *lst)
+static int	solve_cylinder(double x[2], t_vector_2p ray, t_figure *lst)
 {
 	t_vector	v;
 	t_vector	u;
-	double	a;
-	double	b;
-	double	c;
+	double		k[3];
+	double		discr;
 
-	v = vector_mlt(vector_dot(d, lst->figure.cy.nv), lst->figure.cy.nv);
-	v = vector_sub(d, v);
-	u = vector_mlt(vector_dot(vector_sub(o, lst->figure.cy.center), lst->figure.cy.nv),
-													lst->figure.cy.nv);
-	u = vector_sub(vector_sub(o, lst->figure.cy.center), u);
-	a = vector_dot(v, v);
-	b = 2 * vector_dot(v, u);
-	c = vector_dot(u, u) - pow(lst->figure.cy.radius, 2);
-	x[0] = (-b + sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
-	x[1] = (-b - sqrt(pow(b, 2) - 4 * a * c)) / (2 * a);
-	if ((x[0] != x[0] && x[1] != x[1]) || (x[0] < EPSILON && x[1] < EPSILON))
+	v = vector_mlt(vector_dot(ray.direction, lst->figure.cy.nv),
+			lst->figure.cy.nv);
+	v = vector_sub(ray.direction, v);
+	u = vector_mlt(vector_dot(vector_sub(ray.origin, lst->figure.cy.center),
+				lst->figure.cy.nv), lst->figure.cy.nv);
+	u = vector_sub(vector_sub(ray.origin, lst->figure.cy.center), u);
+	k[0] = vector_dot(v, v);
+	k[1] = 2 * vector_dot(v, u);
+	k[2] = vector_dot(u, u) - pow(lst->figure.cy.radius, 2);
+	discr = pow(k[1], 2) - 4 * k[0] * k[2];
+	if (discr < 0)
 	{
 		x[0] = INFINITY;
 		x[1] = INFINITY;
 		return (0);
 	}
+	x[0] = (-k[1] + sqrt(discr)) / (2 * k[0]);
+	x[1] = (-k[1] - sqrt(discr)) / (2 * k[0]);
 	return (1);
 }
 
-static t_vector		calc_cy_normal(double x2[2], t_vector o, t_vector d, t_figure *lst)
+static	int	check_point(double x2[2], char i, t_figure *lst)
 {
-	double	dist;
-	double	x;
+	if (lst->figure.cy.dist[i] >= 0
+		&& lst->figure.cy.dist[i] <= lst->figure.cy.height
+		&& x2[i] > EPSILON)
+		return (1);
+	return (0);
+}
 
-	if ((lst->figure.cy.dist1 >= 0 && lst->figure.cy.dist1 <= lst->figure.cy.height && x2[0] > EPSILON)
-	 && (lst->figure.cy.dist2 >= 0 && lst->figure.cy.dist2 <= lst->figure.cy.height && x2[1] > EPSILON))
+static	void	cy_inter_x(double x2[2], double *dist, double *x, t_figure *lst)
+{
+	if (check_point(x2, 0, lst) && check_point(x2, 1, lst))
 	{
-		dist = lst->figure.cy.dist2;
-		x = x2[1];
+		*dist = lst->figure.cy.dist[1];
+		*x = x2[1];
 		if (x2[0] < x2[1])
 		{
-			dist = lst->figure.cy.dist1;
-			x = x2[0];
+			*dist = lst->figure.cy.dist[0];
+			*x = x2[0];
 		}
 	}
-	else if (lst->figure.cy.dist1 >= 0 && lst->figure.cy.dist1 <= lst->figure.cy.height
-														&& x2[0] > EPSILON)
+	else if (check_point(x2, 0, lst))
 	{
-		dist = lst->figure.cy.dist1;
-		x = x2[0];
+		*dist = lst->figure.cy.dist[0];
+		*x = x2[0];
 	}
 	else
 	{
-		dist = lst->figure.cy.dist2;
-		x = x2[1];
+		*dist = lst->figure.cy.dist[1];
+		*x = x2[1];
 	}
-	x2[0] = x;
-	return (vector_norm(vector_sub(vector_sub(vector_mlt(x, d),
-			vector_mlt(dist, lst->figure.cy.nv)), vector_sub(lst->figure.cy.center, o))));
 }
 
-static double	cy_intersection(t_vector o, t_vector d, t_vector *normal, t_figure *lst)
+static t_vector	calc_cy_normal(double x2[2], t_vector_2p ray, t_figure *lst)
+{
+	double		dist;
+	double		x;
+	t_vector	v;
+	t_vector	c;
+
+	cy_inter_x(x2, &dist, &x, lst);
+	x2[0] = x;
+	v = vector_sub(vector_mlt(x, ray.direction),
+			vector_mlt(dist, lst->figure.cy.nv));
+	c = vector_sub(lst->figure.cy.center, ray.origin);
+	return (vector_norm(vector_sub(v, c)));
+}
+
+double	cy_intersection(t_vector_2p ray, t_vector *normal, t_figure *lst)
 {
 	double	x2[2];
 
-	if (solve_cylinder(x2, o, d, lst) == 0)
+	if (solve_cylinder(x2, ray, lst) == 0)
 		return (INFINITY);
-	lst->figure.cy.dist1 = vector_dot(lst->figure.cy.nv, vector_sub(vector_mlt(x2[0], d),
-												vector_sub(lst->figure.cy.center, o)));
-	lst->figure.cy.dist2 = vector_dot(lst->figure.cy.nv, vector_sub(vector_mlt(x2[1], d),
-												vector_sub(lst->figure.cy.center, o)));
-	if (!((lst->figure.cy.dist1 >= 0 && lst->figure.cy.dist1 <= lst->figure.cy.height
-					&& x2[0] > EPSILON) || (lst->figure.cy.dist2 >= 0
-					&& lst->figure.cy.dist2 <= lst->figure.cy.height && x2[0] > EPSILON)))
+	lst->figure.cy.dist[0] = vector_dot(lst->figure.cy.nv,
+			vector_sub(vector_mlt(x2[0], ray.direction),
+				vector_sub(lst->figure.cy.center, ray.origin)));
+	lst->figure.cy.dist[1] = vector_dot(lst->figure.cy.nv,
+			vector_sub(vector_mlt(x2[1], ray.direction),
+				vector_sub(lst->figure.cy.center, ray.origin)));
+	if (!(check_point(x2, 0, lst) || check_point(x2, 1, lst)))
 		return (INFINITY);
-	*normal = calc_cy_normal(x2, o, d, lst);
+	*normal = calc_cy_normal(x2, ray, lst);
 	return (x2[0]);
-}
-
-static double	caps_intersection(t_vector o, t_vector d, t_figure *lst)
-{
-	double	id1;
-	double	id2;
-	t_vector	ip1;
-	t_vector	ip2;
-	t_vector	c2;
-
-	c2 = vector_sum(lst->figure.cy.center, vector_mlt(lst->figure.cy.height, lst->figure.cy.nv));
-	id1 = solve_plane(o, d, lst->figure.cy.center, lst->figure.cy.nv);
-	id2 = solve_plane(o, d, c2, lst->figure.cy.nv);
-	if (id1 < INFINITY || id2 < INFINITY)
-	{
-		ip1 = vector_sum(o, vector_mlt(id1, d));
-		ip2 = vector_sum(o, vector_mlt(id2, d));
-		if ((id1 < INFINITY && distance(ip1, lst->figure.cy.center) <= lst->figure.cy.radius)
-				&& (id2 < INFINITY && distance(ip2, c2) <= lst->figure.cy.radius))
-			return (id1 < id2 ? id1 : id2);
-		else if (id1 < INFINITY
-						&& distance(ip1, lst->figure.cy.center) <= lst->figure.cy.radius)
-			return (id1);
-		else if (id2 < INFINITY && distance(ip2, c2) <= lst->figure.cy.radius)
-			return (id2);
-		return (INFINITY);
-	}
-	return (INFINITY);
-}
-
-double			cylinder_intersection(t_vector o, t_vector d, t_figure *lst)
-{
-	double		cylinder_inter;
-	double		caps_inter;
-	t_vector	cy_normal;
-
-	cylinder_inter = cy_intersection(o, d, &cy_normal, lst);
-	caps_inter = caps_intersection(o, d, lst);
-	if (cylinder_inter < INFINITY || caps_inter < INFINITY)
-	{
-		if (cylinder_inter < caps_inter)
-		{
-			lst->normal = cy_normal;
-			return (cylinder_inter);
-		}
-		lst->normal = lst->figure.cy.nv;
-		return (caps_inter);
-	}
-	return (INFINITY);
 }

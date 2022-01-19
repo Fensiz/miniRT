@@ -45,8 +45,7 @@ typedef struct	s_cylinder
 	t_vector	nv;
 	double		radius;
 	double		height;
-	double		dist1;
-	double		dist2;
+	double		dist[2];
 }				t_cylinder;
 
 typedef struct	s_cone
@@ -138,6 +137,11 @@ typedef struct s_uv
 	double	u;
 	double	v;
 }	t_uv;
+typedef struct s_interv
+{
+	double		id[2];
+	t_vector	ip[2];
+}	t_interv;
 
 void	load_map(t_scene *scene);
 void	ft_error(int code, char *error_text);
@@ -152,10 +156,7 @@ int		ft_atoi(char **str);
 double	ft_atof(char **str);
 void	*ft_memset(void *b, int c, size_t len);
 void	init_mlx(t_mlx *mlx, t_scene *scene);
-double	sphere_intersection(t_vector origin, t_vector direction, t_figure *figure);
 int		trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene);
-double	cylinder_intersection(t_vector o, t_vector d, t_figure *lst);
-double	plane_intersection(t_vector o, t_vector d, t_figure *lst);
 void	apply_texture(t_figure *figure, t_inter *inter, t_scene *scene);
 double cone_intersection(t_vector pos, t_vector dir, t_figure *lst);
 int	key_handler(int keycode, void *mlx_arr);
@@ -169,8 +170,9 @@ t_vector	rot_from_n_to_y1(t_vector v, t_vector n);
 t_vector	rot_from_y1_to_n(t_vector v, t_vector n);
 
 /* ubtersections */
-double	sphere_intersection(t_vector origin, t_vector direction, t_figure *figure);
-double	solve_plane(t_vector origin, t_vector direction, t_vector plane_p, t_vector plane_nv);
-double	plane_intersection(t_vector origin, t_vector d, t_figure *lst);
-double	cylinder_intersection(t_vector o, t_vector d, t_figure *lst);
+double	sphere_intersection(t_vector_2p ray, t_figure *figure);
+double	solve_plane(t_vector_2p ray, t_vector plane_p, t_vector plane_nv);
+double	plane_intersection(t_vector_2p ray, t_figure *lst);
+double	cylinder_intersection(t_vector_2p ray, t_figure *lst);
+double	cy_intersection(t_vector_2p ray, t_vector *normal, t_figure *lst);
 #endif

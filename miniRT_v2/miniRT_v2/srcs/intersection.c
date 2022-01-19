@@ -2,10 +2,12 @@
 
 static double	cap_intersection(t_vector o, t_vector d, t_figure *lst)
 {
-	double	id1;
+	double		id1;
 	t_vector	ip1;
+	t_vector_2p	ray;
 
-	id1 = solve_plane(o, d, lst->figure.co.center, lst->figure.co.nv);
+	ray = vector_2p_set(o, d);
+	id1 = solve_plane(ray, lst->figure.co.center, lst->figure.co.nv);
 	if (id1 < INFINITY)
 	{
 		ip1 = vector_sum(o, vector_mlt(id1, d));
@@ -15,8 +17,6 @@ static double	cap_intersection(t_vector o, t_vector d, t_figure *lst)
 	}
 	return (INFINITY);
 }
-
-
 
 double cone_solve(t_vector origin, t_vector direction, t_vector *normal, t_figure *lst)
 {

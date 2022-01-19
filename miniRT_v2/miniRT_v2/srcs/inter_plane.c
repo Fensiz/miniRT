@@ -12,23 +12,23 @@
 
 #include "minirt.h"
 
-double	solve_plane(t_vector origin, t_vector direction, t_vector plane_p,
+double	solve_plane(t_vector_2p ray, t_vector plane_p,
 	t_vector plane_nv)
 {
 	double	x;
 	double	denom;
 
-	denom = vector_dot(plane_nv, direction);
+	denom = vector_dot(plane_nv, ray.direction);
 	if (denom == 0)
 		return (INFINITY);
-	x = (vector_dot(plane_nv, vector_sub(plane_p, origin))) / denom;
+	x = (vector_dot(plane_nv, vector_sub(plane_p, ray.origin))) / denom;
 	if (x > 0)
 		return (x);
 	else
 		return (INFINITY);
 }
 
-double	plane_intersection(t_vector origin, t_vector d, t_figure *lst)
+double	plane_intersection(t_vector_2p ray, t_figure *lst)
 {
-	return (solve_plane(origin, d, lst->figure.pl.point, lst->normal));
+	return (solve_plane(ray, lst->figure.pl.point, lst->normal));
 }

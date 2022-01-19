@@ -162,7 +162,6 @@ void	texture_cylinder(t_figure *figure, t_inter *inter, t_map *map)
 	theta = atan2(coords.x, coords.z);
 	i.u = theta / M_PI * figure->figure.cy.radius * 4;
 	i.v = coords.y;
-
 	if (figure->texture >> 1)
 	{
 		gx = uv_to_normal_pl(i.u , i.v, map->map, map->size);

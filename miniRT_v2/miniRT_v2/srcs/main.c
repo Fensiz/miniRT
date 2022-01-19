@@ -448,11 +448,11 @@ void	get_closest_inter(t_vector_2p ray, t_figure *figure,
 	while (figure)
 	{
 		if (figure->type == SPHERE)
-			distance = sphere_intersection(ray.origin, ray.direction, figure);
+			distance = sphere_intersection(ray, figure);
 		else if (figure->type == PLANE)
-			distance = plane_intersection(ray.origin, ray.direction, figure);
+			distance = plane_intersection(ray, figure);
 		else if (figure->type == CYLINDER)
-			distance = cylinder_intersection(ray.origin, ray.direction, figure);
+			distance = cylinder_intersection(ray, figure);
 		else if (figure->type == CONE)
 			distance = cone_intersection(ray.origin, ray.direction, figure);
 		if (distance > EPSILON && distance < *closest_inter)

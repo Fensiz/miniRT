@@ -25,4 +25,5 @@ double		distance(t_vector p1, t_vector p2);
 t_vector	vector_x_rot(t_vector v, double degree_angle);
 t_vector	vector_y_rot(t_vector v, double degree_angle);
 t_vector	vector_z_rot(t_vector v, double degree_angle);
+t_vector_2p	vector_2p_set(t_vector origin, t_vector direction);
 #endif
