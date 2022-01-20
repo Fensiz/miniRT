@@ -29,11 +29,9 @@ CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra -MMD
 
 SRC				=	$(addprefix $(SRC_PATH), $(FILES))
-#SRC			=	$(FILES)
 OBJT			=	$(addprefix $(OBJ_PATH), $(FILES))
 OBJ				=	$(OBJT:.c=.o)
 DEP				=	$(OBJT:.c=.d)
-
 
 all				:	make_dir $(NAME)
 
@@ -43,7 +41,7 @@ $(NAME)			:	$(OBJ)
 	$(CC) -framework OpenGL -framework AppKit -o $(NAME) $^ $(MLX_LIB)
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(MLX_LIB)
-	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -Ilib/mlx19 -c $< -o $@
 
 $(OBJ_PATH)		:
 	mkdir -p $@
