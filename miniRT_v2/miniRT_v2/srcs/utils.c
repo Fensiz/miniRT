@@ -125,3 +125,38 @@ void	*ft_memset(void *b, int c, size_t len)
 		*p++ = (unsigned char)c;
 	return (b);
 }
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	size_t	dlen;
+	size_t	slen;
+
+	dlen = ft_strlen(dst);
+	slen = ft_strlen(src);
+	if (dlen >= dstsize)
+		return (dstsize + slen);
+	dst += dlen;
+	i = dlen + 1;
+	while (*src && i++ < dstsize)
+		*dst++ = *src++;
+	*dst = 0;
+	return (dlen + slen);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+
+	i = 0;
+	if (dstsize && src && dst)
+	{
+		while (src[i] && i < dstsize - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = 0;
+	}
+	return (ft_strlen(src));
+}

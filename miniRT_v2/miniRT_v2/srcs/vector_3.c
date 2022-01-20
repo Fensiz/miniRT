@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "vector.h"
-#include <math.h>
 
 double	distance(t_vector p1, t_vector p2)
 {

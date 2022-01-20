@@ -12,7 +12,7 @@
 
 #include "minirt.h"
 
-static	int	check_dist(t_interv v, char i, t_vector center, t_figure *lst)
+static	int	check_dist(t_interv v, int i, t_vector center, t_figure *lst)
 {
 	if (v.id[i] < INFINITY
 		&& distance(v.ip[i], center) <= lst->figure.cy.radius)

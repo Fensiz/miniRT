@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "vector.h"
-#include <math.h>
 
 double	vector_len(t_vector v)
 {

@@ -30,7 +30,7 @@ static int	solve_cylinder(double x[2], t_vector_2p ray, t_figure *lst)
 	return (solve_square_exp(k, x));
 }
 
-static	int	check_point(double x2[2], char i, t_figure *lst)
+static	int	check_point(double x2[2], int i, t_figure *lst)
 {
 	if (lst->figure.cy.dist[i] >= 0
 		&& lst->figure.cy.dist[i] <= lst->figure.cy.height

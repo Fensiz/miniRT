@@ -15,6 +15,13 @@
 		F433DD2627985753007028CE /* inter_plane.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2527985753007028CE /* inter_plane.c */; };
 		F433DD2827985936007028CE /* inter_cylinder.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2727985936007028CE /* inter_cylinder.c */; };
 		F433DD2A27995A4E007028CE /* color_ops_2.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2927995A4E007028CE /* color_ops_2.c */; };
+		F433DD2C279966FA007028CE /* vector_4.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2B279966FA007028CE /* vector_4.c */; };
+		F433DD2E279975FC007028CE /* parse_param.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2D279975FC007028CE /* parse_param.c */; };
+		F433DD3027997718007028CE /* parse_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2F27997718007028CE /* parse_utils.c */; };
+		F433DD3227997817007028CE /* parse_figure.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD3127997817007028CE /* parse_figure.c */; };
+		F433DD3427997973007028CE /* parse.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD3327997973007028CE /* parse.c */; };
+		F433DD3627998A68007028CE /* texture_2.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD3527998A68007028CE /* texture_2.c */; };
+		F433DD3827998C0F007028CE /* texture_3.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD3727998C0F007028CE /* texture_3.c */; };
 		F442BE272790A66000C4F39E /* map_reader.c in Sources */ = {isa = PBXBuildFile; fileRef = F442BE262790A66000C4F39E /* map_reader.c */; };
 		F442BE2A2798ABC900C4F39E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442BE292798ABC900C4F39E /* AppKit.framework */; platformFilter = maccatalyst; };
 		F442BE2C2798ABD100C4F39E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442BE2B2798ABD100C4F39E /* OpenGL.framework */; platformFilter = maccatalyst; };
@@ -53,6 +60,13 @@
 		F433DD2527985753007028CE /* inter_plane.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inter_plane.c; path = miniRT_v2/srcs/inter_plane.c; sourceTree = "<group>"; };
 		F433DD2727985936007028CE /* inter_cylinder.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inter_cylinder.c; path = miniRT_v2/srcs/inter_cylinder.c; sourceTree = "<group>"; };
 		F433DD2927995A4E007028CE /* color_ops_2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = color_ops_2.c; path = miniRT_v2/srcs/color_ops_2.c; sourceTree = "<group>"; };
+		F433DD2B279966FA007028CE /* vector_4.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vector_4.c; path = miniRT_v2/srcs/vector_4.c; sourceTree = "<group>"; };
+		F433DD2D279975FC007028CE /* parse_param.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = parse_param.c; path = miniRT_v2/srcs/parse_param.c; sourceTree = "<group>"; };
+		F433DD2F27997718007028CE /* parse_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = parse_utils.c; path = miniRT_v2/srcs/parse_utils.c; sourceTree = "<group>"; };
+		F433DD3127997817007028CE /* parse_figure.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = parse_figure.c; path = miniRT_v2/srcs/parse_figure.c; sourceTree = "<group>"; };
+		F433DD3327997973007028CE /* parse.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = parse.c; path = miniRT_v2/srcs/parse.c; sourceTree = "<group>"; };
+		F433DD3527998A68007028CE /* texture_2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = texture_2.c; path = miniRT_v2/srcs/texture_2.c; sourceTree = "<group>"; };
+		F433DD3727998C0F007028CE /* texture_3.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = texture_3.c; path = miniRT_v2/srcs/texture_3.c; sourceTree = "<group>"; };
 		F442BE262790A66000C4F39E /* map_reader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = map_reader.c; path = miniRT_v2/srcs/map_reader.c; sourceTree = "<group>"; };
 		F442BE292798ABC900C4F39E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		F442BE2B2798ABD100C4F39E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -97,6 +111,12 @@
 		F46825FE2775B70A001E4EC6 = {
 			isa = PBXGroup;
 			children = (
+				F433DD3727998C0F007028CE /* texture_3.c */,
+				F433DD3527998A68007028CE /* texture_2.c */,
+				F433DD3327997973007028CE /* parse.c */,
+				F433DD3127997817007028CE /* parse_figure.c */,
+				F433DD2F27997718007028CE /* parse_utils.c */,
+				F433DD2D279975FC007028CE /* parse_param.c */,
 				F433DD2927995A4E007028CE /* color_ops_2.c */,
 				F442BE2F2798B38700C4F39E /* inter_cylinder_2.c */,
 				F442BE2D2798AD8100C4F39E /* handlers.c */,
@@ -120,6 +140,7 @@
 				F46826112775B775001E4EC6 /* vector.c */,
 				F442BE312798B52C00C4F39E /* vector_2.c */,
 				F442BE332798B58C00C4F39E /* vector_3.c */,
+				F433DD2B279966FA007028CE /* vector_4.c */,
 				F468260A2775B70A001E4EC6 /* main.c */,
 				F46826092775B70A001E4EC6 /* miniRT_v2 */,
 				F46826082775B70A001E4EC6 /* Products */,
@@ -200,14 +221,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				F40AA6B22781DEC300C7F5BF /* Makefile in Sources */,
+				F433DD3827998C0F007028CE /* texture_3.c in Sources */,
 				F46826122775B775001E4EC6 /* vector.c in Sources */,
 				F468261F278F162D001E4EC6 /* map.c in Sources */,
+				F433DD3427997973007028CE /* parse.c in Sources */,
+				F433DD3027997718007028CE /* parse_utils.c in Sources */,
+				F433DD3627998A68007028CE /* texture_2.c in Sources */,
 				F442BE302798B38700C4F39E /* inter_cylinder_2.c in Sources */,
 				F468261D277C94E6001E4EC6 /* inter_cone.c in Sources */,
 				F46826192775FF37001E4EC6 /* utils.c in Sources */,
 				F442BE342798B58C00C4F39E /* vector_3.c in Sources */,
 				F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */,
 				F433DD2827985936007028CE /* inter_cylinder.c in Sources */,
+				F433DD2E279975FC007028CE /* parse_param.c in Sources */,
+				F433DD2C279966FA007028CE /* vector_4.c in Sources */,
 				F433DD2427985652007028CE /* inter_sphere.c in Sources */,
 				F468260B2775B70A001E4EC6 /* main.c in Sources */,
 				F433DD2A27995A4E007028CE /* color_ops_2.c in Sources */,
@@ -218,6 +245,7 @@
 				F442BE2E2798AD8100C4F39E /* handlers.c in Sources */,
 				F433DD2627985753007028CE /* inter_plane.c in Sources */,
 				F40AA6AF277F94E300C7F5BF /* texture.c in Sources */,
+				F433DD3227997817007028CE /* parse_figure.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

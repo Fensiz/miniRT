@@ -13,13 +13,14 @@
 NAME		=	miniRT
 SRC_PATH	=	./srcs/
 FILES		=	utils.c		mlx_utils.c		main.c	\
-				texture.c	handlers.c				\
-				map_reader.c 		light_ops.c		\
-				inter_plane.c		vector.c		\
-				inter_sphere.c		vector_2.c		\
-				inter_cylinder.c	vector_3.c		\
-				inter_cylinder_2.c	color_ops.c		\
-				inter_cone.c		color_ops_2.c
+				handlers.c				\
+				map_reader.c 		light_ops.c		parse.c			\
+				inter_plane.c		vector.c		parse_param.c	\
+				inter_sphere.c		vector_2.c		parse_figure.c	\
+				inter_cylinder.c	vector_3.c		parse_utils.c	\
+				inter_cylinder_2.c	vector_4.c		texture.c		\
+				inter_cone.c		color_ops.c		texture_2.c		\
+									color_ops_2.c	texture_3.c
 MLX_PATH	=	./libs/mlx19/
 
 MLX_LIB		=	$(MLX_PATH)libmlx.a			
@@ -44,9 +45,9 @@ $(MLX_LIB)	:
 	make -C	$(MLX_PATH)
 clean		:
 	rm -f $(OBJ) $(DEP)
-#fclean		:	clean
-#	rm -f $(NAME)
-#	make clean -C $(MLX_PATH)
+fclean		:	clean
+	rm -f $(NAME)
+	make clean -C $(MLX_PATH)
 re			:	fclean all
 
 norm		:

@@ -1,6 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 13:06:48 by bgreenbl          #+#    #+#             */
+/*   Updated: 2022/01/20 13:06:49 by bgreenbl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECTOR_H
 # define VECTOR_H
-typedef struct	s_vector
+# include <math.h>
+
+typedef struct s_vector
 {
 	double	x;
 	double	y;
@@ -26,4 +40,6 @@ t_vector	vector_x_rot(t_vector v, double degree_angle);
 t_vector	vector_y_rot(t_vector v, double degree_angle);
 t_vector	vector_z_rot(t_vector v, double degree_angle);
 t_vector_2p	vector_2p_set(t_vector origin, t_vector direction);
+t_vector	rot_from_n_to_y1(t_vector v, t_vector n);
+t_vector	rot_from_y1_to_n(t_vector v, t_vector n);
 #endif

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "vector.h"
-#include <math.h>
 
 t_vector	vector_set(double x, double y, double z)
 {

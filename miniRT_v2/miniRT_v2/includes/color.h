@@ -1,11 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 13:11:26 by bgreenbl          #+#    #+#             */
+/*   Updated: 2022/01/20 13:11:27 by bgreenbl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COLOR_H
 # define COLOR_H
+
 typedef struct s_color
 {
-	int	red;
-	int	green;
-	int	blue;
-}	t_color;
+	int		red;
+	int		green;
+	int		blue;
+}			t_color;
 
 t_color	set_color(int red, int green, int blue);
 int		convert_color2i(t_color	color);
