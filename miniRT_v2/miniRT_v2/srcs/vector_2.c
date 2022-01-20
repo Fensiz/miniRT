@@ -35,7 +35,7 @@ double	vector_cos(t_vector a, t_vector b)
 	return (vector_dot(a, b) / (vector_len(a) * vector_len(b)));
 }
 
-double	vsin(t_vector a, t_vector b)
+double	vector_sin(t_vector a, t_vector b)
 {
 	return (sqrt(1 - pow(vector_cos(a, b), 2)));
 }

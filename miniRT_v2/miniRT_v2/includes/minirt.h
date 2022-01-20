@@ -7,7 +7,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include "vector.h"
-# include "list.h"
 # include "color.h"
 # define MALLOC	2
 # define FD		3
@@ -158,7 +157,6 @@ void	*ft_memset(void *b, int c, size_t len);
 void	init_mlx(t_mlx *mlx, t_scene *scene);
 int		trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene);
 void	apply_texture(t_figure *figure, t_inter *inter, t_scene *scene);
-double cone_intersection(t_vector pos, t_vector dir, t_figure *lst);
 int	key_handler(int keycode, void *mlx_arr);
 int	red_cross_handler(void *mlx_arr);
 char	*file_to_str(int fd);
@@ -170,9 +168,11 @@ t_vector	rot_from_n_to_y1(t_vector v, t_vector n);
 t_vector	rot_from_y1_to_n(t_vector v, t_vector n);
 
 /* ubtersections */
+int		solve_square_exp(double k[3], double x[2]);
 double	sphere_intersection(t_vector_2p ray, t_figure *figure);
 double	solve_plane(t_vector_2p ray, t_vector plane_p, t_vector plane_nv);
 double	plane_intersection(t_vector_2p ray, t_figure *lst);
 double	cylinder_intersection(t_vector_2p ray, t_figure *lst);
 double	cy_intersection(t_vector_2p ray, t_vector *normal, t_figure *lst);
+double	cone_intersection(t_vector_2p ray, t_figure *lst);
 #endif

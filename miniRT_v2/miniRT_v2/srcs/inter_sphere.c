@@ -12,10 +12,25 @@
 
 #include "minirt.h"
 
+int	solve_square_exp(double k[3], double x[2])
+{
+	double	discr;
+
+	discr = pow(k[1], 2) - 4 * k[0] * k[2];
+	if (discr < 0)
+	{
+		x[0] = INFINITY;
+		x[1] = INFINITY;
+		return (0);
+	}
+	x[0] = (-k[1] + sqrt(discr)) / (2 * k[0]);
+	x[1] = (-k[1] - sqrt(discr)) / (2 * k[0]);
+	return (1);
+}
+
 static void	solve_sphere(double x[2], t_vector_2p ray,
 	t_figure *figure)
 {
-	double		discr;
 	t_vector	cam_sphere;
 	double		k[3];
 
@@ -24,15 +39,7 @@ static void	solve_sphere(double x[2], t_vector_2p ray,
 	k[1] = 2 * vector_dot(ray.direction, cam_sphere);
 	k[2] = vector_dot(cam_sphere, cam_sphere) - figure->figure.sp.radius
 		* figure->figure.sp.radius;
-	discr = k[1] * k[1] - (4 * k[0] * k[2]);
-	if (discr < 0)
-	{
-		x[0] = INFINITY;
-		x[1] = INFINITY;
-		return ;
-	}
-	x[0] = (-k[1] + sqrt(discr)) / (2 * k[0]);
-	x[1] = (-k[1] - sqrt(discr)) / (2 * k[0]);
+	solve_square_exp(k, x);
 }
 
 double	sphere_intersection(t_vector_2p ray, t_figure *figure)

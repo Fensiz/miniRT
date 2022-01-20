@@ -194,7 +194,7 @@ void		parse_light(t_scene **scene, char **str)
 	check_value(new->brightness, 0, 1, "light");
 	new->color = parse_color(str);
 }
-//
+
 void		parse_sphere(t_figure **figure_list, char **str)
 {
 	t_figure	*curr;
@@ -454,7 +454,7 @@ void	get_closest_inter(t_vector_2p ray, t_figure *figure,
 		else if (figure->type == CYLINDER)
 			distance = cylinder_intersection(ray, figure);
 		else if (figure->type == CONE)
-			distance = cone_intersection(ray.origin, ray.direction, figure);
+			distance = cone_intersection(ray, figure);
 		if (distance > EPSILON && distance < *closest_inter)
 		{
 			*closest_figure = *figure;
@@ -487,11 +487,6 @@ double	calc_specular(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *l
 
 void	calc_normal(t_vector point, t_vector direction, t_vector *normal, t_figure *figure)
 {
-	t_vector	rotated;
-	double		r;
-	double		x;
-	
-
 	if (figure->type == SPHERE)
 	{
 		*normal = vector_norm(vector_sub(point, figure->figure.sp.center));
@@ -503,25 +498,6 @@ void	calc_normal(t_vector point, t_vector direction, t_vector *normal, t_figure 
 		else
 			figure->figure.sp.inside = 0;
 	}
-//	if (figure->type == CONE)
-//	{
-//		rotated = rot_from_n_to_y1(vector_sub(point, figure->figure.co.center), figure->figure.co.nv);
-//		if (rotated.y < EPSILON)
-//		{
-//			if (vector_cos(direction, figure->normal) > 0)
-//				*normal = vector_mlt(-1, figure->normal);
-//			else
-//				*normal = figure->normal;
-//		}
-//		else
-//		{
-//			r = sqrt(pow(figure->figure.co.height - rotated.y, 2) + pow(rotated.x, 2));
-//			x = rotated.y - r * figure->figure.co.radius / figure->figure.co.height;
-//		
-//			*normal = rot_from_y1_to_n(vector_norm(vector_sub(point, vector_set(0, x, 0))), figure->figure.co.nv);
-//		}
-//		//*normal = figure->normal;
-//	}
 	else if (vector_cos(direction, figure->normal) > 0)
 		*normal = vector_mlt(-1, figure->normal);
 	else

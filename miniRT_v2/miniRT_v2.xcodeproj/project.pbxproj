@@ -14,7 +14,7 @@
 		F433DD2427985652007028CE /* inter_sphere.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2327985652007028CE /* inter_sphere.c */; };
 		F433DD2627985753007028CE /* inter_plane.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2527985753007028CE /* inter_plane.c */; };
 		F433DD2827985936007028CE /* inter_cylinder.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2727985936007028CE /* inter_cylinder.c */; };
-		F43E361D27785C6400CE5AC6 /* list_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F43E361C27785C6300CE5AC6 /* list_utils.c */; };
+		F433DD2A27995A4E007028CE /* color_ops_2.c in Sources */ = {isa = PBXBuildFile; fileRef = F433DD2927995A4E007028CE /* color_ops_2.c */; };
 		F442BE272790A66000C4F39E /* map_reader.c in Sources */ = {isa = PBXBuildFile; fileRef = F442BE262790A66000C4F39E /* map_reader.c */; };
 		F442BE2A2798ABC900C4F39E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442BE292798ABC900C4F39E /* AppKit.framework */; platformFilter = maccatalyst; };
 		F442BE2C2798ABD100C4F39E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F442BE2B2798ABD100C4F39E /* OpenGL.framework */; platformFilter = maccatalyst; };
@@ -26,7 +26,7 @@
 		F46826122775B775001E4EC6 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826112775B775001E4EC6 /* vector.c */; };
 		F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826152775D37C001E4EC6 /* mlx_utils.c */; };
 		F46826192775FF37001E4EC6 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = F46826182775FF37001E4EC6 /* utils.c */; };
-		F468261D277C94E6001E4EC6 /* intersection.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261C277C94E6001E4EC6 /* intersection.c */; };
+		F468261D277C94E6001E4EC6 /* inter_cone.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261C277C94E6001E4EC6 /* inter_cone.c */; };
 		F468261F278F162D001E4EC6 /* map.c in Sources */ = {isa = PBXBuildFile; fileRef = F468261E278F162D001E4EC6 /* map.c */; };
 /* End PBXBuildFile section */
 
@@ -52,8 +52,7 @@
 		F433DD2327985652007028CE /* inter_sphere.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inter_sphere.c; path = miniRT_v2/srcs/inter_sphere.c; sourceTree = "<group>"; };
 		F433DD2527985753007028CE /* inter_plane.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inter_plane.c; path = miniRT_v2/srcs/inter_plane.c; sourceTree = "<group>"; };
 		F433DD2727985936007028CE /* inter_cylinder.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inter_cylinder.c; path = miniRT_v2/srcs/inter_cylinder.c; sourceTree = "<group>"; };
-		F43E361C27785C6300CE5AC6 /* list_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = list_utils.c; path = miniRT_v2/srcs/list_utils.c; sourceTree = "<group>"; };
-		F43E361E27785C8100CE5AC6 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = list.h; path = miniRT_v2/includes/list.h; sourceTree = "<group>"; };
+		F433DD2927995A4E007028CE /* color_ops_2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = color_ops_2.c; path = miniRT_v2/srcs/color_ops_2.c; sourceTree = "<group>"; };
 		F442BE262790A66000C4F39E /* map_reader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = map_reader.c; path = miniRT_v2/srcs/map_reader.c; sourceTree = "<group>"; };
 		F442BE292798ABC900C4F39E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		F442BE2B2798ABD100C4F39E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -69,7 +68,7 @@
 		F46826152775D37C001E4EC6 /* mlx_utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = mlx_utils.c; path = miniRT_v2/srcs/mlx_utils.c; sourceTree = "<group>"; };
 		F46826172775F3B8001E4EC6 /* mlx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mlx.h; path = miniRT_v2/libs/mlx19/mlx.h; sourceTree = "<group>"; };
 		F46826182775FF37001E4EC6 /* utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utils.c; path = miniRT_v2/srcs/utils.c; sourceTree = "<group>"; };
-		F468261C277C94E6001E4EC6 /* intersection.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = intersection.c; path = miniRT_v2/srcs/intersection.c; sourceTree = "<group>"; };
+		F468261C277C94E6001E4EC6 /* inter_cone.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inter_cone.c; path = miniRT_v2/srcs/inter_cone.c; sourceTree = "<group>"; };
 		F468261E278F162D001E4EC6 /* map.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = map.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +97,7 @@
 		F46825FE2775B70A001E4EC6 = {
 			isa = PBXGroup;
 			children = (
+				F433DD2927995A4E007028CE /* color_ops_2.c */,
 				F442BE2F2798B38700C4F39E /* inter_cylinder_2.c */,
 				F442BE2D2798AD8100C4F39E /* handlers.c */,
 				F433DD2727985936007028CE /* inter_cylinder.c */,
@@ -111,9 +111,7 @@
 				F40AA6B0277FB79800C7F5BF /* color.h */,
 				F40AA6AE277F94E300C7F5BF /* texture.c */,
 				F40AA6AC277F8B9500C7F5BF /* color_ops.c */,
-				F468261C277C94E6001E4EC6 /* intersection.c */,
-				F43E361E27785C8100CE5AC6 /* list.h */,
-				F43E361C27785C6300CE5AC6 /* list_utils.c */,
+				F468261C277C94E6001E4EC6 /* inter_cone.c */,
 				F46826182775FF37001E4EC6 /* utils.c */,
 				F46826172775F3B8001E4EC6 /* mlx.h */,
 				F46826152775D37C001E4EC6 /* mlx_utils.c */,
@@ -205,20 +203,20 @@
 				F46826122775B775001E4EC6 /* vector.c in Sources */,
 				F468261F278F162D001E4EC6 /* map.c in Sources */,
 				F442BE302798B38700C4F39E /* inter_cylinder_2.c in Sources */,
-				F468261D277C94E6001E4EC6 /* intersection.c in Sources */,
+				F468261D277C94E6001E4EC6 /* inter_cone.c in Sources */,
 				F46826192775FF37001E4EC6 /* utils.c in Sources */,
 				F442BE342798B58C00C4F39E /* vector_3.c in Sources */,
 				F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */,
 				F433DD2827985936007028CE /* inter_cylinder.c in Sources */,
 				F433DD2427985652007028CE /* inter_sphere.c in Sources */,
 				F468260B2775B70A001E4EC6 /* main.c in Sources */,
+				F433DD2A27995A4E007028CE /* color_ops_2.c in Sources */,
 				F442BE272790A66000C4F39E /* map_reader.c in Sources */,
 				F442BE322798B52C00C4F39E /* vector_2.c in Sources */,
 				F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */,
 				F433DD22279822F8007028CE /* light_ops.c in Sources */,
 				F442BE2E2798AD8100C4F39E /* handlers.c in Sources */,
 				F433DD2627985753007028CE /* inter_plane.c in Sources */,
-				F43E361D27785C6400CE5AC6 /* list_utils.c in Sources */,
 				F40AA6AF277F94E300C7F5BF /* texture.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

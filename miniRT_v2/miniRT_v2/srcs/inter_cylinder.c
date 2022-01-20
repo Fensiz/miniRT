@@ -17,7 +17,6 @@ static int	solve_cylinder(double x[2], t_vector_2p ray, t_figure *lst)
 	t_vector	v;
 	t_vector	u;
 	double		k[3];
-	double		discr;
 
 	v = vector_mlt(vector_dot(ray.direction, lst->figure.cy.nv),
 			lst->figure.cy.nv);
@@ -28,16 +27,7 @@ static int	solve_cylinder(double x[2], t_vector_2p ray, t_figure *lst)
 	k[0] = vector_dot(v, v);
 	k[1] = 2 * vector_dot(v, u);
 	k[2] = vector_dot(u, u) - pow(lst->figure.cy.radius, 2);
-	discr = pow(k[1], 2) - 4 * k[0] * k[2];
-	if (discr < 0)
-	{
-		x[0] = INFINITY;
-		x[1] = INFINITY;
-		return (0);
-	}
-	x[0] = (-k[1] + sqrt(discr)) / (2 * k[0]);
-	x[1] = (-k[1] - sqrt(discr)) / (2 * k[0]);
-	return (1);
+	return (solve_square_exp(k, x));
 }
 
 static	int	check_point(double x2[2], char i, t_figure *lst)

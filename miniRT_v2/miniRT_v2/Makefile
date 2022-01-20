@@ -12,15 +12,19 @@
 
 NAME		=	miniRT
 SRC_PATH	=	./srcs/
-FILES		=	intersection.c	color_ops.c	utils.c		\
-				mlx_utils.c		vector.c vector_2.c vector_3.c	main.c	texture.c	handlers.c\
-				map_reader.c light_ops.c	inter_sphere.c	inter_cylinder.c	inter_plane.c \
-								inter_cylinder_2.c
+FILES		=	utils.c		mlx_utils.c		main.c	\
+				texture.c	handlers.c				\
+				map_reader.c 		light_ops.c		\
+				inter_plane.c		vector.c		\
+				inter_sphere.c		vector_2.c		\
+				inter_cylinder.c	vector_3.c		\
+				inter_cylinder_2.c	color_ops.c		\
+				inter_cone.c		color_ops_2.c
 MLX_PATH	=	./libs/mlx19/
 
 MLX_LIB		=	$(MLX_PATH)libmlx.a			
 CC			=	gcc
-#CFLAGS		=	-Wall -Werror -Wextra -MMD
+CFLAGS		=	-Wall -Werror -Wextra -MMD
 
 SRC			=	$(addprefix $(SRC_PATH), $(FILES))
 OBJ			=	$(SRC:.c=.o)

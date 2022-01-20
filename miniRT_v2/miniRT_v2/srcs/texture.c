@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 #include <stdio.h>
 
@@ -6,13 +5,15 @@ double	rot_angle(t_vector n, double coord)
 {
 	return ((asin(coord / sqrt(n.y * n.y + coord * coord)) / M_PI) * 180);
 }
+
 double	rot_angle2(t_vector n, double coord)
 {
 	return ((asin(coord / sqrt(n.y * n.y + n.x * n.x + n.z * n.z)) / M_PI) * 180);
 }
+
 double	rot_angle3(t_vector n, double coord)
 {
-	return (( asin(-n.x/sqrt(n.z*n.z + n.x*n.x)) / M_PI) * 180);
+	return ((asin(-n.x / sqrt(n.z * n.z + n.x * n.x)) / M_PI) * 180);
 }
 
 t_vector	rot_from_n_to_y1(t_vector v, t_vector n)
@@ -33,28 +34,28 @@ t_vector	rot_from_n_to_y1(t_vector v, t_vector n)
 		v = vector_z_rot(v, 180 - rot_angle(n, n.x));
 	return (v);
 }
+
 t_vector	rot_from_y1_to_n(t_vector v, t_vector n)
 {
-
-	 if (n.x >= 0 && n.y >= 0)// && n.z < 0)
-	 {
+	if (n.x >= 0 && n.y >= 0)
+	{
 		v = vector_z_rot(v, -rot_angle2(n, n.x));
 		v = vector_x_rot(v, rot_angle(n, n.z));
-	 }
-	else if (n.x < 0 && n.y >= 0)// && n.z < 0)
-	{
-	   v = vector_z_rot(v, -rot_angle2(n, n.x));
-	   v = vector_x_rot(v, rot_angle(n, n.z));
 	}
-	else if (n.x >= 0 && n.y < 0)// && n.z < 0)
+	else if (n.x < 0 && n.y >= 0)
 	{
-	   v = vector_z_rot(v, -rot_angle2(n, n.x));
-	   v = vector_x_rot(v, 180 - rot_angle(n, n.z));
+		v = vector_z_rot(v, -rot_angle2(n, n.x));
+		v = vector_x_rot(v, rot_angle(n, n.z));
 	}
-	else if (n.x < 0 && n.y < 0)// && n.z < 0)
+	else if (n.x >= 0 && n.y < 0)
 	{
-	   v = vector_z_rot(v, -rot_angle2(n, n.x));
-	   v = vector_x_rot(v, 180 - rot_angle(n, n.z));
+		v = vector_z_rot(v, -rot_angle2(n, n.x));
+		v = vector_x_rot(v, 180 - rot_angle(n, n.z));
+	}
+	else if (n.x < 0 && n.y < 0)
+	{
+		v = vector_z_rot(v, -rot_angle2(n, n.x));
+		v = vector_x_rot(v, 180 - rot_angle(n, n.z));
 	}
 	return (v);
 }
@@ -73,46 +74,45 @@ int	uv_height(double u, double v, int *map, int map_size)
 
 t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 {
-	int	ui;
-	int	vi;
+	int			ui;
+	int			vi;
 	t_vector	g;
 
 	u *= 800;
 	v *= 400;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
 	vi = ((int)floor(-v) % map_size + map_size) % map_size;
-	g.x = (map[(ui - 1 + map_size) % map_size + vi* map_size]
-		- map[(ui + 1) % map_size + vi * map_size]);
+	g.x = (map[(ui - 1 + map_size) % map_size + vi * map_size]
+			- map[(ui + 1) % map_size + vi * map_size]);
 	g.y = EPSILON;
 	g.z = -(map[ui + (vi - 1 + map_size) % map_size * map_size]
-		 - map[ui + (vi + 1) % map_size * map_size]);
+			- map[ui + (vi + 1) % map_size * map_size]);
 	if (g.x == 0 && g.z == 0)
-		return vector_set(0, 0, 0);
+		return (vector_set(0, 0, 0));
 	g = vector_norm(g);
 	return (g);
 }
+
 t_vector	uv_to_normal_pl(double u, double v, int *map, int map_size)
 {
-	int	ui;
-	int	vi;
+	int			ui;
+	int			vi;
 	t_vector	g;
 
-	
 	u *= 20;
 	v *= 20;
 	ui = ((int)floor(u) % map_size + map_size) % map_size;
 	vi = ((int)floor(-v) % map_size + map_size) % map_size;
-	g.x = (map[(ui - 1 + map_size) % map_size + vi* map_size]
-		- map[(ui + 1) % map_size + vi * map_size]);
+	g.x = (map[(ui - 1 + map_size) % map_size + vi * map_size]
+			- map[(ui + 1) % map_size + vi * map_size]);
 	g.y = EPSILON;
 	g.z = -(map[ui + (vi - 1 + map_size) % map_size * map_size]
-		 - map[ui + (vi + 1) % map_size * map_size]);
+			- map[ui + (vi + 1) % map_size * map_size]);
 	if (g.x == 0 && g.z == 0)
-		return vector_set(0, 0, 0);
+		return (vector_set(0, 0, 0));
 	g = vector_norm(g);
 	return (g);
 }
-
 
 void	texture_plane(t_figure *figure, t_inter *inter, t_map *map)
 {
@@ -153,7 +153,7 @@ void	texture_cylinder(t_figure *figure, t_inter *inter, t_map *map)
 	t_uv		i;
 	double		theta;
 	t_vector	val;
-		
+
 	coords = vector_sub(inter->point, figure->figure.cy.center);
 	coords.x += EPSILON;
 	coords.y += EPSILON;
@@ -164,7 +164,7 @@ void	texture_cylinder(t_figure *figure, t_inter *inter, t_map *map)
 	i.v = coords.y;
 	if (figure->texture >> 1)
 	{
-		gx = uv_to_normal_pl(i.u , i.v, map->map, map->size);
+		gx = uv_to_normal_pl(i.u, i.v, map->map, map->size);
 		if (vector_len(gx))
 		{
 			gx = vector_mlt(0.2, gx);
@@ -191,7 +191,7 @@ void	texture_cone(t_figure *figure, t_inter *inter, t_map *map)
 	t_uv		i;
 	double		theta;
 	t_vector	val;
-		
+
 	coords = vector_sub(inter->point, figure->figure.co.center);
 	coords.x += EPSILON;
 	coords.y += EPSILON;
@@ -200,10 +200,9 @@ void	texture_cone(t_figure *figure, t_inter *inter, t_map *map)
 	theta = atan2(coords.x, coords.z);
 	i.u = theta / M_PI * figure->figure.co.radius * 4;
 	i.v = coords.y;
-
 	if (figure->texture >> 1)
 	{
-		gx = uv_to_normal_pl(i.u , i.v, map->map, map->size);
+		gx = uv_to_normal_pl(i.u, i.v, map->map, map->size);
 		if (vector_len(gx))
 		{
 			gx = vector_mlt(0.2, gx);
@@ -223,13 +222,12 @@ void	texture_cone(t_figure *figure, t_inter *inter, t_map *map)
 	}
 }
 
-
 t_uv	uv_sphere(t_inter *inter, t_figure *figure)
 {
 	t_vector	coords;
-	double	phi;
-	double	theta;
-	t_uv	i;
+	double		phi;
+	double		theta;
+	t_uv		i;
 
 	coords = vector_sub(inter->point, figure->figure.sp.center);
 	theta = atan2(coords.x, coords.z);
@@ -245,7 +243,7 @@ void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 	t_vector	gx;
 	t_uv		i;
 	t_vector	val;
-	int height;
+	int			height;
 
 	i = uv_sphere(inter, figure);
 	if (figure->texture >> 1)
@@ -279,7 +277,6 @@ void	cylinder_case(t_figure *figure, t_inter *inter, t_scene *scene)
 	coords.x += EPSILON;
 	coords.y += EPSILON;
 	coords.z += EPSILON;
-
 	coords = rot_from_n_to_y1(coords, figure->figure.cy.nv);
 	if (fabs(coords.y) < 0.01
 		|| fabs(fabs(coords.y) - figure->figure.cy.height) < 0.01)

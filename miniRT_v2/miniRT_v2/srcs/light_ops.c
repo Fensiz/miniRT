@@ -54,7 +54,7 @@ static	int	in_light(t_vector o, t_vector i, t_vector d, t_figure *lst)
 		else if (lst->type == CYLINDER)
 			distance_v = cylinder_intersection(ray, lst);
 		else if (lst->type == CONE)
-			distance_v = cone_intersection(o, d, lst);
+			distance_v = cone_intersection(ray, lst);
 		if (distance_v < distance_mem)
 			distance_mem = distance_v;
 		lst = lst->next;
