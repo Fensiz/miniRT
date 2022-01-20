@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_reader.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 17:33:50 by bgreenbl          #+#    #+#             */
+/*   Updated: 2022/01/20 17:33:51 by bgreenbl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
-#include <stdio.h>
 
 void	parse_map(char *str, t_map *map)
 {
@@ -12,14 +23,11 @@ void	parse_map(char *str, t_map *map)
 	i = 0;
 	while (*str && i < map->size * map->size)
 	{
-		//write(1,"XK\n",3);
 		if (!(*str >= '0' && *str <= '9') && *str != ' ' && *str != '-')
 			str++;
 		else
 		{
-			
 			map->map[i] = ft_atoi(&str);
-	//		printf("%d\n",map->map[i]);
 			i++;
 		}
 	}
@@ -29,9 +37,7 @@ void	load_map(t_scene *scene)
 {
 	int		fd;
 	char	*str;
-	//write(1,"OK\n",3);
-	fd = open(//"./texture/map_1.bump"
-			  "/Users/simon/miniRT_git/miniRT_v2/miniRT_v2/texture/map_1.bump", O_RDONLY);
+	fd = open("./texture/map_1.bump", O_RDONLY);
 	if (fd == -1)
 		ft_fatal(FD);
 	str = file_to_str(fd);

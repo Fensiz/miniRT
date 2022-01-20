@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handlers.c                                         :+:      :+:    :+:   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 17:27:51 by bgreenbl          #+#    #+#             */
-/*   Updated: 2022/01/20 17:27:52 by bgreenbl         ###   ########.fr       */
+/*   Created: 2022/01/20 17:32:11 by bgreenbl          #+#    #+#             */
+/*   Updated: 2022/01/20 17:32:12 by bgreenbl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <mlx.h>
 
-int	key_handler(int keycode, void *mlx_arr)
+void	*memalloc(unsigned int size)
 {
-	if (keycode == 53)
-	{
-		mlx_destroy_window (((t_mlx *)mlx_arr)->mlx,
-			((t_mlx *)mlx_arr)->window);
-		exit (0);
-	}
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (ptr == NULL)
+		ft_fatal(MALLOC);
+	return (ptr);
+}
+
+int	ft_isspace(char c)
+{
+	if ((c >= 11 && c <= 13) || c == ' ' || c == 9)
+		return (1);
 	return (0);
 }
 
-int	red_cross_handler(void *mlx_arr)
+int	ft_isdigit(char c)
 {
-	mlx_destroy_window (((t_mlx *)mlx_arr)->mlx, ((t_mlx *)mlx_arr)->window);
-	exit (0);
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+
+void	skip_spaces(char **str)
+{
+	while (ft_isspace(**str))
+		(*str)++;
 }

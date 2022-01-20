@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
+# include <mlx.h>
 # include "vector.h"
 # include "color.h"
 # define MALLOC				2
@@ -162,7 +163,8 @@ int			ft_atoi(char **str);
 double		ft_atof(char **str);
 void		*ft_memset(void *b, int c, size_t len);
 void		init_mlx(t_mlx *mlx, t_scene *scene);
-int			trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene);
+int			trace_ray(t_vector_2p ray, int depth, t_figure *lst,
+				t_scene *scene);
 void		apply_texture(t_figure *figure, t_inter *inter, t_scene *scene);
 int			key_handler(int keycode, void *mlx_arr);
 int			red_cross_handler(void *mlx_arr);

@@ -66,5 +66,3 @@ void	bump_texture(t_uv i, int type, t_inter *inter, t_map *map)
 		inter->normal = rot_from_y1_to_n(gx, inter->normal);
 	}
 }
-
-

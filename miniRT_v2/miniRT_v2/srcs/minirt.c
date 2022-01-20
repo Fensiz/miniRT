@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgreenbl <bgreenbl@student.21-school.      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/20 17:36:21 by bgreenbl          #+#    #+#             */
+/*   Updated: 2022/01/20 17:36:23 by bgreenbl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
-#include <mlx.h>
-#include <math.h>
-#include <stdio.h>
 
 void	ft_usage_message(const char *program_name)
 {
@@ -102,7 +111,7 @@ void	render_scene(t_scene *scene, t_figure *figure, t_mlx *mlx, t_camera *camera
 void	get_closest_inter(t_vector_2p ray, t_figure *figure,
 					t_figure *closest_figure, double *closest_inter)
 {
-	double distance;
+	double	distance;
 
 	distance = INFINITY;
 	while (figure)
@@ -124,7 +133,8 @@ void	get_closest_inter(t_vector_2p ray, t_figure *figure,
 	}
 }
 
-double	calc_specular(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *lst)
+double	calc_specular(t_vector_2p ray, t_inter *inter, t_scene scene,
+			t_figure *lst)
 {
 	double		light;
 	t_vector	direction;
@@ -135,7 +145,8 @@ double	calc_specular(t_vector_2p ray, t_inter *inter, t_scene scene, t_figure *l
 	to_cam = vector_sub(ray.origin, inter->point);
 	reflected = reflect_ray(direction, inter->normal);
 	if (vector_dot(reflected, to_cam) > 0)
-		light = scene.light->brightness * pow(vector_cos(reflected, to_cam), lst->specular);
+		light = scene.light->brightness * pow(vector_cos(reflected, to_cam),
+				lst->specular);
 	else
 		light = 0;
 	return (light);
