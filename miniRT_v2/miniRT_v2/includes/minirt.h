@@ -218,4 +218,11 @@ void		texture_plane(t_figure *figure, t_inter *inter, t_map *map);
 void		texture_cylinder(t_figure *figure, t_inter *inter, t_map *map);
 void		texture_cone(t_figure *figure, t_inter *inter, t_map *map);
 void		apply_texture(t_figure *figure, t_inter *inter, t_scene *scene);
+/* ray */
+void		render_scene(t_scene *scene, t_figure *figure, t_mlx *mlx,
+				t_camera *camera);
+void		get_closest_inter(t_vector_2p ray, t_figure *figure,
+				t_figure *closest_figure, double *closest_inter);
+void		calc_normal(t_vector point, t_vector direction, t_vector *normal,
+				t_figure *figure);
 #endif

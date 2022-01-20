@@ -21,7 +21,7 @@ FILES			=	utils.c		mlx_utils.c		minirt.c	handlers.c	\
 					inter_cylinder_2.c	vector_4.c		texture.c		\
 					inter_cone.c		color_ops.c		texture_2.c		\
 					utils.c				color_ops_2.c	texture_3.c		\
-					utils_2.c			utils_3.c
+					utils_2.c			utils_3.c		ray.c
 MLX_PATH		=	./libs/mlx19/
 
 MLX_LIB			=	$(MLX_PATH)libmlx.a

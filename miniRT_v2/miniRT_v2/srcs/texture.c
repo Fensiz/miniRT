@@ -36,7 +36,7 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 void	checkerboard_texture(t_uv i, t_inter *inter, int type)
 {
 	t_vector	val;
-	
+
 	if (type == SPHERE)
 	{
 		i.u *= 20;
@@ -70,7 +70,7 @@ t_map	*map_select(t_figure *figure, t_map *map_list)
 void	bump_texture(t_uv i, t_figure *figure, t_inter *inter, t_map *map)
 {
 	t_vector	gx;
-	t_map	*smap;
+	t_map		*smap;
 
 	smap = map_select(figure, map);
 	if (figure->type == SPHERE)
