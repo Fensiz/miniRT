@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "calc_specular(ray, inter, scene, lst)"
+            landmarkName = "calc_normal(point, direction, normal, figure)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,51 +10,60 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	miniRT
-SRC_PATH	=	./srcs/
-FILES		=	utils.c		mlx_utils.c		main.c	\
-				handlers.c				\
-				map_reader.c 		light_ops.c		parse.c			\
-				inter_plane.c		vector.c		parse_param.c	\
-				inter_sphere.c		vector_2.c		parse_figure.c	\
-				inter_cylinder.c	vector_3.c		parse_utils.c	\
-				inter_cylinder_2.c	vector_4.c		texture.c		\
-				inter_cone.c		color_ops.c		texture_2.c		\
+NAME			=	miniRT
+SRC_PATH		=	./srcs/
+OBJ_PATH		=	./objs/
+FILES			=	utils.c		mlx_utils.c		main.c	\
+					handlers.c				\
+					map_reader.c 		light_ops.c		parse.c			\
+					inter_plane.c		vector.c		parse_param.c	\
+					inter_sphere.c		vector_2.c		parse_figure.c	\
+					inter_cylinder.c	vector_3.c		parse_utils.c	\
+					inter_cylinder_2.c	vector_4.c		texture.c		\
+					inter_cone.c		color_ops.c		texture_2.c		\
 									color_ops_2.c	texture_3.c
-MLX_PATH	=	./libs/mlx19/
+MLX_PATH		=	./libs/mlx19/
 
-MLX_LIB		=	$(MLX_PATH)libmlx.a			
-CC			=	gcc
-CFLAGS		=	-Wall -Werror -Wextra -MMD
+MLX_LIB			=	$(MLX_PATH)libmlx.a
+CC				=	gcc
+CFLAGS			=	-Wall -Werror -Wextra -MMD
 
-SRC			=	$(addprefix $(SRC_PATH), $(FILES))
-OBJ			=	$(SRC:.c=.o)
-DEP			=	$(SRC:.c=.d)
+SRC				=	$(addprefix $(SRC_PATH), $(FILES))
+#SRC			=	$(FILES)
+OBJT			=	$(addprefix $(OBJ_PATH), $(FILES))
+OBJ				=	$(OBJT:.c=.o)
+DEP				=	$(OBJT:.c=.d)
 
-all			:	$(NAME)
 
-bonus		:	all
+all				:	make_dir $(NAME)
 
-$(NAME)		:	$(OBJ)
+bonus			:	all
+
+$(NAME)			:	$(OBJ)
 	$(CC) -framework OpenGL -framework AppKit -o $(NAME) $^ $(MLX_LIB)
 
-%.o			:	%.c $(MLX_LIB)
+$(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(MLX_LIB)
 	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -c $< -o $@
 
-$(MLX_LIB)	:
+$(OBJ_PATH)		:
+	mkdir -p $@
+
+make_dir 		:	$(OBJ_PATH)
+
+$(MLX_LIB)		:
 	make -C	$(MLX_PATH)
-clean		:
+clean			:
 	rm -f $(OBJ) $(DEP)
-fclean		:	clean
+fclean			:	clean
 	rm -f $(NAME)
 	make clean -C $(MLX_PATH)
-re			:	fclean all
+re				:	fclean all
 
-norm		:
+norm			:
 	norminette srcs includes
-normv		:
+normv			:
 	@norminette -v
 
-.PHONY		:	all bonus clean fclean re norm normv
+.PHONY			:	all bonus clean fclean re norm normv make_dir
 
 -include $(DEP)
