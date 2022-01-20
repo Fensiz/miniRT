@@ -21,11 +21,11 @@ void	texture_plane(t_figure *figure, t_inter *inter, t_map *map)
 	i.u = coords.x;
 	i.v = coords.z;
 	if (figure->texture >> 1)
-		bump_texture(i, figure->type, inter, map);
+		bump_texture(i, figure, inter, map);
 	if (figure->texture & 1)
 	{
-		coords.x = abs((int)floor((coords.x) + EPSILON)) % 2;
-		coords.z = abs((int)floor((coords.z) + EPSILON)) % 2;
+		coords.x = abs((int)floor((coords.x * 2) + EPSILON)) % 2;
+		coords.z = abs((int)floor((coords.z * 2) + EPSILON)) % 2;
 		if (((int)coords.x) ^ (int)coords.z)
 			inter->color = BLACK;
 		else
@@ -45,10 +45,10 @@ void	texture_cylinder(t_figure *figure, t_inter *inter, t_map *map)
 	coords.z += EPSILON;
 	coords = rot_from_n_to_y1(coords, figure->figure.cy.nv);
 	theta = atan2(coords.x, coords.z);
-	i.u = theta / M_PI * figure->figure.cy.radius * 4;
+	i.u = -theta / M_PI * figure->figure.cy.radius * 4;
 	i.v = coords.y;
 	if (figure->texture >> 1)
-		bump_texture(i, figure->type, inter, map);
+		bump_texture(i, figure, inter, map);
 	if (figure->texture & 1)
 		checkerboard_texture(i, inter, figure->type);
 }
@@ -68,7 +68,7 @@ void	texture_cone(t_figure *figure, t_inter *inter, t_map *map)
 	i.u = theta / M_PI * figure->figure.co.radius * 4;
 	i.v = coords.y;
 	if (figure->texture >> 1)
-		bump_texture(i, figure->type, inter, map);
+		bump_texture(i, figure, inter, map);
 	if (figure->texture & 1)
 		checkerboard_texture(i, inter, figure->type);
 }

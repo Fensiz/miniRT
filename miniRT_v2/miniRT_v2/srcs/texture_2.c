@@ -34,12 +34,12 @@ static void	texture_sphere(t_inter *inter, t_figure *figure, t_map *map)
 
 	i = uv_sphere(inter, figure);
 	if (figure->texture >> 1)
-		bump_texture(i, figure->type, inter, map);
+		bump_texture(i, figure, inter, map);
 	if (figure->texture & 1)
 		checkerboard_texture(i, inter, figure->type);
 }
 
-static void	cylinder_case(t_figure *figure, t_inter *inter, t_scene *scene)
+static void	cylinder_case(t_figure *figure, t_inter *inter, t_map *map)
 {
 	t_vector	coords;
 
@@ -50,12 +50,12 @@ static void	cylinder_case(t_figure *figure, t_inter *inter, t_scene *scene)
 	coords = rot_from_n_to_y1(coords, figure->figure.cy.nv);
 	if (fabs(coords.y) < 0.01
 		|| fabs(fabs(coords.y) - figure->figure.cy.height) < 0.01)
-		texture_plane(figure, inter, scene->map);
+		texture_plane(figure, inter, map);
 	else
-		texture_cylinder(figure, inter, scene->map);
+		texture_cylinder(figure, inter, map);
 }
 
-static void	cone_case(t_figure *figure, t_inter *inter, t_scene *scene)
+static void	cone_case(t_figure *figure, t_inter *inter, t_map *map)
 {
 	t_vector	coords;
 
@@ -66,17 +66,17 @@ static void	cone_case(t_figure *figure, t_inter *inter, t_scene *scene)
 	coords = rot_from_n_to_y1(coords, figure->figure.co.nv);
 	if (fabs(coords.y) < 0.01
 		|| fabs(fabs(coords.y) - figure->figure.co.height) < 0.01)
-		texture_plane(figure, inter, scene->map);
+		texture_plane(figure, inter, map);
 	else
-		texture_cone(figure, inter, scene->map);
+		texture_cone(figure, inter, map);
 }
 
 void	apply_texture(t_figure *figure, t_inter *inter, t_scene *scene)
 {
 	if (figure->type == CYLINDER)
-		cylinder_case(figure, inter, scene);
+		cylinder_case(figure, inter, scene->map);
 	else if (figure->type == CONE)
-		cone_case(figure, inter, scene);
+		cone_case(figure, inter, scene->map);
 	else if (figure->type == SPHERE)
 		texture_sphere(inter, figure, scene->map);
 	else

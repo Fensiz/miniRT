@@ -30,7 +30,7 @@ void	parse_plane(t_figure **figure_list, char **str)
 	curr->reflection = ft_atof(str);
 	check_value(curr->reflection, 0, 1, type);
 	curr->texture = ft_atoi(str);
-	check_value(curr->texture, 0, 5, type);
+	check_value(curr->texture, 0, 7, type);
 }
 
 void	parse_sphere(t_figure **figure_list, char **str)
@@ -52,7 +52,7 @@ void	parse_sphere(t_figure **figure_list, char **str)
 	curr->reflection = ft_atof(str);
 	check_value(curr->reflection, 0, 1, type);
 	curr->texture = ft_atoi(str);
-	check_value(curr->texture, 0, 5, type);
+	check_value(curr->texture, 0, 7, type);
 }
 
 void	parse_cylinder(t_figure **figure_list, char **str)
@@ -77,7 +77,7 @@ void	parse_cylinder(t_figure **figure_list, char **str)
 	curr->reflection = ft_atof(str);
 	check_value(curr->reflection, 0, 1, type);
 	curr->texture = ft_atoi(str);
-	check_value(curr->texture, 0, 5, type);
+	check_value(curr->texture, 0, 7, type);
 }
 
 void	parse_cone(t_figure **figure_list, char **str)
@@ -102,5 +102,5 @@ void	parse_cone(t_figure **figure_list, char **str)
 	curr->reflection = ft_atof(str);
 	check_value(curr->reflection, 0, 1, type);
 	curr->texture = ft_atoi(str);
-	check_value(curr->texture, 0, 5, type);
+	check_value(curr->texture, 0, 7, type);
 }

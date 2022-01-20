@@ -36,28 +36,47 @@ t_vector	uv_to_normal(double u, double v, int *map, int map_size)
 void	checkerboard_texture(t_uv i, t_inter *inter, int type)
 {
 	t_vector	val;
-
-	val.x = abs((int)floor(i.u)) % 2;
-	val.y = abs((int)floor(i.v)) % 2;
+	
 	if (type == SPHERE)
 	{
-		val.x *= 40;
-		val.y *= 20;
+		i.u *= 20;
+		i.v *= 10;
 	}
+	i.u *= 2;
+	i.v *= 2;
+	val.x = abs((int)floor(i.u)) % 2;
+	val.y = abs((int)floor(i.v)) % 2;
 	if (((int)val.x) ^ (int)val.y)
 		inter->color = BLACK;
 	else
 		inter->color = WHITE;
 }
 
-void	bump_texture(t_uv i, int type, t_inter *inter, t_map *map)
+t_map	*map_select(t_figure *figure, t_map *map_list)
+{
+	t_map	*map;
+	int		bump;
+
+	bump = figure->texture >> 1;
+	if (bump == 1)
+		map = map_list;
+	else if (bump == 2)
+		map = map_list->next;
+	else
+		map = map_list->next->next;
+	return (map);
+}
+
+void	bump_texture(t_uv i, t_figure *figure, t_inter *inter, t_map *map)
 {
 	t_vector	gx;
+	t_map	*smap;
 
-	if (type == SPHERE)
-		gx = uv_to_normal(40 * i.u, 20 * i.v, map->map, map->size);
+	smap = map_select(figure, map);
+	if (figure->type == SPHERE)
+		gx = uv_to_normal(40 * i.u, 20 * i.v, smap->map, smap->size);
 	else
-		gx = uv_to_normal(i.u, i.v, map->map, map->size);
+		gx = uv_to_normal(2 * i.u, 2 * i.v, smap->map, smap->size);
 	if (vector_len(gx))
 	{
 		gx = vector_mlt(0.2, gx);

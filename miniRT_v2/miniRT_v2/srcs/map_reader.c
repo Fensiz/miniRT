@@ -33,19 +33,54 @@ void	parse_map(char *str, t_map *map)
 	}
 }
 
-void	load_map(t_scene *scene)
+t_map	*alloc_map(void)
 {
-	int		fd;
+	t_map	*map;
+
+	map = (t_map *)memalloc(sizeof(t_map));
+	map->size = 0;
+	map->map = NULL;
+	map->next = NULL;
+	return (map);
+}
+
+void	load_one_map(t_map *map, const char *fname)
+{
 	char	*str;
-	fd = open("./texture/map_1.bump", O_RDONLY);
+	int		fd;
+
+	fd = open(fname, O_RDONLY);
 	if (fd == -1)
 		ft_fatal(FD);
 	str = file_to_str(fd);
-	scene->map = (t_map *)memalloc(sizeof(t_map));
-	//scene->map->next = NULL;
-	parse_map(str, scene->map);
+	parse_map(str, map);
 	close(fd);
 	free(str);
+}
+
+void	load_map(t_scene *scene)
+{
+//	int		fd;
+//	char	*str;
+//	t_map *curr;
+	
+	scene->map = alloc_map();
+	load_one_map(scene->map, "./texture/map_1.bump");
+//				 "/Users/simon/miniRT_git/miniRT_v2/miniRT_v2/texture/map_1.bump");
+				 //"./texture/map_1.bump");
+	scene->map->next = alloc_map();
+	load_one_map(scene->map->next, "./texture/map_2.bump");
+//				 "/Users/simon/miniRT_git/miniRT_v2/miniRT_v2/texture/map_2.bump");
+	scene->map->next->next = alloc_map();
+	load_one_map(scene->map->next->next, "./texture/map_3.bump");
+//				 "/Users/simon/miniRT_git/miniRT_v2/miniRT_v2/texture/map_3.bump");
+//	fd = open("./texture/map_1.bump", O_RDONLY);
+//	if (fd == -1)
+//		ft_fatal(FD);
+//	str = file_to_str(fd);
+//	parse_map(str, scene->map);
+//	close(fd);
+//	free(str);
 //	fd = open("./texture/map_2.bump", O_RDONLY);
 //	if (fd == -1)
 //		ft_fatal(FD);

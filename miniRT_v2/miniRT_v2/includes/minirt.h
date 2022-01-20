@@ -213,7 +213,7 @@ double		cone_intersection(t_vector_2p ray, t_figure *lst);
 /* texture */
 t_vector	uv_to_normal(double u, double v, int *map, int map_size);
 void		checkerboard_texture(t_uv i, t_inter *inter, int type);
-void		bump_texture(t_uv i, int type, t_inter *inter, t_map *map);
+void		bump_texture(t_uv i, t_figure *figure, t_inter *inter, t_map *map);
 void		texture_plane(t_figure *figure, t_inter *inter, t_map *map);
 void		texture_cylinder(t_figure *figure, t_inter *inter, t_map *map);
 void		texture_cone(t_figure *figure, t_inter *inter, t_map *map);
