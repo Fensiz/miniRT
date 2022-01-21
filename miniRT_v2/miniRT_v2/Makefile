@@ -39,7 +39,7 @@ OBJ				=	$(OBJT:.c=.o)
 DEP				=	$(OBJT:.c=.d)
 FRMW			=	-framework OpenGL -framework AppKit
 
-all				:	make_dir $(NAME) .mark
+all				:	make_dir $(NAME)
 
 bonus			:
 	make BS="-D BNS" all
