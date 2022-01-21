@@ -51,7 +51,7 @@ void	parse_elems(t_mlx *mlx, t_scene *scene, t_figure **figure, char *str)
 		if (!*str)
 			break ;
 		parse(mlx, scene, figure, &str);
-		str++;
+		//str++;
 	}
 	if (mlx->camera == NULL)
 		ft_error(SCENE, " parse error: no cam");
@@ -85,6 +85,7 @@ void	parse_scene(t_mlx *mlx, t_scene *scene, t_figure **figure,
 	if (fd == -1)
 		ft_fatal(FD);
 	str = file_to_str(fd);
+	
 	parse_elems(mlx, scene, figure, str);
 	free(str);
 }

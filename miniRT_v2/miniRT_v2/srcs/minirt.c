@@ -37,7 +37,7 @@ void	ft_error(int code, char *error_text)
 
 char	*file_to_str(int fd)
 {
-	char	buffer[BUFF_SIZE + 1];
+	char	buffer[BUFF_SIZE + 2];
 	char	*str;
 	char	*tmp;
 	size_t	r_size;
