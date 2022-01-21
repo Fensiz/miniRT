@@ -88,8 +88,6 @@ typedef struct s_figure
 typedef struct s_camera
 {
 	void			*image;
-	int				init;
-	int				cam_id;
 	t_vector		origin;
 	t_vector		direction;
 	int				fov;
@@ -122,7 +120,6 @@ typedef struct s_scene
 {
 	int				width;
 	int				height;
-	int				cam_count;
 	t_light			*light;
 	double			ambient_light;
 	int				ambient_light_color;
