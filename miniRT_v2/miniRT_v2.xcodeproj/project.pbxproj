@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F4076A27279AEF2300C14A0D /* utils_4.c in Sources */ = {isa = PBXBuildFile; fileRef = F4076A26279AEF2300C14A0D /* utils_4.c */; };
+		F4076A29279AEFCB00C14A0D /* free.c in Sources */ = {isa = PBXBuildFile; fileRef = F4076A28279AEFCB00C14A0D /* free.c */; };
 		F40AA6AD277F8B9500C7F5BF /* color_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = F40AA6AC277F8B9500C7F5BF /* color_ops.c */; };
 		F40AA6AF277F94E300C7F5BF /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = F40AA6AE277F94E300C7F5BF /* texture.c */; };
 		F40AA6B22781DEC300C7F5BF /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = F40AA6B12781DEC300C7F5BF /* Makefile */; };
@@ -52,6 +54,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F4076A26279AEF2300C14A0D /* utils_4.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = utils_4.c; path = miniRT_v2/srcs/utils_4.c; sourceTree = "<group>"; };
+		F4076A28279AEFCB00C14A0D /* free.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = free.c; path = miniRT_v2/srcs/free.c; sourceTree = "<group>"; };
 		F40AA6AC277F8B9500C7F5BF /* color_ops.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = color_ops.c; path = miniRT_v2/srcs/color_ops.c; sourceTree = "<group>"; };
 		F40AA6AE277F94E300C7F5BF /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = texture.c; path = miniRT_v2/srcs/texture.c; sourceTree = "<group>"; };
 		F40AA6B0277FB79800C7F5BF /* color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = color.h; path = miniRT_v2/includes/color.h; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 		F46825FE2775B70A001E4EC6 = {
 			isa = PBXGroup;
 			children = (
+				F4076A28279AEFCB00C14A0D /* free.c */,
 				F46826142775D20B001E4EC6 /* minirt.h */,
 				F468260A2775B70A001E4EC6 /* minirt.c */,
 				F442BE352799F7A700C4F39E /* ray.c */,
@@ -137,6 +142,7 @@
 				F46826182775FF37001E4EC6 /* utils.c */,
 				F433DD392799A949007028CE /* utils_2.c */,
 				F433DD3B2799A9C3007028CE /* utils_3.c */,
+				F4076A26279AEF2300C14A0D /* utils_4.c */,
 				F40AA6AE277F94E300C7F5BF /* texture.c */,
 				F433DD3527998A68007028CE /* texture_2.c */,
 				F433DD3727998C0F007028CE /* texture_3.c */,
@@ -244,10 +250,12 @@
 				F433DD2A27995A4E007028CE /* color_ops_2.c in Sources */,
 				F442BE362799F7A700C4F39E /* ray.c in Sources */,
 				F442BE272790A66000C4F39E /* map_reader.c in Sources */,
+				F4076A27279AEF2300C14A0D /* utils_4.c in Sources */,
 				F442BE322798B52C00C4F39E /* vector_2.c in Sources */,
 				F46826162775D37C001E4EC6 /* mlx_utils.c in Sources */,
 				F433DD22279822F8007028CE /* light_ops.c in Sources */,
 				F442BE2E2798AD8100C4F39E /* handlers.c in Sources */,
+				F4076A29279AEFCB00C14A0D /* free.c in Sources */,
 				F433DD2627985753007028CE /* inter_plane.c in Sources */,
 				F433DD3C2799A9C3007028CE /* utils_3.c in Sources */,
 				F40AA6AF277F94E300C7F5BF /* texture.c in Sources */,

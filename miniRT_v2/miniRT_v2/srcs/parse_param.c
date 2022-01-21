@@ -21,7 +21,7 @@ void	parse_ambient_light(t_scene *scene, char **str)
 	scene->ambient_light_color = parse_color(str);
 }
 
-void	parse_camera(t_mlx *mlx, t_scene *scene, char **str)
+void	parse_camera(t_mlx *mlx, char **str)
 {
 	(*str)++;
 	mlx->camera = memalloc(sizeof(t_camera));

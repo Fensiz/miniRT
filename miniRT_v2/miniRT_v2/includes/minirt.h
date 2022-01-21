@@ -148,6 +148,14 @@ typedef struct s_interv
 	double			id[2];
 	t_vector		ip[2];
 }					t_interv;
+typedef struct s_data
+{
+	t_vector_2p		ray;
+	double			r;
+	int				ret_color;
+	t_inter			*inter;
+	t_figure		closest_figure;
+}					t_data;
 
 void		load_map(t_scene *scene);
 void		ft_error(int code, char *error_text);
@@ -187,7 +195,7 @@ t_vector	parse_vector(char **str);
 t_figure	*ft_addback_figure(t_figure **lst);
 
 void		parse_ambient_light(t_scene *scene, char **str);
-void		parse_camera(t_mlx *mlx, t_scene *scene, char **str);
+void		parse_camera(t_mlx *mlx, char **str);
 void		parse_light(t_scene **scene, char **str);
 
 void		parse_plane(t_figure **figure_list, char **str);
@@ -224,4 +232,14 @@ void		get_closest_inter(t_vector_2p ray, t_figure *figure,
 				t_figure *closest_figure, double *closest_inter);
 void		calc_normal(t_vector point, t_vector direction, t_vector *normal,
 				t_figure *figure);
+
+void		ft_usage_message(const char *program_name);
+void		ft_error(int code, char *error_text);
+char		*file_to_str(int fd);
+t_inter		*get_inter(t_figure *closest_figure, t_vector_2p ray, t_figure *lst,
+				t_scene *scene);
+
+void		free_bump(t_scene *s);
+void		free_figures(t_figure *f);
+void		free_light(t_light	*l);
 #endif

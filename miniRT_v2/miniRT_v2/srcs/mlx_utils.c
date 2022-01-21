@@ -20,8 +20,8 @@ void	init_mlx(t_mlx *mlx, t_scene *scene)
 	scene->height = 800;
 	mlx->camera->image = mlx_new_image(mlx->mlx, scene->width, scene->height);
 	mlx->camera->img_addr = mlx_get_data_addr(mlx->camera->image,
-				&mlx->camera->bits_per_pixel,
-				&mlx->camera->line_length, &mlx->camera->endian);
+			&mlx->camera->bits_per_pixel,
+			&mlx->camera->line_length, &mlx->camera->endian);
 }
 
 void	my_put_pixel(t_mlx *mlx, int x, int y, int color)

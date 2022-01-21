@@ -126,10 +126,8 @@
             filePath = "miniRT_v2/srcs/minirt.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "main(argc, argv)"
-            landmarkType = "9">
+            startingLineNumber = "112"
+            endingLineNumber = "112">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -145,38 +143,6 @@
             startingLineNumber = "87"
             endingLineNumber = "87"
             landmarkName = "parse_scene(mlx, scene, figure, argv)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D5132047-D9FB-4890-B506-127152642DF2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "miniRT_v2/srcs/minirt.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "file_to_str(fd)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "46083136-778A-4747-B317-205CDEC0D556"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "miniRT_v2/srcs/minirt.c"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "file_to_str(fd)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -238,10 +204,8 @@
             filePath = "miniRT_v2/srcs/minirt.c"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "main(argc, argv)"
-            landmarkType = "9">
+            startingLineNumber = "113"
+            endingLineNumber = "113">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

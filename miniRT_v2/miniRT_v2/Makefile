@@ -13,7 +13,7 @@
 NAME			=	miniRT
 SRC_PATH		=	./srcs/
 OBJ_PATH		=	./objs/
-FILES			=	utils.c		mlx_utils.c		minirt.c	handlers.c	\
+FILES			=	free.c		mlx_utils.c		minirt.c	handlers.c	\
 					map_reader.c 		light_ops.c		parse.c			\
 					inter_plane.c		vector.c		parse_param.c	\
 					inter_sphere.c		vector_2.c		parse_figure.c	\
@@ -21,24 +21,29 @@ FILES			=	utils.c		mlx_utils.c		minirt.c	handlers.c	\
 					inter_cylinder_2.c	vector_4.c		texture.c		\
 					inter_cone.c		color_ops.c		texture_2.c		\
 					utils.c				color_ops_2.c	texture_3.c		\
-					utils_2.c			utils_3.c		ray.c
+					utils_2.c			utils_3.c		ray.c			\
+					utils_4.c
 MLX_PATH		=	./libs/mlx19/
 
 MLX_LIB			=	$(MLX_PATH)libmlx.a
 CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra -MMD
+#CFLAGS += `pkg-config --cflags x11 xext`
+#LIBS 			+= `pkg-config --libs x11 xext`
+LINUX			=	 -lm -lX11 -lGLU -lGL $(LIBS)
 
 SRC				=	$(addprefix $(SRC_PATH), $(FILES))
 OBJT			=	$(addprefix $(OBJ_PATH), $(FILES))
 OBJ				=	$(OBJT:.c=.o)
 DEP				=	$(OBJT:.c=.d)
+FRMW			=	-framework OpenGL -framework AppKit
 
 all				:	make_dir $(NAME)
 
 bonus			:	all
 
 $(NAME)			:	$(OBJ)
-	$(CC) -framework OpenGL -framework AppKit -o $(NAME) $^ $(MLX_LIB)
+	$(CC) $(FRMW) -o $(NAME) $^ $(MLX_LIB)
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(MLX_LIB)
 	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -Ilib/mlx19 -c $< -o $@
