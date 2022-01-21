@@ -36,6 +36,9 @@
 # define BUFF_SIZE 			64
 # define EPSILON 			0.00001
 # define BOUNCE_LIMIT 		3
+#ifndef BNS
+# define BNS				0
+#endif
 
 typedef struct s_sphere
 {
@@ -120,6 +123,9 @@ typedef struct s_scene
 {
 	int				width;
 	int				height;
+	int				cam_count;
+	int				amb_count;
+	int				light_count;
 	t_light			*light;
 	double			ambient_light;
 	int				ambient_light_color;
@@ -192,7 +198,7 @@ t_vector	parse_vector(char **str);
 t_figure	*ft_addback_figure(t_figure **lst);
 
 void		parse_ambient_light(t_scene *scene, char **str);
-void		parse_camera(t_mlx *mlx, char **str);
+void	parse_camera(t_mlx *mlx, t_scene *scene, char **str);
 void		parse_light(t_scene **scene, char **str);
 
 void		parse_plane(t_figure **figure_list, char **str);

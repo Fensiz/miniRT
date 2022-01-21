@@ -17,7 +17,7 @@ void	parse(t_mlx *mlx, t_scene *scene, t_figure **figure, char **s)
 	if (**s == 'A')
 		parse_ambient_light(scene, s);
 	else if (**s == 'C')
-		parse_camera(mlx, s);
+		parse_camera(mlx, scene, s);
 	else if (**s == 'c' && *(*s + 1) == 'y')
 		parse_cylinder(figure, s);
 	else if (**s == 'c' && *(*s + 1) == 'o')
@@ -70,12 +70,15 @@ static int	is_right_format(const char *fname)
 }
 
 void	parse_scene(t_mlx *mlx, t_scene *scene, t_figure **figure,
-							const char **argv)
+					const char **argv)
 {
 	char		*str;
 	int			fd;
 
 	*figure = NULL;
+	scene->cam_count = 0;
+	scene->amb_count = 0;
+	scene->light_count = 0;
 	scene->light = NULL;
 	mlx->camera = NULL;
 	fd = open(argv[1], O_RDONLY);

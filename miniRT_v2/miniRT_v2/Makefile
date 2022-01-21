@@ -23,9 +23,10 @@ FILES			=	free.c		mlx_utils.c		minirt.c	handlers.c	\
 					utils.c				color_ops_2.c	texture_3.c		\
 					utils_2.c			utils_3.c		ray.c			\
 					utils_4.c
-MLX_PATH		=	./libs/mlx19/
+#MLX_PATH		=	./libs/mlx19/
 
-MLX_LIB			=	$(MLX_PATH)libmlx.a
+#MLX_LIB			=	$(MLX_PATH)libmlx.a
+MLX_LIB			=	libmlx.a
 CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra -MMD
 #CFLAGS += `pkg-config --cflags x11 xext`
@@ -46,16 +47,17 @@ bonus			:
 $(NAME)			:	$(OBJ)
 	$(CC) $(FRMW) -o $(NAME) $^ $(MLX_LIB)
 
-$(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(MLX_LIB)
-	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -Ilib/mlx19 $(BS) -c $< -o $@
+$(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(MLX_LIB) Makefile
+	#$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -Ilib/mlx19 $(BS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MLX_LIB) -Iincludes -Ilib/mlx19 $(BS) -c $< -o $@
 
 $(OBJ_PATH)		:
 	mkdir -p $@
 
 make_dir 		:	$(OBJ_PATH)
 
-$(MLX_LIB)		:
-	make -C	$(MLX_PATH)
+#$(MLX_LIB)		:
+#	make -C	$(MLX_PATH)
 clean			:
 	rm -f $(OBJ) $(DEP)
 fclean			:	clean

@@ -52,6 +52,9 @@ char	*file_to_str(int fd)
 		free(tmp);
 		r_size = read(fd, buffer, BUFF_SIZE);
 	}
+	tmp = str;
+	str = ft_strjoin(str, "");
+	free(tmp);
 	return (str);
 }
 
