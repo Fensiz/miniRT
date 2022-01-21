@@ -20,7 +20,7 @@ int	key_handler(int keycode, void *mlx_arr)
 		mlx_destroy_window(((t_mlx *)mlx_arr)->mlx,
 			((t_mlx *)mlx_arr)->window);
 		free(((t_mlx *)mlx_arr)->mlx);
-		exit (0);
+		exit(0);
 	}
 	return (0);
 }
@@ -29,5 +29,5 @@ int	red_cross_handler(void *mlx_arr)
 {
 	mlx_destroy_window(((t_mlx *)mlx_arr)->mlx, ((t_mlx *)mlx_arr)->window);
 	free(((t_mlx *)mlx_arr)->mlx);
-	exit (0);
+	exit(0);
 }

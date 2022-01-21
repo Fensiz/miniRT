@@ -171,7 +171,6 @@ int	main(int argc, const char **argv)
 	free_bump(&scene);
 	free(mlx.camera->img_addr);
 	free(mlx.camera->image);
-
 	free(mlx.camera);
 	free_figures(figure);
 	free_light(scene.light);

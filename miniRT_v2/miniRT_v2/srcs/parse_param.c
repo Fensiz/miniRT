@@ -23,31 +23,14 @@ void	parse_ambient_light(t_scene *scene, char **str)
 
 void	parse_camera(t_mlx *mlx, t_scene *scene, char **str)
 {
-	t_camera	*new;
-	t_camera	*curr;
-	int			prev_cam_id;
-
 	(*str)++;
-	prev_cam_id = 0;
-	curr = mlx->camera;
-	new = memalloc(sizeof(t_camera));
-	new->next = NULL;
-	if (curr)
-	{
-		while (curr->next)
-			curr = curr->next;
-		prev_cam_id = curr->cam_id;
-		curr->next = new;
-	}
-	else
-		mlx->camera = new;
+	mlx->camera = memalloc(sizeof(t_camera));
+	mlx->camera->next = NULL;
 	skip_spaces(str);
-	new->cam_id = prev_cam_id + 1;
-	scene->cam_count = new->cam_id;
-	new->origin = parse_vector(str);
-	new->direction = vector_norm(parse_vector(str));
-	new->fov = ft_atoi(str);
-	check_value(new->fov, 0, 180, "camera");
+	mlx->camera->origin = parse_vector(str);
+	mlx->camera->direction = vector_norm(parse_vector(str));
+	mlx->camera->fov = ft_atoi(str);
+	check_value(mlx->camera->fov, 0, 180, "camera");
 }
 
 void	parse_light(t_scene **scene, char **str)
