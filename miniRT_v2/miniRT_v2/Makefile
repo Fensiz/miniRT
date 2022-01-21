@@ -40,13 +40,14 @@ FRMW			=	-framework OpenGL -framework AppKit
 
 all				:	make_dir $(NAME)
 
-bonus			:	all
+bonus			:
+	make BS="-D BNS" all
 
 $(NAME)			:	$(OBJ)
 	$(CC) $(FRMW) -o $(NAME) $^ $(MLX_LIB)
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(MLX_LIB)
-	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -Ilib/mlx19 -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes -Ilib/mlx19 $(BS) -c $< -o $@
 
 $(OBJ_PATH)		:
 	mkdir -p $@
