@@ -39,10 +39,37 @@ OBJ				=	$(OBJT:.c=.o)
 DEP				=	$(OBJT:.c=.d)
 FRMW			=	-framework OpenGL -framework AppKit
 
-all				:	make_dir $(NAME)
+all				:	make_dir tch $(NAME)
+all_mod			:	make_dir $(NAME)
+	touch	.alltch
+ifdef BS
+ifeq ("$(wildcard .bnstch)","$(wildcard .alltch)")
+tch				:	.bnstch
+.bnstch			:
+	@touch	.bnstch
+else ifdef BS
+tch				:	.bnstch
+.bnstch			:
+	@rm -f .alltch
+	@make clean
+	@touch	.bnstch
+endif
+else
+ifeq ("$(wildcard .bnstch)","$(wildcard .alltch)")
+tch				:	.alltch
+.alltch			:
+	@touch	.alltch
+else
+tch				:	.alltch
+.alltch			:
+	@rm -f .bnstch
+	@make clean
+	@touch	.alltch
+endif
+endif
 
 bonus			:
-	make BS="-D BNS" all
+	@make BS="-D BNS" all
 
 $(NAME)			:	$(OBJ)
 	$(CC) $(FRMW) -o $(NAME) $^ $(MLX_LIB)
@@ -57,12 +84,17 @@ make_dir 		:	$(OBJ_PATH)
 
 $(MLX_LIB)		:
 	make -C	$(MLX_PATH)
+	
 clean			:
 	rm -f $(OBJ) $(DEP)
+	
 fclean			:	clean
 	rm -f $(NAME)
+	rm -f .alltch
+	rm -f .bnstch
 	make clean -C $(MLX_PATH)
-re				:	fclean all
+	
+re				:	fclean all_mod
 
 norm			:
 	norminette srcs includes
