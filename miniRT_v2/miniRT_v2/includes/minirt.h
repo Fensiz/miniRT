@@ -36,9 +36,9 @@
 # define BUFF_SIZE 			64
 # define EPSILON 			0.00001
 # define BOUNCE_LIMIT 		3
-#ifndef BNS
-# define BNS				0
-#endif
+# ifndef BNS
+#  define BNS				0
+# endif
 
 typedef struct s_sphere
 {
@@ -198,7 +198,7 @@ t_vector	parse_vector(char **str);
 t_figure	*ft_addback_figure(t_figure **lst);
 
 void		parse_ambient_light(t_scene *scene, char **str);
-void	parse_camera(t_mlx *mlx, t_scene *scene, char **str);
+void		parse_camera(t_mlx *mlx, t_scene *scene, char **str);
 void		parse_light(t_scene **scene, char **str);
 
 void		parse_plane(t_figure **figure_list, char **str);
