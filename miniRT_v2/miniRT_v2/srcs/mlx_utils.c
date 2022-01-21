@@ -15,21 +15,13 @@
 
 void	init_mlx(t_mlx *mlx, t_scene *scene)
 {
-	t_camera	*curr;
-
 	mlx->mlx = mlx_init();
-	scene->width = 800;
-	scene->height = 600;
-	curr = mlx->camera;
-	mlx->begin = mlx->camera;
-	while (curr)
-	{
-		curr->image = mlx_new_image(mlx->mlx, scene->width, scene->height);
-		curr->img_addr = mlx_get_data_addr(mlx->camera->image,
+	scene->width = 1280;
+	scene->height = 800;
+	mlx->camera->image = mlx_new_image(mlx->mlx, scene->width, scene->height);
+	mlx->camera->img_addr = mlx_get_data_addr(mlx->camera->image,
 				&mlx->camera->bits_per_pixel,
-				&curr->line_length, &curr->endian);
-		curr = curr->next;
-	}
+				&mlx->camera->line_length, &mlx->camera->endian);
 }
 
 void	my_put_pixel(t_mlx *mlx, int x, int y, int color)

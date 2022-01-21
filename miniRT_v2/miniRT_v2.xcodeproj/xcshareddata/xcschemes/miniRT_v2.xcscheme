@@ -57,7 +57,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/Users/simon/miniRT_git/miniRT_v2/new.rt"
+            argument = "/Users/simon/miniRT_git/miniRT_v2/miniRT_v2/scenes/sc_1.rt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

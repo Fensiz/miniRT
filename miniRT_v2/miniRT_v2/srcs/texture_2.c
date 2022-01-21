@@ -22,7 +22,6 @@ static t_uv	uv_sphere(t_inter *inter, t_figure *figure)
 	coords = vector_sub(inter->point, figure->figure.sp.center);
 	theta = atan2(coords.x, coords.z);
 	phi = acos((double)coords.y / figure->figure.sp.radius);
-	coords = vector_sum(coords, figure->figure.sp.center);
 	i.u = 1 - (theta / (2 * M_PI) + 0.5);
 	i.v = 1 - phi / M_PI;
 	return (i);

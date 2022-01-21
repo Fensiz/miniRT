@@ -30,9 +30,6 @@ int	parse_color(char **str)
 	int	green;
 	int	blue;
 
-	red = 0;
-	green = 0;
-	blue = 0;
 	red = ft_atoi(str);
 	check_value(red, 0, 255, "color");
 	if (**str != ',')

@@ -104,7 +104,6 @@ typedef struct s_mlx
 	void			*mlx;
 	void			*window;
 	t_camera		*camera;
-	t_camera		*begin;
 }					t_mlx;
 typedef struct s_light
 {

@@ -87,7 +87,10 @@ int	trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 
 	inter = get_inter(&closest_figure, ray, lst, scene);
 	if (closest_figure.type == -1)
+	{
+		free(inter);
 		return (scene->background);
+	}
 	apply_texture(&closest_figure, inter, scene);
 	inter->figure = &closest_figure;
 	calc_light(ray, inter, *scene, lst);
@@ -106,29 +109,72 @@ int	trace_ray(t_vector_2p ray, int depth, t_figure *lst, t_scene *scene)
 	return (ret_color);
 }
 
+void	free_bump(t_scene *s)
+{
+	free(s->map->map);
+	free(s->map->next->map);
+	free(s->map->next->next->map);
+	free(s->map->next->next);
+	free(s->map->next);
+	free(s->map);
+}
+
+void	free_figures(t_figure *f)
+{
+	t_figure	*tmp;
+
+	if (f)
+	{
+		while (f)
+		{
+			tmp = f->next;
+			free(f);
+			f = tmp;
+		}
+	}
+}
+
+void	free_light(t_light	*l)
+{
+	t_light	*tmp;
+
+	if (l)
+	{
+		while (l)
+		{
+			tmp = l->next;
+			free(l);
+			l = tmp;
+		}
+	}
+}
+
+
+
 int	main(int argc, const char **argv)
 {
 	t_mlx		mlx;
 	t_scene		scene;
 	t_figure	*figure;
-	t_camera	*curr;
 
 	if (argc != 2)
 		ft_usage_message(argv[0]);
 	parse_scene(&mlx, &scene, &figure, argv);
 	init_mlx(&mlx, &scene);
-	curr = mlx.camera;
 	load_map(&scene);
 	scene.background = 0;
-	while (curr)
-	{
-		render_scene(&scene, figure, &mlx, curr);
-		curr = curr->next;
-	}
+	render_scene(&scene, figure, &mlx, mlx.camera);
 	mlx.window = mlx_new_window(mlx.mlx, scene.width, scene.height, "miniRT");
 	mlx_put_image_to_window(mlx.mlx, mlx.window, mlx.camera->image, 0, 0);
 	mlx_hook(mlx.window, 2, 1L << 0, key_handler, &mlx);
 	mlx_hook(mlx.window, 17, 0L, red_cross_handler, &mlx);
+	free_bump(&scene);
+	free(mlx.camera->img_addr);
+	free(mlx.camera->image);
+
+	free(mlx.camera);
+	free_figures(figure);
+	free_light(scene.light);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

@@ -17,8 +17,9 @@ int	key_handler(int keycode, void *mlx_arr)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window (((t_mlx *)mlx_arr)->mlx,
+		mlx_destroy_window(((t_mlx *)mlx_arr)->mlx,
 			((t_mlx *)mlx_arr)->window);
+		free(((t_mlx *)mlx_arr)->mlx);
 		exit (0);
 	}
 	return (0);
@@ -26,6 +27,7 @@ int	key_handler(int keycode, void *mlx_arr)
 
 int	red_cross_handler(void *mlx_arr)
 {
-	mlx_destroy_window (((t_mlx *)mlx_arr)->mlx, ((t_mlx *)mlx_arr)->window);
+	mlx_destroy_window(((t_mlx *)mlx_arr)->mlx, ((t_mlx *)mlx_arr)->window);
+	free(((t_mlx *)mlx_arr)->mlx);
 	exit (0);
 }
