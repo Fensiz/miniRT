@@ -39,7 +39,13 @@ static t_vector	cam_rot(t_vector d, t_vector cam_direction)
 	t_vector	rotated;
 
 	d = vector_x_rot(d, -90);
+	if (cam_direction.z < 0)
+	{
+		cam_direction.y = -cam_direction.y;
+	}
 	rotated = rot_from_y1_to_n(d, cam_direction);
+	if (cam_direction.z < 0)
+		rotated = vector_z_rot(rotated, 180);
 	return (rotated);
 }
 

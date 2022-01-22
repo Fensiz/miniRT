@@ -15,7 +15,7 @@
 void	parse_ambient_light(t_scene *scene, char **str)
 {
 	if (scene->amb_count != 0)
-		ft_error(106, "Extra ambient light");
+		ft_error(SCENE, "Extra ambient light");
 	(scene->amb_count)++;
 	(*str)++;
 	skip_spaces(str);
@@ -27,7 +27,7 @@ void	parse_ambient_light(t_scene *scene, char **str)
 void	parse_camera(t_mlx *mlx, t_scene *scene, char **str)
 {
 	if (scene->cam_count != 0)
-		ft_error(106, "Extra camera");
+		ft_error(SCENE, "Extra camera");
 	(scene->cam_count)++;
 	(*str)++;
 	mlx->camera = memalloc(sizeof(t_camera));
@@ -45,7 +45,7 @@ void	parse_light(t_scene **scene, char **str)
 	t_light	*curr;
 
 	if ((*scene)->light_count != 0 && !BNS)
-		ft_error(106, "Extra light");
+		ft_error(SCENE, "Extra light");
 	((*scene)->light_count)++;
 	(*str)++;
 	curr = (*scene)->light;
