@@ -19,7 +19,7 @@ void	check_value(double value, double min, double max, char *name)
 	if (value < min || value > max)
 	{
 		ft_strlcpy(error, name, 81);
-		ft_strlcat(error, " value out of range", 19);
+		ft_strlcat(error, " value out of range", 100);
 		ft_error(SCENE, error);
 	}
 }
