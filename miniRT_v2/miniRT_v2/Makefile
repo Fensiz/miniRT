@@ -24,20 +24,25 @@ FILES			=	free.c		mlx_utils.c		minirt.c	handlers.c	\
 					utils_2.c			utils_3.c		ray.c			\
 					utils_4.c
 MLX_PATH		=	./libs/mlx19/
+CC				=	gcc
+CFLAGS			=	-Wall -Werror -Wextra -MMD #-fsanitize=address
+    
+ifeq ($(shell uname -s),Linux)
+CFLAGS 			+=	`pkg-config --cflags x11 xext`
+LIBS 			+=	`pkg-config --libs x11 xext`
+LINUX			=	-lm -lX11 -lGLU -lGL $(LIBS)
+MLX_PATH		=	./libs/mlx19_linux/
+endif
 
 MLX_LIB			=	$(MLX_PATH)libmlx.a
-
-CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -MMD
-#CFLAGS += `pkg-config --cflags x11 xext`
-#LIBS 			+= `pkg-config --libs x11 xext`
-#LINUX			=	 -lm -lX11 -lGLU -lGL $(LIBS)
-
 SRC				=	$(addprefix $(SRC_PATH), $(FILES))
 OBJT			=	$(addprefix $(OBJ_PATH), $(FILES))
 OBJ				=	$(OBJT:.c=.o)
 DEP				=	$(OBJT:.c=.d)
+
+ifeq ($(shell uname -s),Darwin)
 FRMW			=	-framework OpenGL -framework AppKit
+endif
 
 all				:	make_dir tch $(NAME)
 all_mod			:	make_dir $(NAME)
@@ -72,10 +77,10 @@ bonus			:
 	@make BS="-D BNS" all
 
 $(NAME)			:	$(OBJ)
-	$(CC) $(FRMW) -o $(NAME) $^ $(MLX_LIB)
+	$(CC) $(FRMW) -o $(NAME) $^ $(MLX_LIB) $(LIBS) $(LINUX)
 
 $(OBJ_PATH)%.o	:	$(SRC_PATH)%.c $(MLX_LIB) Makefile
-	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes $(BS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(MLX_PATH) -Iincludes $(BS) $(LINUX) -c $< -o $@
 
 $(OBJ_PATH)		:
 	mkdir -p $@

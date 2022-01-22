@@ -26,8 +26,6 @@ void	ft_error(int code, char *error_text)
 		write(2, "Scene error: ", 13);
 	else if (code == FATAL)
 		write(2, "Fatal error: ", 13);
-//	else if (code == FIG_TYPE)
-//		write(2, "Figure error: ", 14);
 	else if (code == FILE_FORMAT_ERR)
 		write(2, "Wrong file format", 17);
 	write(2, error_text, ft_strlen(error_text));
