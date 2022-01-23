@@ -84,11 +84,11 @@ void	calc_light(t_vector_2p ray, t_inter *inter,
 			light = scene.light->brightness
 				* vector_cos(inter->normal, direction);
 			add_coeficient(rgb, light, scene.light->color);
-		}
-		if (inter->figure->specular)
-		{
-			light = calc_specular(ray, inter, scene, inter->figure);
-			add_coeficient(rgb, light, scene.light->color);
+			if (inter->figure->specular)
+			{
+				light = calc_specular(ray, inter, scene, inter->figure);
+				add_coeficient(rgb, light, scene.light->color);
+			}
 		}
 		scene.light = scene.light->next;
 	}
